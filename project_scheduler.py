@@ -4,181 +4,141 @@ from pathlib import Path
 from uuid import uuid4
 
 from application.settings import settings
-from framework.conversions import generate_hdr_tv_names
+from camera import Camera
+from camera_crane import CameraCrane
+import framework.conversions as conversions
+from serial_device import SerialDevice
 from threaded_instance import ThreadedInstance
 from framework.datastructures import *
-
-
-TV_NAMES = [
-    30, 25, 20, 15, 13, 10, 8, 6, 5, 4, 3.2, 2.5, 2, 1.6, 1.3, 1,
-    0.8, 0.6, 0.5, 0.4, 0.3, 1/4, 1/5, 1/6, 1/8, 1/10, 1/13, 1/15,
-    1/20, 1/25, 1/30, 1/40, 1/50, 1/60, 1/80, 1/100, 1/125, 1/160,
-    1/200, 1/250, 1/320
-]
-
+from turn_table import TurnTable
 
 class ProjectScheduler(ThreadedInstance):
-    def __init__(self):
-        self.project: Project | None = None
+    def __init__(self, camera: Camera, serial_device: SerialDevice, turn_table: TurnTable, camera_crane: CameraCrane):
+        self.current_project: Optional[Project] = None
+
+        self.project_running: Event = Event()
+        self.project_paused: Event = Event()
+
+        self.current_x: int = 0
+        self.current_y: int = 0
+
+        self.current_cluster: Optional[CameraJobCluster] = None 
+
+        self.is_bottom: bool = False
+        self.can_turn: bool = False
+
+        self.camera: Optional[Camera] = camera
+        self.serial_device: Optional[SerialDevice] = serial_device
+        self.turn_table: Optional[TurnTable] = turn_table
+        self.camera_crane: Optional[CameraCrane] = camera_crane
+
+        self.v_steps = settings.process.v_steps
+        self.h_steps = settings.process.h_steps
+
+        self.position_array: list[float] = []
+        self.delta_rotation: float = 0
+
+        self.generate_movesets()
+
         super().__init__()
 
-    def generate_project(self, name: str) -> Project:
-        project_id = uuid4().hex
+    def generate_movesets(self):
+        self.position_array = []
+        self.delta_rotation = 360/self.v_steps
 
-        project_dir = Path(settings.process.destination_dir) / name
-        preview_dir = project_dir / "preview"
+        stepsize = 1 / (self.h_steps - 1)
 
-        project_dir.mkdir(parents=True, exist_ok=True)
+        for i in range(self.h_steps):
+            self.position_array.append(i * stepsize)
 
-        if settings.process.create_previews:
-            preview_dir.mkdir(parents=True, exist_ok=True)
+    def generate_project(self) -> Project:
+        pass
 
-        hdr = HdrSettings(
-            base_tv=settings.camera.base_tv,
-            hdr_ev=settings.camera.hdr_ev,
-            hdr_shots=settings.camera.hdr_shot_count,
-            contrast_weight=settings.camera.contrast_weight,
-            exposure_weight=settings.camera.exposure_weight,
-            saturation_weight=settings.camera.saturation_weight,
-            tonemap_gamma=settings.camera.tonemap_gamma,
-            use_mertens=settings.camera.use_mertens,
-            use_robertson=settings.camera.use_robertson,
-        )
+    def start_project(self, project: Project):
+        if self.current_project is not None and self.project_running.is_set():
+            return
 
-        if settings.camera.use_robertson or settings.camera.use_mertens:
-            tv_values = generate_hdr_tv_names(
-                base_tv=hdr.base_tv,
-                hdr_shots=hdr.hdr_shots,
-                hdr_ev=hdr.hdr_ev,
-                tv_names=TV_NAMES,
-            )
-        else:
-            tv_values = [hdr.base_tv]
+        self.current_project = project
+        self.project_paused.clear()
+        self.project_running.set()
 
-        clusters: list[CameraJobCluster] = []
+        self.current_x = 0
+        self.current_y = 0
+        self.is_bottom = False
+        self.can_turn = False
 
-        h_steps = settings.process.h_steps
-        v_steps = settings.process.v_steps
+        self.v_steps = settings.process.v_steps
+        self.h_steps = settings.process.h_steps
 
-        def build_cluster(x: int, y: int, bottom: bool) -> CameraJobCluster:
-            cluster_id = uuid4().hex
+        self.generate_movesets()
 
-            row_no = y + 1
-            col_no = x + 1
+    def pause_project(self):
+        if not self.current_project or not self.project_running.is_set():
+            return
 
-            final_filename = f"DFGM_R{row_no:02d}_C{col_no:02d}.jpg"
-            preview_filename = f"DFGM_R{row_no:02d}_C{col_no:02d}.jpg"
+        self.project_paused.set()
 
-            cluster = CameraJobCluster(
-                id=cluster_id,
-                project_id=project_id,
-                x=x,
-                y=y,
-                bottom=bottom,
-                hdr=replace(hdr),
-                img_destination=project_dir / final_filename,
-                preview_destination=(preview_dir / preview_filename) if settings.process.create_previews else None,
-                auto_format=True,
-                save_preview=settings.process.create_previews,
-            )
+    def resume_project(self):
+        if not self.current_project or not self.project_running.is_set():
+            return
 
-            for shot_index, tv in enumerate(tv_values, start=1):
-                job_id = uuid4().hex
+        self.project_paused.clear()
 
-                job = CameraJob(
-                    id=job_id,
-                    cluster_id=cluster_id,
-                    project_id=project_id,
-                    capture=CaptureSettings(
-                        iso=settings.camera.iso,
-                        av=settings.camera.av,
-                        tv=tv,
-                    ),
-                    img_destination=project_dir / f"{cluster_id}_S{shot_index:02d}.jpg",
-                )
+    def stop_project(self):
+        if not self.current_project:
+            return
 
-                cluster.jobs.append(job)
+        self.project_running.clear()
+        self.project_paused.clear()
 
-            return cluster
+    def all_ready(self):
+        return self.crane_ready() and self.table_ready() and self.cluster_shot()
 
-        # top side
-        for y in range(v_steps):
-            for x in range(h_steps):
-                clusters.append(build_cluster(x=x, y=y, bottom=False))
+    def crane_ready(self):
+        return not (self.camera_crane.is_moving or self.camera_crane.is_nulling)
+    
+    def table_ready(self):
+        return not (self.turn_table.is_rotating or self.turn_table.is_nulling)
+    
+    def cluster_shot(self):
+        return self.current_cluster.state.shot.is_set()
 
-        # bottom side
-        for y in range(v_steps):
-            for x in range(h_steps):
-                clusters.append(build_cluster(x=x, y=v_steps + y, bottom=True))
-
-        return Project(
-            id=project_id,
-            name=name,
-            dir_destination=project_dir,
-            clusters=clusters,
-            state=ProjectState(
-                total_jobs=sum(len(cluster.jobs) for cluster in clusters),
-            ),
-        )
-
-    def run_project(self, project: Project):
-        self.project = project
-
-    def run(self): # as for this function, I mean: it should also do the moving to the expected positions
-        # for the top half: start at 100% cameracrane and end at 0% cameracrane
-        # rotate by + 360/v_steps for each x
-        # 
-
-        # for bottom half:
-        # start at 0% and go up to 100% cameracrane
-        # rotate by -360/v_steps for each x
+    def run(self):
         while not self.is_stopped():
-            self.wait_if_paused()
-            time.sleep(1 / settings.app.thread_refreshrate)
+            self._pause_event.wait()
 
-            if self.project is None:
+            time.sleep(1/settings.app.thread_refreshrate)
+
+            if not self.current_project:
                 continue
 
-            project = self.project
+            if not self.camera or not self.camera_crane or not self.turn_table or not self.serial_device:
+                continue
 
-            try:
-                all_done = True
+            if not self.camera.is_connected() or not self.serial_device.is_connected():
+                continue
 
-                for cluster in project.clusters:
-                    if cluster.state.formatted.is_set():
-                        continue
+            if not self.project_running.is_set():
+                continue
 
-                    cluster_ready = all(job.state.transferred.is_set() for job in cluster.jobs)
+            if self.project_paused.is_set():
+                continue
 
-                    if not cluster_ready:
-                        all_done = False
-                        continue
+            if self.current_y == (self.v_steps - 1):
+                self.is_bottom = True
+                self.can_turn = True
+                self.pause()
+                # hier aufforderung zum drehen zeigen
 
-                    if not cluster.state.transferred.is_set():
-                        cluster.state.transferred.set()
-                        cluster._on_transfer()
+            if not self.all_ready():
+                continue
 
-                    if not cluster.state.formatted.is_set():
-                        all_done = False
+            self.camera_crane.move_to(self.position_array[self.current_y])
+            
+            self.camera.enqueue_cluster(self.current_cluster)
+            
 
-                finished_jobs = 0
-                failed_jobs = 0
+            # move to x and y
 
-                for cluster in project.clusters:
-                    for job in cluster.jobs:
-                        if job.state.transferred.is_set():
-                            finished_jobs += 1
-                        if job.state.error is not None:
-                            failed_jobs += 1
 
-                    if cluster.state.error is not None:
-                        failed_jobs += len([job for job in cluster.jobs if job.state.error is None])
 
-                project.state.finished_jobs = finished_jobs
-                project.state.failed_jobs = failed_jobs
-
-                if all_done:
-                    self.project = None
-
-            except Exception as e:
-                project.state.error = str(e)

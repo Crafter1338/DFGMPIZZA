@@ -78,7 +78,7 @@ class TurnTableSettings:
 
 ##################################################################
 
-file = Path("program/application/settings.json")
+file = Path("application/settings.json")
 
 def _merge(default: dict, loaded: dict):
     """Merge loaded dict into default dict recursively"""

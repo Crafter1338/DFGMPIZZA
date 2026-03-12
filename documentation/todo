@@ -1,21 +1,6 @@
-- SerialDevice | Erledigt
-- CameraCrane  | Erledigt
-- TurnTable    | Erledigt
+https://stackoverflow.com/questions/78723140/edsdk-python-loading-an-image-into-system-memory
+Prüfen ob die Bilder aus der Kamera (img_buffer auch funktionieren)
 
-- Settings     | Erledigt
-
-- Camera (Version mit Buffer System) | Nicht Erledigt
-- Camera (Version mit Memory Streams) https://stackoverflow.com/questions/78723140/edsdk-python-loading-an-image-into-system-memory | Erledigt
-
-- MainWindow | Erledigt
-- Aspect Ratio QLabel
-- Dialogs (Fehler, Teil drehen)
+- Dialogs (Teil drehen)
 - GIF für Drehung (evtl KI?)
-- App Funktionalität (Verbindung UI Elemente mit Settings)
 - Prozessierung (ohne loops)
-- Dataclasses | Erledigt
-
-Einteilung in 
-1. Project
-2. JobCluster
-3. Job
