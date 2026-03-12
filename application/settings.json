@@ -1,0 +1,52 @@
+{
+    "app": {
+        "thread_refreshrate": 20,
+        "image_crop": 0
+    },
+    "ui": {
+        "refreshrate": 60,
+        "preview_refreshrate": 5
+    },
+    "camera": {
+        "reconnect_delay": 0.5,
+        "timeout": 15,
+        "liveview_refresh_rate": 4,
+        "iso": 100,
+        "av": 8,
+        "base_tv": 0.5,
+        "hdr_shot_count": 3,
+        "hdr_ev": 1,
+        "contrast_weight": 1,
+        "exposure_weight": 1,
+        "saturation_weight": 1,
+        "tonemap_gamma": 2.2,
+        "use_mertens": true,
+        "use_robertson": false
+    },
+    "process": {
+        "destination_dir": "application/results",
+        "preview_dim": 1024,
+        "max_preview_kb": 18,
+        "create_previews": true,
+        "h_steps": 12,
+        "v_steps": 12
+    },
+    "serial": {
+        "port": "COM5",
+        "baudrate": 57600,
+        "timeout": 0.25,
+        "reconnect_delay": 0.5
+    },
+    "mechanics": {
+        "settle_time": 0.3,
+        "vertical_swing_compensation_delay": 6
+    },
+    "camera_crane": {
+        "min_pos": 0.1,
+        "max_pos": 0.9,
+        "homing_duration": 50
+    },
+    "turn_table": {
+        "test": 0
+    }
+}

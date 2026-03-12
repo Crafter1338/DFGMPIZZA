@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./program/edsdk-python",
+        "./edsdk-python"
+    ]
+}
