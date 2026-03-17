@@ -1,0 +1,5 @@
+2026-03-11 17:20:01,090 [ERROR] serial_device: Verbindung zur Mechanik nicht hergestellt
+2026-03-11 17:20:05,496 [ERROR] camera: Übertragung der Bilder fehlgeschlagen
+Traceback (most recent call last):
+  File "c:\Users\n.stickel\Desktop\DFGM\Programmierung\camera.py", line 206, in _process_transfer
+edsdk.EdsError: EDS_ERR_STREAM_OPEN_ERROR

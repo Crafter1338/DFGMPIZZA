@@ -112,6 +112,7 @@ class Camera(ThreadedInstance):
             edsdk.CloseSession(self.cam)
             self.cam = None
         except:
+            self.cam = None
             pass
 
     ##################################################################
@@ -206,6 +207,14 @@ class Camera(ThreadedInstance):
     def run(self):
         pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED)
         edsdk.InitializeSDK()
+        
+        self.connect()
+        
+        print("disconnecting")
+        
+        self.disconnect()
+        
+        print("disconnected worked")
 
         while not self.is_stopped():
             self.wait_if_paused()
@@ -273,6 +282,7 @@ class Camera(ThreadedInstance):
                     continue
 
             except Exception as e:
+                print(e)
                 self.disconnect()
 
         pythoncom.CoUninitialize()

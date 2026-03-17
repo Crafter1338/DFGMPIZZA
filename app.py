@@ -1,6 +1,7 @@
 import sys
 import time
 from pathlib import Path
+import uuid
 
 from PySide6.QtWidgets import (
     QApplication,
@@ -13,6 +14,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import QTimer, QUrl, Qt
 from PySide6.QtGui import QDesktopServices, QMovie, QPixmap
 
+from framework.datastructures import CameraJobCluster, HdrSettings
 from ui.aspect_ratio_label import AspectRatioLabel
 from ui.ui_mainwindow import Ui_MainWindow
 
@@ -83,8 +85,11 @@ class MainWindow(QMainWindow):
         self.serial_device.start()
         self.turn_table.start()
         self.camera_crane.start()
+        print("came start")
         self.camera.start()
+        print("camera started")
         self.project_scheduler.start()
+        print("scheduler started")
 
         self.current_project = None
         self.project_started_at: float | None = None
@@ -97,14 +102,24 @@ class MainWindow(QMainWindow):
         self._connect_ui()
         self._update_hdr_preview_enabled()
         self._reset_progress_ui()
+        
+        print("after functions")
 
         self.update_timer = QTimer(self)
 
-        interval_ms = int(1000 / settings.ui.refreshrate)
-        self.update_timer.setInterval(interval_ms)
+        self.update_timer.setInterval(int(1000 / settings.ui.refreshrate))
 
         self.update_timer.timeout.connect(self._update_ui)
         self.update_timer.start()
+        
+        self.preview_update_timer = QTimer(self)
+        
+        self.preview_update_timer.setInterval(int(1000 / settings.ui.refreshrate))
+
+        self.preview_update_timer.timeout.connect(self._update_ui_preview)
+        self.preview_update_timer.start()
+        
+        print("done")
 
     def _replace_image_label(self):
         old_label = self.ui.image_label
@@ -133,7 +148,7 @@ class MainWindow(QMainWindow):
         self.ui.exposure_slider.setValue(int(round(settings.camera.exposure_weight * 100)))
         self.ui.saturation_slider.setValue(int(round(settings.camera.saturation_weight * 100)))
 
-        self.ui.liveview_checkbox.setChecked(True)
+        self.ui.liveview_checkbox.setChecked(False)
 
     def _prepare_mode_buttons(self):
         for button in (
@@ -407,12 +422,29 @@ class MainWindow(QMainWindow):
     # Liveview / preview
     # ---------------------------------------------------------
 
+    def _update_ui_preview(self):        
+        if self.ui.liveview_checkbox.isChecked():
+            self.set_preview_pixmap(fp.jpeg_buffer_to_qpixmap(self.camera.liveview_data))
+        else:
+            self.ui.image_label.setPixmap(QPixmap())
+        
+
     def _on_liveview_toggled(self, checked: bool):
         self._update_hdr_preview_enabled()
 
     def _on_hdr_preview_clicked(self):
         if not self.ui.hdr_preview_button.isEnabled():
             return
+        
+        cluster = CameraJobCluster(
+            id=str(uuid.uuid4()),
+            hdr=HdrSettings(
+                
+            ),
+            
+        )
+        
+        self.camera.enqueue_cluster()
 
     def _update_ui(self):
         try:
