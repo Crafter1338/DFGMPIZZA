@@ -3,6 +3,7 @@ from pathlib import Path
 from threading import Event
 import threading
 from typing import Optional
+from uuid import uuid4
 
 import numpy as np
 
@@ -133,6 +134,8 @@ class CameraJobCluster:
         try:
             images = [job.img_buffer for job in self.jobs if job.img_buffer is not None]
 
+            print(len(images))
+
             if len(images) == 0:
                 self.state.error = "No job image buffers available"
                 return
@@ -175,6 +178,8 @@ class CameraJobCluster:
                     self.state.error = "Image flip failed"
                     return
                 result = flipped
+                
+            print(result)
 
             self.img_buffer = result
             self.state.processed.set()
@@ -226,3 +231,75 @@ class Project:
     
     clusters: list[CameraJobCluster] = field(default_factory=list)
     state: ProjectState = field(default_factory=ProjectState)
+    
+    
+def generate_preview_cluster() -> CameraJobCluster:
+    cluster_id = str(uuid4())
+    project_id = "preview"
+
+    cluster = CameraJobCluster(
+        id=cluster_id,
+        project_id=project_id,
+        x=0,
+        y=0,
+        bottom=False,
+
+        hdr=HdrSettings(
+            base_tv=settings.camera.base_tv,
+            hdr_ev=settings.camera.hdr_ev,
+            hdr_shots=max(1, int(settings.camera.hdr_shot_count)),
+            contrast_weight=settings.camera.contrast_weight,
+            exposure_weight=settings.camera.exposure_weight,
+            saturation_weight=settings.camera.saturation_weight,
+            tonemap_gamma=settings.camera.tonemap_gamma,
+            use_mertens=settings.camera.use_mertens,
+            use_robertson=settings.camera.use_robertson,
+        ),
+
+        img_destination=None,
+        preview_destination=None,
+
+        auto_format=False,
+        save_preview=False,
+    )
+
+    base_tv = settings.camera.base_tv
+    hdr_ev = settings.camera.hdr_ev
+    shots = cluster.hdr.hdr_shots
+
+    capture_settings = []
+
+    if shots == 1:
+        capture_settings.append(
+            CaptureSettings(
+                iso=settings.camera.iso,
+                av=settings.camera.av,
+                tv=base_tv,
+            )
+        )
+    else:
+        mid = shots // 2
+        for i in range(shots):
+            ev_offset = (i - mid) * hdr_ev
+            tv = base_tv * (2 ** ev_offset)
+
+            capture_settings.append(
+                CaptureSettings(
+                    iso=settings.camera.iso,
+                    av=settings.camera.av,
+                    tv=tv,
+                )
+            )
+
+    for capture in capture_settings:
+        cluster.jobs.append(
+            CameraJob(
+                id=str(uuid4()),
+                cluster_id=cluster.id,
+                project_id=project_id,
+                capture=capture,
+                img_destination=None,
+            )
+        )
+
+    return cluster

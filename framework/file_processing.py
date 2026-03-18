@@ -143,7 +143,7 @@ from PySide6.QtGui import QPixmap, QImage
 
 def save_image_buffer(img: np.ndarray, dst: str | Path) -> Path | None:
     try:
-        if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+        if img is None  or img.size == 0:
             return None
 
         destination = Path(dst)
@@ -176,7 +176,7 @@ def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
 
 def flip_image_buffer(img: np.ndarray) -> Optional[np.ndarray]:
     try:
-        if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+        if img is None  or img.size == 0:
             return None
 
         return cv2.rotate(img, cv2.ROTATE_180)
@@ -186,7 +186,7 @@ def flip_image_buffer(img: np.ndarray) -> Optional[np.ndarray]:
 
 def crop_image_buffer(img: np.ndarray, val: float) -> Optional[np.ndarray]:
     try:
-        if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+        if img is None  or img.size == 0:
             return None
 
         if not (0 <= val <= 1):
@@ -211,7 +211,7 @@ def crop_image_buffer(img: np.ndarray, val: float) -> Optional[np.ndarray]:
 
 
 def hdr_merge_mertens_buffer(
-    images: Sequence[np.ndarray],
+    images: Sequence[bytes],
     contrast: float = 1.0,
     exposure: float = 1.0,
     saturation: float = 1.0,
@@ -220,8 +220,12 @@ def hdr_merge_mertens_buffer(
         valid_images: list[np.ndarray] = []
 
         for img in images:
-            if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+            if img is None or img.size == 0:
                 return None
+            print(img)
+            """
+            OpenCV(4.12.0) D:\a\opencv-python\opencv-python\opencv\modules\photo\src\hdr_common.cpp:57: error: (-215:Assertion failed) images[i].cols == width && images[i].rows == height in function 'cv::checkImageDimensions'
+            """
             valid_images.append(img)
 
         if len(valid_images) < 2:
@@ -237,12 +241,13 @@ def hdr_merge_mertens_buffer(
         res_mertens_8bit = np.clip(res_mertens * 255, 0, 255).astype(np.uint8)
 
         return res_mertens_8bit
-    except:
+    except Exception as e:
+        print(e)
         return None
 
 
 def hdr_merge_robertson_buffer(
-    images: Sequence[np.ndarray],
+    images: Sequence[bytes],
     exposure_times: Sequence[float],
     gamma: float = 2.2,
 ) -> Optional[np.ndarray]:
@@ -250,7 +255,7 @@ def hdr_merge_robertson_buffer(
         valid_images: list[np.ndarray] = []
 
         for img in images:
-            if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+            if img is None or img.size == 0:
                 return None
             valid_images.append(img)
 

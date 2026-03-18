@@ -82,13 +82,13 @@ class Camera(ThreadedInstance):
             edsdk.SetObjectEventHandler(self.cam, edsdk.ObjectEvent.DirItemRequestTransfer, self.handle_transferring_images)
 
 
-            self.image_data = bytes(6000*4000*3)    # TODO: Richtige Größe bestimmen
-            self.liveview_data = bytes(6000*4000*3) # TODO: Richtige Größe bestimmen
+            self.image_data = bytes(6240*4160*3)    # TODO: Richtige Größe bestimmen
+            self.liveview_data = bytes(6240*4160*3) # TODO: Richtige Größe bestimmen
 
             self.image_out_stream = edsdk.CreateMemoryStreamFromPointer(self.image_data)
             self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
             #self.liveview_out_stream = edsdk.CreateFileStream(f"liveview.jpg", edsdk.FileCreateDisposition.CreateAlways, edsdk.Access.ReadWrite)
-
+            
             self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
 
             self.iso_names  = [0, 100, 125, 160, 200, 250, 320, 400, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 10000] # 0 für Auto
@@ -147,15 +147,14 @@ class Camera(ThreadedInstance):
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, job.capture.raw_av)
         edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, job.capture.raw_iso)
 
-        edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture)
+        edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
 
         job.state.shot.set()
 
         pass
 
     def enqueue_cluster(self, cluster: CameraJobCluster):
-        with self.queue_lock:
-            self.cluster_queue.append(cluster)
+        self.cluster_queue.append(cluster)
 
     def handle_transferring_images(self, event, obj_handle):
         if not event == edsdk.ObjectEvent.DirItemRequestTransfer:
@@ -210,11 +209,7 @@ class Camera(ThreadedInstance):
         
         self.connect()
         
-        print("disconnecting")
-        
         self.disconnect()
-        
-        print("disconnected worked")
 
         while not self.is_stopped():
             self.wait_if_paused()
@@ -237,8 +232,8 @@ class Camera(ThreadedInstance):
 
                 pythoncom.PumpWaitingMessages()
 
-                #if self.busy: muss evtl mit unterem getauscht werden
-                #    continue
+                if self.busy:
+                    continue
 
                 if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate:
                     self.last_liveview = time.time()
@@ -252,7 +247,7 @@ class Camera(ThreadedInstance):
                     if self.cluster_queue:
                         cluster = self.cluster_queue.popleft()
 
-                if cluster is None:
+                if not cluster:
                     continue
 
                 self.cluster_buffer[cluster.id] = cluster

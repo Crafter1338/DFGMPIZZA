@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import QTimer, QUrl, Qt
 from PySide6.QtGui import QDesktopServices, QMovie, QPixmap
 
-from framework.datastructures import CameraJobCluster, HdrSettings
+from framework.datastructures import CameraJobCluster, HdrSettings, generate_preview_cluster
 from ui.aspect_ratio_label import AspectRatioLabel
 from ui.ui_mainwindow import Ui_MainWindow
 
@@ -27,6 +27,7 @@ from ai_project_scheduler import ProjectScheduler, SchedulerPhase
 from application.settings import settings, file as settings_file
 import framework.file_processing as fp
 
+# TODO: Add back crop slider
 
 class TurnPartDialog(QDialog):
     def __init__(self, parent=None):
@@ -85,11 +86,10 @@ class MainWindow(QMainWindow):
         self.serial_device.start()
         self.turn_table.start()
         self.camera_crane.start()
-        print("came start")
         self.camera.start()
-        print("camera started")
         self.project_scheduler.start()
-        print("scheduler started")
+        
+        self.current_preview_cluster: None|CameraJobCluster = None
 
         self.current_project = None
         self.project_started_at: float | None = None
@@ -102,8 +102,6 @@ class MainWindow(QMainWindow):
         self._connect_ui()
         self._update_hdr_preview_enabled()
         self._reset_progress_ui()
-        
-        print("after functions")
 
         self.update_timer = QTimer(self)
 
@@ -118,8 +116,6 @@ class MainWindow(QMainWindow):
 
         self.preview_update_timer.timeout.connect(self._update_ui_preview)
         self.preview_update_timer.start()
-        
-        print("done")
 
     def _replace_image_label(self):
         old_label = self.ui.image_label
@@ -222,6 +218,9 @@ class MainWindow(QMainWindow):
         liveview_enabled = self.ui.liveview_checkbox.isChecked()
         single_mode = self.ui.single_picture_button.isChecked()
         self.ui.hdr_preview_button.setEnabled(not liveview_enabled and not single_mode)
+        
+        if liveview_enabled:
+            self.current_preview_cluster = None
 
     def _reset_progress_ui(self):
         self.ui.progress_bar.setRange(0, 100)
@@ -252,30 +251,6 @@ class MainWindow(QMainWindow):
                 self.project_scheduler.confirm_turn_done()
         finally:
             self._turn_dialog_open = False
-
-    def _try_load_latest_preview(self):
-        project = self.current_project
-        if not project:
-            return
-
-        preview_dir = Path(project.dir_destination) / "preview"
-        if preview_dir.exists():
-            previews = sorted(
-                preview_dir.glob("*.jpg"),
-                key=lambda p: p.stat().st_mtime,
-                reverse=True,
-            )
-            if previews:
-                self.set_preview_pixmap(QPixmap(str(previews[0])))
-                return
-
-        images = sorted(
-            Path(project.dir_destination).glob("*.jpg"),
-            key=lambda p: p.stat().st_mtime,
-            reverse=True,
-        )
-        if images:
-            self.set_preview_pixmap(QPixmap(str(images[0])))
 
     # ---------------------------------------------------------
     # Input handlers
@@ -423,10 +398,13 @@ class MainWindow(QMainWindow):
     # ---------------------------------------------------------
 
     def _update_ui_preview(self):        
+        if not self.camera.is_connected():
+            return
+        
         if self.ui.liveview_checkbox.isChecked():
             self.set_preview_pixmap(fp.jpeg_buffer_to_qpixmap(self.camera.liveview_data))
-        else:
-            self.ui.image_label.setPixmap(QPixmap())
+        elif self.current_preview_cluster:
+            self.ui.image_label.setPixmap(fp.jpeg_buffer_to_qpixmap(self.current_preview_cluster.img_buffer))
         
 
     def _on_liveview_toggled(self, checked: bool):
@@ -436,15 +414,15 @@ class MainWindow(QMainWindow):
         if not self.ui.hdr_preview_button.isEnabled():
             return
         
-        cluster = CameraJobCluster(
-            id=str(uuid.uuid4()),
-            hdr=HdrSettings(
-                
-            ),
-            
-        )
+        if not self.camera.is_connected():
+            return
+
+        print("generating")
+        self.current_preview_cluster = generate_preview_cluster()
+        print(self.current_preview_cluster)
         
-        self.camera.enqueue_cluster()
+        self.camera.enqueue_cluster(self.current_preview_cluster)
+        print("enqueued")
 
     def _update_ui(self):
         try:
@@ -482,7 +460,6 @@ class MainWindow(QMainWindow):
                 self.ui.progress_bar.setFormat("0/0")
 
             self.ui.time_label.setText(self._format_elapsed())
-            self._try_load_latest_preview()
 
             if project.state.error:
                 self.ui.status_label.setText(f"Fehler: {project.state.error}")

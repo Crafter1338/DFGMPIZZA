@@ -385,14 +385,6 @@ class ProjectScheduler(ThreadedInstance):
     # Flow control
     ##################################################################
 
-    def generate_preview_cluster(self):
-        # generate a cluster and return it
-        # the cluster should use hdr settings from settings
-        # the cluster should also include the jobs
-        # TODO: then use this function inside the app.py to generate a preview cluster and show that in the preview pixmap
-        # TODO: test the whole image taking and where it goes
-        pass
-
     def advance_position(self):
         self.current_cluster = None
         self._cluster_enqueued = False
