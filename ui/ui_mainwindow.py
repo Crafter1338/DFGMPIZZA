@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 541))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 585))
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
@@ -136,6 +136,18 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.hdr_robertson_button, 0, Qt.AlignmentFlag.AlignRight)
 
+        self.label_11 = QLabel(self.scrollAreaWidgetContents)
+        self.label_11.setObjectName(u"label_11")
+
+        self.verticalLayout_7.addWidget(self.label_11)
+
+        self.crop_slider = QSlider(self.scrollAreaWidgetContents)
+        self.crop_slider.setObjectName(u"crop_slider")
+        self.crop_slider.setMaximum(100)
+        self.crop_slider.setOrientation(Qt.Orientation.Horizontal)
+
+        self.verticalLayout_7.addWidget(self.crop_slider)
+
         self.verticalSpacer_4 = QSpacerItem(10, 15, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_7.addItem(self.verticalSpacer_4)
@@ -158,6 +170,7 @@ class Ui_MainWindow(object):
         self.hdr_count_input = QSpinBox(self.scrollAreaWidgetContents)
         self.hdr_count_input.setObjectName(u"hdr_count_input")
         self.hdr_count_input.setMinimum(3)
+        self.hdr_count_input.setSingleStep(2)
         self.hdr_count_input.setMaximum(9)
 
         self.verticalLayout_7.addWidget(self.hdr_count_input)
@@ -417,6 +430,7 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menubar)
 #if QT_CONFIG(shortcut)
         self.label_6.setBuddy(self.name_input)
+        self.label_11.setBuddy(self.crop_slider)
         self.label_8.setBuddy(self.base_tv_input)
         self.label_9.setBuddy(self.hdr_count_input)
         self.label_10.setBuddy(self.hdr_ev_input)
@@ -428,18 +442,19 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.name_input, self.single_picture_button)
         QWidget.setTabOrder(self.single_picture_button, self.hdr_mertens_button)
         QWidget.setTabOrder(self.hdr_mertens_button, self.hdr_robertson_button)
-        QWidget.setTabOrder(self.hdr_robertson_button, self.base_tv_input)
+        QWidget.setTabOrder(self.hdr_robertson_button, self.crop_slider)
+        QWidget.setTabOrder(self.crop_slider, self.base_tv_input)
         QWidget.setTabOrder(self.base_tv_input, self.hdr_count_input)
         QWidget.setTabOrder(self.hdr_count_input, self.hdr_ev_input)
-        QWidget.setTabOrder(self.hdr_ev_input, self.contrast_slider)
-        QWidget.setTabOrder(self.contrast_slider, self.exposure_slider)
-        QWidget.setTabOrder(self.exposure_slider, self.saturation_slider)
-        QWidget.setTabOrder(self.saturation_slider, self.liveview_checkbox)
+        QWidget.setTabOrder(self.hdr_ev_input, self.liveview_checkbox)
         QWidget.setTabOrder(self.liveview_checkbox, self.hdr_preview_button)
         QWidget.setTabOrder(self.hdr_preview_button, self.start_button)
         QWidget.setTabOrder(self.start_button, self.pause_button)
         QWidget.setTabOrder(self.pause_button, self.stop_button)
-        QWidget.setTabOrder(self.stop_button, self.settings_button)
+        QWidget.setTabOrder(self.stop_button, self.contrast_slider)
+        QWidget.setTabOrder(self.contrast_slider, self.exposure_slider)
+        QWidget.setTabOrder(self.exposure_slider, self.settings_button)
+        QWidget.setTabOrder(self.settings_button, self.saturation_slider)
 
         self.retranslateUi(MainWindow)
         self.liveview_checkbox.toggled.connect(self.hdr_preview_button.setDisabled)
@@ -466,7 +481,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"DFGM - PIZZA", None))
         self.image_label.setText("")
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None))
         self.name_input.setText("")
@@ -475,6 +490,7 @@ class Ui_MainWindow(object):
         self.single_picture_button.setText(QCoreApplication.translate("MainWindow", u"Einzelbild", None))
         self.hdr_mertens_button.setText(QCoreApplication.translate("MainWindow", u"HDR Mertens", None))
         self.hdr_robertson_button.setText(QCoreApplication.translate("MainWindow", u"HDR Robertson", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Crop", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Basis Belichtungszeit", None))
         self.base_tv_input.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Anzahl HDR Bilder", None))

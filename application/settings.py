@@ -5,6 +5,7 @@ from pathlib import Path
 @dataclass
 class AppSettings:
     thread_refreshrate: int = 20
+    reconnect_delay: float = 0.5
     image_crop: float = 0
 
 ##################################################################
@@ -12,7 +13,7 @@ class AppSettings:
 @dataclass
 class UISettings:
     refreshrate: int = 20
-    preview_refreshrate: int = 5
+    preview_refreshrate: int = 15
 
 ##################################################################
 

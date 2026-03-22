@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>DFGM - PIZZA</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -90,7 +90,7 @@
            <x>0</x>
            <y>0</y>
            <width>218</width>
-           <height>541</height>
+           <height>585</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -237,6 +237,26 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Crop</string>
+            </property>
+            <property name="buddy">
+             <cstring>crop_slider</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="crop_slider">
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
@@ -283,6 +303,9 @@
            <widget class="QSpinBox" name="hdr_count_input">
             <property name="minimum">
              <number>3</number>
+            </property>
+            <property name="singleStep">
+                <number>2</number>
             </property>
             <property name="maximum">
              <number>9</number>
@@ -798,18 +821,19 @@
   <tabstop>single_picture_button</tabstop>
   <tabstop>hdr_mertens_button</tabstop>
   <tabstop>hdr_robertson_button</tabstop>
+  <tabstop>crop_slider</tabstop>
   <tabstop>base_tv_input</tabstop>
   <tabstop>hdr_count_input</tabstop>
   <tabstop>hdr_ev_input</tabstop>
-  <tabstop>contrast_slider</tabstop>
-  <tabstop>exposure_slider</tabstop>
-  <tabstop>saturation_slider</tabstop>
   <tabstop>liveview_checkbox</tabstop>
   <tabstop>hdr_preview_button</tabstop>
   <tabstop>start_button</tabstop>
   <tabstop>pause_button</tabstop>
   <tabstop>stop_button</tabstop>
+  <tabstop>contrast_slider</tabstop>
+  <tabstop>exposure_slider</tabstop>
   <tabstop>settings_button</tabstop>
+  <tabstop>saturation_slider</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -820,12 +844,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>63</x>
-     <y>656</y>
+     <x>91</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel">
-     <x>311</x>
-     <y>649</y>
+     <x>375</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -840,8 +864,8 @@
      <y>158</y>
     </hint>
     <hint type="destinationlabel">
-     <x>372</x>
-     <y>646</y>
+     <x>375</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -856,8 +880,8 @@
      <y>197</y>
     </hint>
     <hint type="destinationlabel">
-     <x>365</x>
-     <y>663</y>
+     <x>375</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -872,8 +896,8 @@
      <y>224</y>
     </hint>
     <hint type="destinationlabel">
-     <x>280</x>
-     <y>661</y>
+     <x>375</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -884,12 +908,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>981</x>
-     <y>165</y>
+     <x>937</x>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
-     <x>967</x>
-     <y>351</y>
+     <x>937</x>
+     <y>405</y>
     </hint>
    </hints>
   </connection>
@@ -900,12 +924,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>988</x>
-     <y>156</y>
+     <x>937</x>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
-     <x>987</x>
-     <y>401</y>
+     <x>937</x>
+     <y>459</y>
     </hint>
    </hints>
   </connection>
@@ -916,12 +940,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>950</x>
-     <y>159</y>
+     <x>937</x>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
-     <x>969</x>
-     <y>470</y>
+     <x>937</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>
@@ -936,8 +960,8 @@
      <y>155</y>
     </hint>
     <hint type="destinationlabel">
-     <x>953</x>
-     <y>516</y>
+     <x>937</x>
+     <y>568</y>
     </hint>
    </hints>
   </connection>
@@ -952,8 +976,8 @@
      <y>164</y>
     </hint>
     <hint type="destinationlabel">
-     <x>984</x>
-     <y>563</y>
+     <x>937</x>
+     <y>612</y>
     </hint>
    </hints>
   </connection>
@@ -968,8 +992,8 @@
      <y>187</y>
     </hint>
     <hint type="destinationlabel">
-     <x>939</x>
-     <y>358</y>
+     <x>937</x>
+     <y>405</y>
     </hint>
    </hints>
   </connection>
@@ -985,7 +1009,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
-     <y>412</y>
+     <y>459</y>
     </hint>
    </hints>
   </connection>
@@ -1000,8 +1024,8 @@
      <y>220</y>
     </hint>
     <hint type="destinationlabel">
-     <x>916</x>
-     <y>355</y>
+     <x>937</x>
+     <y>405</y>
     </hint>
    </hints>
   </connection>
@@ -1016,8 +1040,8 @@
      <y>223</y>
     </hint>
     <hint type="destinationlabel">
-     <x>921</x>
-     <y>413</y>
+     <x>937</x>
+     <y>459</y>
     </hint>
    </hints>
   </connection>
@@ -1028,12 +1052,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>190</y>
+     <x>937</x>
+     <y>202</y>
     </hint>
     <hint type="destinationlabel">
-     <x>813</x>
-     <y>477</y>
+     <x>937</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>
@@ -1048,8 +1072,8 @@
      <y>194</y>
     </hint>
     <hint type="destinationlabel">
-     <x>831</x>
-     <y>523</y>
+     <x>937</x>
+     <y>568</y>
     </hint>
    </hints>
   </connection>
@@ -1064,8 +1088,8 @@
      <y>193</y>
     </hint>
     <hint type="destinationlabel">
-     <x>810</x>
-     <y>567</y>
+     <x>937</x>
+     <y>612</y>
     </hint>
    </hints>
   </connection>
@@ -1080,8 +1104,8 @@
      <y>232</y>
     </hint>
     <hint type="destinationlabel">
-     <x>797</x>
-     <y>476</y>
+     <x>937</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>
@@ -1096,8 +1120,8 @@
      <y>221</y>
     </hint>
     <hint type="destinationlabel">
-     <x>870</x>
-     <y>522</y>
+     <x>937</x>
+     <y>568</y>
     </hint>
    </hints>
   </connection>
@@ -1112,8 +1136,8 @@
      <y>228</y>
     </hint>
     <hint type="destinationlabel">
-     <x>889</x>
-     <y>563</y>
+     <x>937</x>
+     <y>612</y>
     </hint>
    </hints>
   </connection>
