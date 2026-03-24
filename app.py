@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -32,21 +33,27 @@ from application.datastructures import Image
 import application.file_processing as fp 
 
 class RotatePartDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self):
+        super().__init__()
 
         self.ui = Ui_R_Dialog()
+        self.ui.setupUi(self)
+
         self.movie = QMovie("assets/rotate_part.gif")
 
         if self.movie.isValid():
             self.ui.label_movie.setMovie(self.movie)
             self.movie.start()
 
+
 class DestinationAlreadyExistsDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, article_number: str = None):
+        super().__init__()
 
         self.ui = Ui_D_Dialog()
+        self.ui.setupUi(self)
+
+        self.ui.label_article_number.setText(article_number or "00000")
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -82,6 +89,8 @@ class MainWindow(QMainWindow):
 
         self.preview: Optional[Image] = None
         self.preview_bytes = bytes()
+
+        self.preview_bytes = Path("pic.jpg").read_bytes() # TODO: entfernen
 
     def _replace_image_label(self):
         old_label = self.ui.image_label
@@ -132,14 +141,13 @@ class MainWindow(QMainWindow):
         self.ui.hdr_mertens_button.clicked.connect(self._on_radio_button_changed)
         self.ui.hdr_robertson_button.clicked.connect(self._on_radio_button_changed)
 
-#        self.ui.start_button.clicked.connect(self._on_start_clicked)
+        self.ui.start_button.clicked.connect(self._on_start_clicked)
 #        self.ui.pause_button.clicked.connect(self._on_pause_clicked)
 #        self.ui.stop_button.clicked.connect(self._on_stop_clicked)
 
-#        self.ui.liveview_checkbox.toggled.connect(self._on_liveview_toggled)
-#        self.ui.hdr_preview_button.clicked.connect(self._on_hdr_preview_clicked)
+        self.ui.hdr_preview_button.clicked.connect(self._on_hdr_preview_clicked)
 
-#        self.ui.settings_button.clicked.connect(self._open_settings_folder)
+        self.ui.settings_button.clicked.connect(self._open_settings_folder)
 
     ###
     def set_preview_pixmap(self, pixmap: QPixmap):
@@ -181,25 +189,73 @@ class MainWindow(QMainWindow):
         elif not self.serial_device.is_connected():
             self.statusBar().showMessage("[1/2] | Serial Verbunden | Kamera Getrennt")
 
+    def _block_settings_while_running(self):
+        elements: list[QLabel] = [self.ui.name_input, self.ui.base_tv_input, self.ui.crop_slider, self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider, self.ui.hdr_count_input, self.ui.hdr_ev_input, self.ui.hdr_mertens_button, self.ui.hdr_robertson_button, self.ui.single_picture_button, self.ui.start_button, self.ui.hdr_preview_button]
+        
+        def set_state(state: bool):
+            for e in elements:
+                if not state and e.isEnabled():
+                    e.setEnabled(state)
+                elif state and not e.isEnabled():
+                    if e in [self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider]:
+                        e.setEnabled(self.ui.hdr_mertens_button.isChecked())
+                    elif e in [self.ui.hdr_count_input, self.ui.hdr_ev_input]:
+                        e.setEnabled(not self.ui.single_picture_button.isChecked())
+                    elif e == self.ui.hdr_preview_button:
+                        e.setEnabled(not self.ui.liveview_checkbox.isChecked())
+                    else:
+                        e.setEnabled(state)
+        
+        if self.current_project:
+            set_state(False)
+        elif not self.current_project:
+            set_state(True)
+
     def _update_ui(self):
+        self._block_settings_while_running()
         self._update_status_bar()
         self._update_hardware_visuals()
 
-    def _update_preview(self):
-        if not self.preview:
-            return
-        
+    def _update_preview(self):        
         if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked():
             self.preview = Image(data=self.camera.image_data)
             self.preview.crop(settings.app.image_crop)
-
-        else:
+        elif self.preview_bytes:
             self.preview = Image(self.preview_bytes)
             self.preview.crop(settings.app.image_crop)
+        else:
+            return
         
         pixmap = self.preview.get_pixmap()
 
         self.set_preview_pixmap(pixmap)
+
+    # ---------------------------------------------------------
+    # Action Knöpfe
+    # ---------------------------------------------------------
+
+    def _on_hdr_preview_clicked(self):
+        pass
+
+    def _on_start_clicked(self):
+        pass
+
+    
+    # ---------------------------------------------------------
+    # Dialoge
+    # ---------------------------------------------------------
+
+    def show_rotate_dialog(self) -> bool:
+        dlg = RotatePartDialog()
+        dlg.show()
+
+        return dlg.exec()
+
+    def show_destination_already_exists_dialog(self) -> bool:
+        dlg = DestinationAlreadyExistsDialog(self.ui.name_input.text())
+        dlg.show()
+
+        return dlg.exec()
 
     # ---------------------------------------------------------
     # Input handlers
@@ -221,6 +277,8 @@ class MainWindow(QMainWindow):
 
         settings.camera.base_tv = value
         settings.save()
+
+        self.camera.set_camera_properties(settings.camera.iso, settings.camera.av, settings.camera.base_tv)
 
     def _on_hdr_ev_changed(self, value):
         settings.camera.hdr_ev = float(value)
@@ -256,6 +314,19 @@ class MainWindow(QMainWindow):
         settings.camera.use_mertens   = self.ui.hdr_mertens_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.camera.use_robertson = self.ui.hdr_robertson_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.save()
+
+    def _open_settings_folder(self):
+        settings_path = Path(__file__).resolve().parent / "application" / "settings.json"
+
+        settings_path = settings_path.resolve()
+
+        if settings_path.exists():
+            if sys.platform == "win32":
+                subprocess.Popen(["explorer", "/select,", str(settings_path)])
+            else:
+                QDesktopServices.openUrl(QUrl.fromLocalFile(str(settings_path.parent)))
+        else:
+            self.statusBar().showMessage(f"Settings-Datei nicht gefunden: {settings_path}")
 
     def closeEvent(self, event):
         for instance in (

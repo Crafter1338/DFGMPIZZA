@@ -103,6 +103,27 @@ class Camera(ThreadedInstance):
 
         return True
     
+    def set_camera_properties(self, iso, av, tv):
+        if not self.cam:
+            return
+        
+        if not self.is_connected():
+            return
+        
+        try:
+            if self.busy:
+                return
+
+            iso = conversions.round_to_raw_value(iso, self.iso_names, self.iso_values)
+            av = conversions.round_to_raw_value(av, self.av_names, self.av_values)
+            tv = conversions.round_to_raw_value(tv, self.tv_names, self.tv_values)
+
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, tv)
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, av)
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, iso)
+        except:
+            pass
+    
     def queue_raw_shot(self, iso, av, tv):
         payload = ShotPayload(
             iso=iso,
@@ -160,6 +181,12 @@ class Camera(ThreadedInstance):
         return future
     
     def take_image(self, payload: ShotPayload):
+        if not self.cam:
+            return
+        
+        if not self.is_connected():
+            return
+        
         self.last_action = time.time()
         
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, payload.tv)
@@ -217,6 +244,9 @@ class Camera(ThreadedInstance):
             edsdk.DownloadEvfImage(self.cam, self.liveview_ref)
 
         if self.busy:
+            return
+        
+        if not self.is_connected():
             return
 
         if self.shot_queue:

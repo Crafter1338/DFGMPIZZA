@@ -2,7 +2,7 @@
     "app": {
         "thread_refreshrate": 20,
         "reconnect_delay": 0.5,
-        "image_crop": 0.57
+        "image_crop": 0.42
     },
     "ui": {
         "refreshrate": 60,
@@ -15,8 +15,8 @@
         "iso": 100,
         "av": 8,
         "base_tv": 0.5,
-        "hdr_shot_count": 5,
-        "hdr_ev": 1.0,
+        "hdr_shot_count": 7,
+        "hdr_ev": 0.333334,
         "contrast_weight": 0.99,
         "exposure_weight": 1,
         "saturation_weight": 1,
