@@ -48,6 +48,8 @@ class Camera(ThreadedInstance):
         self.iso_values: list[int] = []
         self.tv_values: list[int]  = []
         self.av_values: list[int]  = []
+
+        self.last_liveview = 0.0
     
         super().__init__()
     

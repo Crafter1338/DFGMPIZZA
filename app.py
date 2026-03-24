@@ -1,3 +1,4 @@
+import threading
 import subprocess
 import sys
 import time
@@ -82,7 +83,6 @@ class MainWindow(QMainWindow):
 
         self.project_scheduler.start()
 
-        self.current_project = None
         self.project_started_at: Optional[float] = None
 
         self._replace_image_label()
@@ -216,16 +216,20 @@ class MainWindow(QMainWindow):
                     else:
                         e.setEnabled(state)
         
-        if self.current_project:
+        if self.project_scheduler.current_project and self.project_scheduler.is_project_running():
             set_state(False)
-        elif not self.current_project:
+        else:
             set_state(True)
 
     def _handle_rotate_dialog(self):
+        project = self.project_scheduler.current_project
+        if project is None:
+            return
+
         needs_turn = (
             self.project_scheduler.is_project_running()
-            and self.current_project.current_index == self.current_project.turn_index
-            and not self.current_project.turn_confirmed
+            and project.current_index == project.turn_index
+            and not project.turn_confirmed
         )
 
         if needs_turn:
@@ -234,15 +238,35 @@ class MainWindow(QMainWindow):
             if result:
                 self.project_scheduler.confirm_turn()
 
+    def _update_project_progress(self):
+        project = self.project_scheduler.current_project
+        if project is None:
+            return
+
+        total = max(1, project.n_total_shots)
+        finished = min(project.n_finished_shots, total)
+
+        percent = int((finished / total) * 100)
+
+        self.ui.progress_bar.setValue(percent)
+        self.ui.progress_bar.setFormat(f"{finished}/{project.n_total_shots}")
+
+        if self.project_started_at is not None:
+            elapsed = int(time.time() - self.project_started_at)
+            minutes = elapsed // 60
+            seconds = elapsed % 60
+            self.ui.time_label.setText(f"{minutes}:{seconds:02d} min")
+
     def _update_ui(self):
         self._block_settings_while_running()
         self._update_status_bar()
         self._update_hardware_visuals()
         self._handle_rotate_dialog()
+        self._update_project_progress()
 
     def _update_preview(self):        
         if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked():
-            self.preview = Image(data=self.camera.image_data)
+            self.preview = Image(data=self.camera.liveview_data)
             self.preview.crop(settings.app.image_crop)
         elif self.preview_bytes:
             self.preview = Image(self.preview_bytes)
@@ -259,11 +283,84 @@ class MainWindow(QMainWindow):
     # ---------------------------------------------------------
 
     def _on_hdr_preview_clicked(self):
-        pass
+        if not self.camera.is_connected():
+            return
+        
+        self.ui.hdr_preview_button.setEnabled(False)
+
+        def worker():
+            try:
+                payloads = self.project_scheduler._create_image_payloads()
+                images: list[Image] = []
+
+                for payload in payloads:
+                    result = self.camera.queue_shot(payload).result(settings.camera.timeout)
+
+                    if not result or result.image is None:
+                        raise RuntimeError("Bildaufnahme fehlgeschlagen")
+
+                    images.append(result.image)
+
+                cv_images = []
+                for image in images:
+                    cv_img = image.get_cv2_image()
+                    if cv_img is None:
+                        raise RuntimeError("Bild konnte nicht dekodiert werden")
+                    cv_images.append(cv_img)
+
+                if len(cv_images) == 0:
+                    raise RuntimeError("Keine Bilder für Preview vorhanden")
+
+                if len(cv_images) == 1:
+                    result_img = cv_images[0].copy()
+
+                elif settings.camera.use_mertens:
+                    result_img = fp.hdr_merge_mertens_buffer(
+                        images=cv_images,
+                        contrast=settings.camera.contrast_weight,
+                        exposure=settings.camera.exposure_weight,
+                        saturation=settings.camera.saturation_weight,
+                    )
+
+                elif settings.camera.use_robertson:
+                    exposure_times = [payload.tv for payload in payloads]
+
+                    result_img = fp.hdr_merge_robertson_buffer(
+                        images=cv_images,
+                        exposure_times=exposure_times,
+                        gamma=settings.camera.tonemap_gamma,
+                    )
+
+                else:
+                    result_img = cv_images[0].copy()
+
+                if result_img is None:
+                    raise RuntimeError("HDR-Verarbeitung fehlgeschlagen")
+
+                if settings.app.image_crop > 0:
+                    cropped = fp.crop_image_buffer(result_img, settings.app.image_crop)
+                    if cropped is None:
+                        raise RuntimeError("Crop fehlgeschlagen")
+                    result_img = cropped
+
+                preview_image = Image()
+                preview_image.cv2_to_data(result_img)
+
+                if not preview_image.data:
+                    raise RuntimeError("Preview konnte nicht encodiert werden")
+
+                self.preview_bytes = preview_image.data
+
+            except Exception as e:
+                self.statusBar().showMessage(f"HDR-Preview fehlgeschlagen: {e}")
+
+            finally:
+                self.ui.hdr_preview_button.setEnabled(True)
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def _on_start_clicked(self):
         if not self.camera.is_connected() or not self.serial_device.is_connected():
-            self.statusBar().showMessage("Hardware nicht bereit")
             return
 
         name = self.ui.name_input.text().strip()
@@ -285,7 +382,7 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage("Projekt konnte nicht erstellt werden")
             return
 
-        self.current_project = project
+        self.project_scheduler.current_project = project
         self.project_started_at = time.time()
 
         self.reset_progress_ui()
@@ -304,7 +401,7 @@ class MainWindow(QMainWindow):
 
     def _on_stop_clicked(self):
         self.project_scheduler.stop_project()
-        self.current_project = None
+        self.project_scheduler.current_project = None
         self.project_started_at = None
         self.reset_progress_ui()
 
@@ -397,6 +494,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         for instance in (
+            self.project_scheduler,
             self.camera,
             self.camera_crane,
             self.turn_table,
