@@ -124,7 +124,7 @@ class Camera(ThreadedInstance):
         except:
             pass
     
-    def queue_raw_shot(self, iso, av, tv):
+    def queue_raw_shot(self, iso, av, tv) -> Future[ShotResult]:
         payload = ShotPayload(
             iso=iso,
             av=av,
@@ -155,7 +155,7 @@ class Camera(ThreadedInstance):
 
         return future
 
-    def queue_shot(self, payload: ShotPayload):
+    def queue_shot(self, payload: ShotPayload) -> Future[ShotResult]:
         payload.iso = conversions.round_to_raw_value(
             payload.iso,
             self.iso_names,

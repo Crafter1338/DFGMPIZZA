@@ -18,6 +18,7 @@ from PySide6.QtGui import QDesktopServices, QMovie, QPixmap
 
 from application.settings import settings
 
+from instances.project_scheduler import ProjectScheduler
 from ui.aspect_ratio_label import AspectRatioLabel
 from ui.ui_mainwindow import Ui_MainWindow
 from ui.ui_destinationalreadyexists import Ui_Dialog as Ui_D_Dialog
@@ -67,10 +68,19 @@ class MainWindow(QMainWindow):
         self.camera_crane = CameraCrane(self.serial_device)
         self.camera = Camera()
 
+        self.project_scheduler = ProjectScheduler(
+            camera=self.camera,
+            serial_device=self.serial_device,
+            camera_crane=self.camera_crane,
+            turn_table=self.turn_table,
+        )
+
         self.serial_device.start()
         self.turn_table.start()
         self.camera_crane.start()
         self.camera.start()
+
+        self.project_scheduler.start()
 
         self.current_project = None
         self.project_started_at: Optional[float] = None
@@ -142,8 +152,8 @@ class MainWindow(QMainWindow):
         self.ui.hdr_robertson_button.clicked.connect(self._on_radio_button_changed)
 
         self.ui.start_button.clicked.connect(self._on_start_clicked)
-#        self.ui.pause_button.clicked.connect(self._on_pause_clicked)
-#        self.ui.stop_button.clicked.connect(self._on_stop_clicked)
+        self.ui.pause_button.clicked.connect(self._on_pause_clicked)
+        self.ui.stop_button.clicked.connect(self._on_stop_clicked)
 
         self.ui.hdr_preview_button.clicked.connect(self._on_hdr_preview_clicked)
 
@@ -211,10 +221,24 @@ class MainWindow(QMainWindow):
         elif not self.current_project:
             set_state(True)
 
+    def _handle_rotate_dialog(self):
+        needs_turn = (
+            self.project_scheduler.is_project_running()
+            and self.current_project.current_index == self.current_project.turn_index
+            and not self.current_project.turn_confirmed
+        )
+
+        if needs_turn:
+            result = self.show_rotate_dialog()
+
+            if result:
+                self.project_scheduler.confirm_turn()
+
     def _update_ui(self):
         self._block_settings_while_running()
         self._update_status_bar()
         self._update_hardware_visuals()
+        self._handle_rotate_dialog()
 
     def _update_preview(self):        
         if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked():
@@ -238,9 +262,52 @@ class MainWindow(QMainWindow):
         pass
 
     def _on_start_clicked(self):
-        pass
+        if not self.camera.is_connected() or not self.serial_device.is_connected():
+            self.statusBar().showMessage("Hardware nicht bereit")
+            return
 
-    
+        name = self.ui.name_input.text().strip()
+
+        if not name:
+            self.statusBar().showMessage("Bitte einen Namen eingeben")
+            return
+
+        dst = Path(settings.process.destination_dir)
+
+        project_dst = dst / name
+        if project_dst.exists():
+            result = self.show_destination_already_exists_dialog()
+            if not result:
+                return
+
+        project = self.project_scheduler.create_project(name, dst)
+        if project is None:
+            self.statusBar().showMessage("Projekt konnte nicht erstellt werden")
+            return
+
+        self.current_project = project
+        self.project_started_at = time.time()
+
+        self.reset_progress_ui()
+        self.project_scheduler.start_project()
+
+    def _on_pause_clicked(self):
+        if not self.project_scheduler.is_project_running():
+            return
+
+        if self.project_scheduler.is_project_paused():
+            self.project_scheduler.resume_project()
+            self.ui.pause_button.setText("Pause")
+        else:
+            self.project_scheduler.pause_project()
+            self.ui.pause_button.setText("Fortsetzen")
+
+    def _on_stop_clicked(self):
+        self.project_scheduler.stop_project()
+        self.current_project = None
+        self.project_started_at = None
+        self.reset_progress_ui()
+
     # ---------------------------------------------------------
     # Dialoge
     # ---------------------------------------------------------
