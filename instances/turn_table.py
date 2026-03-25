@@ -5,7 +5,7 @@ from threading import Event
 
 from instances.serial_device import *
 from application.settings import settings
-from instances.serial_device import _generate_rotate_by_instructions, _retrieve_value_from_instruction
+from instances.serial_device import _generate_rotate_by_instructions, _retrieve_value_from_instruction, SerialDevice, static_instructions
 from instances.threaded_instance import ThreadedInstance
 
 class TurnTable(ThreadedInstance):
@@ -27,7 +27,7 @@ class TurnTable(ThreadedInstance):
         self.is_nulling = False
 
         self.nulled.clear()
-        self.rotated.clear()
+        self.rotated.set()
 
         super().__init__()
 
@@ -81,6 +81,9 @@ class TurnTable(ThreadedInstance):
         self.is_rotating = True
 
     def tick(self):
+        if not self.serial_device or not self.serial_device.is_connected():
+            return
+        
         if not self.nulled.is_set() and not self.is_nulling:
             self.null()
             return
@@ -88,7 +91,7 @@ class TurnTable(ThreadedInstance):
         try:
             instructions = _generate_rotate_by_instructions(self.int_delta_target_rotation)
             future = self.serial_device.queue_instructions(instructions["GET"])
-            response = future.result(timeout = 1)
+            response = future.result(timeout = 5)
             
             self.rotation = _retrieve_value_from_instruction(response, instructions["factor"], True)
         except Exception as e:

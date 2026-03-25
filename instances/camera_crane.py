@@ -3,8 +3,7 @@ import time
 from typing import *
 from threading import Event
 
-from instances.serial_device import *
-from instances.serial_device import _generate_move_to_instructions, _retrieve_value_from_instruction
+from instances.serial_device import _generate_move_to_instructions, _retrieve_value_from_instruction, SerialDevice, static_instructions
 from application.settings import settings
 from instances.threaded_instance import ThreadedInstance
 
@@ -25,7 +24,7 @@ class CameraCrane(ThreadedInstance):
         self._is_moving_to = False
 
         self.nulled.clear()
-        self.moved.clear()
+        self.moved.set()
 
         super().__init__()
 
@@ -83,17 +82,24 @@ class CameraCrane(ThreadedInstance):
         self._is_moving_to = False
 
     def move_to(self, pos: float):
+        if not self.nulled.is_set():
+            return
+        
         if self.is_nulling:
             return
         
         if self.is_moving and not self._is_moving_to:
             self.move_end()
 
+        pos *= pos * settings.camera_crane.max_pos
         pos = min(max(pos, settings.camera_crane.min_pos), settings.camera_crane.max_pos)
         target_position = int(round(pos * 100))
         target_position = min(max(target_position, settings.camera_crane.min_pos*100), settings.camera_crane.max_pos*100)
         
-        self.serial_device.queue_instructions(_generate_move_to_instructions(target_position)["SET"])
+        print(target_position)
+        
+        f = self.serial_device.queue_instructions(_generate_move_to_instructions(target_position)["SET"])
+        print(f.result())
         
         self.target_position = pos 
         self.int_target_position = target_position
@@ -103,6 +109,9 @@ class CameraCrane(ThreadedInstance):
         self._is_moving_to = True
 
     def tick(self):
+        if not self.serial_device or not self.serial_device.is_connected():
+            return
+        
         if not self.nulled.is_set() and not self.is_nulling:
             self.null()
             return
@@ -110,13 +119,13 @@ class CameraCrane(ThreadedInstance):
         try:
             instructions = _generate_move_to_instructions(self.int_target_position)
             future = self.serial_device.queue_instructions(instructions["GET"])
-            response = future.result(timeout = 1)
+            response = future.result(timeout = 5)
 
             self.position = (_retrieve_value_from_instruction(response, instructions["factor"]) / 100)
         except Exception as e:
             return
         
-        if self.is_moving and (self.position >= settings.camera_crane.max_pos or self.position <= settings.camera_crane.min_pos):
+        if self.is_moving and not self._is_moving_to and (self.position >= settings.camera_crane.max_pos or self.position <= settings.camera_crane.min_pos):
             self.move_end()
 
         if self.is_moving and abs(self.position - self.target_position) < 0.015:

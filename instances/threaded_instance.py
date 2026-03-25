@@ -51,8 +51,11 @@ class ThreadedInstance(Thread):
         self._last_connect = time.time()
 
     def _disconnect(self):
-        self.disconnect()
-        self._connected_event.clear()
+        try:
+            self.disconnect()
+            self._connected_event.clear()
+        except:
+            return
 
     def connect(self) -> bool: # Muss von Unterklasse definiert werden
         self._connected_event.set()
@@ -63,14 +66,18 @@ class ThreadedInstance(Thread):
         return True
 
     def tick(self): # Muss von Unterklasse definiert werden
-        pass
+        return
 
     def on_start(self): # Muss von Unterklasse definiert werden
-        pass
+        return
 
     def run(self):
-        self.on_start()
-
+        print("STARTING:",self)
+        try:
+            self.on_start()
+        except Exception as e:
+            print(e)
+            
         while not self.is_stopped():
             try:
                 self.wait_if_paused()
@@ -84,4 +91,6 @@ class ThreadedInstance(Thread):
                 self.tick()
 
             except Exception as e:
+                print(e)
                 self._disconnect()
+                

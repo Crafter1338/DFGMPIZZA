@@ -100,7 +100,7 @@ class MainWindow(QMainWindow):
         self.preview: Optional[Image] = None
         self.preview_bytes = bytes()
 
-        self.preview_bytes = Path("pic.jpg").read_bytes() # TODO: entfernen
+        #self.preview_bytes = Path("pic.jpg").read_bytes() # TODO: entfernen
 
     def _replace_image_label(self):
         old_label = self.ui.image_label
@@ -183,7 +183,6 @@ class MainWindow(QMainWindow):
             self.ui.hdr_preview_button.setEnabled(False)
             self.ui.liveview_checkbox.setEnabled(False)
         else:
-            self.ui.hdr_preview_button.setEnabled(not self.ui.single_picture_button)
             self.ui.liveview_checkbox.setEnabled(True)
 
         self.ui.lcd_crane_pos.display(round(getattr(self.camera_crane, "position", 0.0), 2) * 100)
@@ -195,9 +194,9 @@ class MainWindow(QMainWindow):
         elif not self.camera.is_connected() and not self.serial_device.is_connected():
             self.statusBar().showMessage("[0/2] | Hardware nicht bereit")
         elif not self.camera.is_connected():
-            self.statusBar().showMessage("[1/2] | Serial Getrennt | Kamera verbunden")
-        elif not self.serial_device.is_connected():
             self.statusBar().showMessage("[1/2] | Serial Verbunden | Kamera Getrennt")
+        elif not self.serial_device.is_connected():
+            self.statusBar().showMessage("[1/2] | Serial Getrennt | Kamera Verbunden")
 
     def _block_settings_while_running(self):
         elements: list[QLabel] = [self.ui.name_input, self.ui.base_tv_input, self.ui.crop_slider, self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider, self.ui.hdr_count_input, self.ui.hdr_ev_input, self.ui.hdr_mertens_button, self.ui.hdr_robertson_button, self.ui.single_picture_button, self.ui.start_button, self.ui.hdr_preview_button]
@@ -210,9 +209,9 @@ class MainWindow(QMainWindow):
                     if e in [self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider]:
                         e.setEnabled(self.ui.hdr_mertens_button.isChecked())
                     elif e in [self.ui.hdr_count_input, self.ui.hdr_ev_input]:
-                        e.setEnabled(not self.ui.single_picture_button.isChecked())
+                        e.setEnabled((not self.ui.single_picture_button.isChecked()))
                     elif e == self.ui.hdr_preview_button:
-                        e.setEnabled(not self.ui.liveview_checkbox.isChecked())
+                        e.setEnabled((not self.ui.liveview_checkbox.isChecked()))
                     else:
                         e.setEnabled(state)
         
@@ -268,10 +267,14 @@ class MainWindow(QMainWindow):
         if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked():
             self.preview = Image(data=self.camera.liveview_data)
             self.preview.crop(settings.app.image_crop)
+            
+            self.preview_bytes = None
         elif self.preview_bytes:
             self.preview = Image(self.preview_bytes)
             self.preview.crop(settings.app.image_crop)
-        else:
+        
+        if not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes:
+            self.ui.image_label.setPixmap(QPixmap())
             return
         
         pixmap = self.preview.get_pixmap()
@@ -302,8 +305,8 @@ class MainWindow(QMainWindow):
                     images.append(result.image)
 
                 cv_images = []
-                for image in images:
-                    cv_img = image.get_cv2_image()
+                for image in images:                    
+                    cv_img = image.get_cv2_image() #TODO manchmal NONE
                     if cv_img is None:
                         raise RuntimeError("Bild konnte nicht dekodiert werden")
                     cv_images.append(cv_img)
@@ -337,12 +340,6 @@ class MainWindow(QMainWindow):
                 if result_img is None:
                     raise RuntimeError("HDR-Verarbeitung fehlgeschlagen")
 
-                if settings.app.image_crop > 0:
-                    cropped = fp.crop_image_buffer(result_img, settings.app.image_crop)
-                    if cropped is None:
-                        raise RuntimeError("Crop fehlgeschlagen")
-                    result_img = cropped
-
                 preview_image = Image()
                 preview_image.cv2_to_data(result_img)
 
@@ -361,6 +358,9 @@ class MainWindow(QMainWindow):
 
     def _on_start_clicked(self):
         if not self.camera.is_connected() or not self.serial_device.is_connected():
+            return
+        
+        if not self.camera_crane.nulled.is_set():
             return
 
         name = self.ui.name_input.text().strip()
@@ -438,11 +438,12 @@ class MainWindow(QMainWindow):
 
         if value <= 0:
             return
-
+        
         settings.camera.base_tv = value
         settings.save()
 
-        self.camera.set_camera_properties(settings.camera.iso, settings.camera.av, settings.camera.base_tv)
+        #self.camera.set_camera_properties(float(settings.camera.iso), float(settings.camera.av), float(settings.camera.base_tv))
+        # doesnt work
 
     def _on_hdr_ev_changed(self, value):
         settings.camera.hdr_ev = float(value)

@@ -2,7 +2,7 @@
     "app": {
         "thread_refreshrate": 20,
         "reconnect_delay": 0.5,
-        "image_crop": 0.42
+        "image_crop": 0.05
     },
     "ui": {
         "refreshrate": 60,
@@ -14,9 +14,9 @@
         "liveview_refresh_rate": 4,
         "iso": 100,
         "av": 8,
-        "base_tv": 0.5,
-        "hdr_shot_count": 7,
-        "hdr_ev": 0.333334,
+        "base_tv": 0.1,
+        "hdr_shot_count": 3,
+        "hdr_ev": 1.3333339999999998,
         "contrast_weight": 0.99,
         "exposure_weight": 1,
         "saturation_weight": 1,
@@ -29,8 +29,8 @@
         "preview_dim": 1024,
         "max_preview_kb": 18,
         "create_previews": true,
-        "h_steps": 12,
-        "v_steps": 12
+        "h_steps": 4,
+        "v_steps": 4
     },
     "serial": {
         "port": "COM5",

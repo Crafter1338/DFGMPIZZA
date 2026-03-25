@@ -54,9 +54,12 @@ class Camera(ThreadedInstance):
         super().__init__()
     
     def on_start(self):
-        self.last_action = time.time()
-        pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED)
-        edsdk.InitializeSDK()
+        try:
+            self.last_action = time.time()
+            pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED)
+            edsdk.InitializeSDK()
+        except Exception as e:
+            print(e)
 
     def disconnect(self):
         self.last_action = time.time()
@@ -77,18 +80,27 @@ class Camera(ThreadedInstance):
 
         camera_list  = edsdk.GetCameraList()
         camera_count = edsdk.GetChildCount(camera_list)
+        
+        print(camera_count)
 
         if camera_count == 0:
-            self._disconnect()
             return False
         
         self.cam = edsdk.GetChildAtIndex(camera_list, 0)
+
+        print(self.cam)
 
         if not self.cam:
             self._disconnect()
             return False
         
+        print("opening session")
+        
         edsdk.OpenSession(self.cam)
+        
+        print("session opened")
+        
+        time.sleep(1)
 
         edsdk.SetPropertyData(self.cam, edsdk.PropID.SaveTo, 0, edsdk.SaveTo.Host)
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Evf_OutputDevice, 0, edsdk.EvfOutputDevice.PC)
@@ -97,6 +109,12 @@ class Camera(ThreadedInstance):
         )
 
         edsdk.SetObjectEventHandler(self.cam, edsdk.ObjectEvent.DirItemRequestTransfer, self.handle_transfer)
+
+        self.iso_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.ISOSpeed)["propDesc"])
+        self.av_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Av)["propDesc"])
+        self.tv_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Tv)["propDesc"])
+
+        print("properties set")
 
         self.image_out_stream = edsdk.CreateMemoryStreamFromPointer(self.image_data)
         self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
@@ -111,19 +129,22 @@ class Camera(ThreadedInstance):
         
         if not self.is_connected():
             return
-        
-        try:
-            if self.busy:
-                return
+    
+        if self.busy:
+            return
 
+        try:
             iso = conversions.round_to_raw_value(iso, self.iso_names, self.iso_values)
             av = conversions.round_to_raw_value(av, self.av_names, self.av_values)
             tv = conversions.round_to_raw_value(tv, self.tv_names, self.tv_values)
-
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, tv)
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, av)
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, iso)
-        except:
+            
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, int(tv))
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, int(av))
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, int(iso))
+            
+            print("done")
+        except Exception as e:
+            print(e)
             pass
     
     def queue_raw_shot(self, iso, av, tv) -> Future[ShotResult]:
@@ -195,7 +216,7 @@ class Camera(ThreadedInstance):
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, payload.av)
         edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, payload.iso)
 
-        edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture)
+        edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
 
         self.busy = True
 
@@ -212,6 +233,8 @@ class Camera(ThreadedInstance):
             info = edsdk.GetDirectoryItemInfo(obj_handle)
 
             shot_payload, future = self.shot_queue.popleft()
+
+            time.sleep(0.5)
 
             edsdk.Download(obj_handle, info["size"], self.image_out_stream)
             edsdk.DownloadComplete(obj_handle)
@@ -230,30 +253,27 @@ class Camera(ThreadedInstance):
         self.busy = False
         return 0
 
-    def tick(self):
-        if not self.cam:
-            self._disconnect()
-            return
-        
+    def tick(self):             
         if self.busy and time.time() - self.last_action > settings.camera.timeout:
             self._disconnect()
             return
         
         pythoncom.PumpWaitingMessages()
         
-        if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate:
-            self.last_liveview = time.time()
-            edsdk.DownloadEvfImage(self.cam, self.liveview_ref)
-
         if self.busy:
             return
         
         if not self.is_connected():
             return
+        
+        if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate:
+            self.last_liveview = time.time()
+            edsdk.DownloadEvfImage(self.cam, self.liveview_ref)
+        
 
+        item = None
+            
         if self.shot_queue:
-            item = None
-
             with self.queue_lock:
                 item = self.shot_queue.popleft()
                 self.shot_queue.appendleft(item)

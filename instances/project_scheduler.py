@@ -370,19 +370,29 @@ class ProjectScheduler(ThreadedInstance):
             scan_position.images.append(result.image)
 
         def mechanics_move_to_position():
+            print("X:", scan_position.x_pos, "Y:", scan_position.y_pos)
+            
             if prev_scan_position and prev_scan_position.y_pos != scan_position.y_pos:
+                self.camera_crane.move_to(scan_position.y_pos)
+                
+            if not prev_scan_position:
                 self.camera_crane.move_to(scan_position.y_pos)
 
             if prev_scan_position and prev_scan_position.x_pos != scan_position.x_pos:
                 self.turn_table.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
-
+                self.turn_table.rotated.wait()
+                            
             self.camera_crane.moved.wait()
-            self.turn_table.rotated.wait()
 
             if prev_scan_position == None or prev_scan_position.y_pos != scan_position.y_pos:
                 time.sleep(settings.mechanics.vertical_swing_compensation_delay)
 
-        mechanics_move_to_position()
+        print("ready to rumble")
+
+        mechanics_move_to_position() # TODO: pos of y stimmt überhaupt nicht,
+        # List index out of index
+        
+        print("moved")
 
         time.sleep(settings.mechanics.settle_time)
 
