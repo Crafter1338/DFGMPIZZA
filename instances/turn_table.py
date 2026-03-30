@@ -1,7 +1,10 @@
+import logging
 import threading
 import time
 from typing import *
 from threading import Event
+
+logger = logging.getLogger(__name__)
 
 from instances.serial_device import *
 from application.settings import settings
@@ -10,6 +13,7 @@ from instances.threaded_instance import ThreadedInstance
 
 class TurnTable(ThreadedInstance):
     def __init__(self, serial_device: SerialDevice):
+        logger.info("TurnTable initialization 1/2")
         self.serial_device = serial_device
 
         self.rotation: float = 0
@@ -30,8 +34,11 @@ class TurnTable(ThreadedInstance):
         self.rotated.set()
 
         super().__init__()
+        logger.info("TurnTable initialization 2/2")
 
     def _null(self):
+        logger.info("TurnTable null 1/2")
+        
         self.is_nulling = True
         self.end_rotation()
 
@@ -50,6 +57,8 @@ class TurnTable(ThreadedInstance):
         
         self.is_nulling = False
         self.nulled.set()
+
+        logger.info("TurnTable null 2/2")
 
     def null(self):
         if self.is_nulling:
@@ -95,7 +104,7 @@ class TurnTable(ThreadedInstance):
             
             self.rotation = _retrieve_value_from_instruction(response, instructions["factor"], True)
         except Exception as e:
-            pass
+            logger.exception("TurnTable.tick position query error")
 
         if self.is_rotating and abs(self.target_rotation - self.rotation) < 0.6:
             self.is_rotating = False

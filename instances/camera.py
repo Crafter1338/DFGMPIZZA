@@ -1,10 +1,13 @@
 from dataclasses import dataclass
+import logging
 import time
 from typing import *
 import edsdk
 import numpy as np
 import pythoncom
 from threading import Event, RLock
+
+logger = logging.getLogger(__name__)
 
 from application.settings import settings
 from instances.threaded_instance import ThreadedInstance
@@ -29,6 +32,7 @@ class ShotResult:
 
 class Camera(ThreadedInstance):
     def __init__(self):
+        logger.info("Camera initialization 1/2")
         self.cam: Optional[edsdk.EdsObject] = None
 
         self.last_action = time.time()
@@ -52,16 +56,21 @@ class Camera(ThreadedInstance):
         self.last_liveview = 0.0
     
         super().__init__()
+        logger.info("Camera initialization 2/2")
     
     def on_start(self):
         try:
             self.last_action = time.time()
             pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED)
             edsdk.InitializeSDK()
+
+            logger.info("Camera EDSDK initialized")
         except Exception as e:
-            print(e)
+            logger.exception("Camera.on_start error")
 
     def disconnect(self):
+        logger.info("Camera disconnected")
+
         self.last_action = time.time()
         self.busy = False
 
@@ -72,6 +81,8 @@ class Camera(ThreadedInstance):
         return True
 
     def connect(self):
+        logger.info("Camera connecting... 1/5")
+
         self.last_action = time.time()
 
         if self.cam:
@@ -80,26 +91,24 @@ class Camera(ThreadedInstance):
 
         camera_list  = edsdk.GetCameraList()
         camera_count = edsdk.GetChildCount(camera_list)
-        
-        print(camera_count)
+
+        logger.info("Camera connecting... 2/5")
 
         if camera_count == 0:
             return False
         
         self.cam = edsdk.GetChildAtIndex(camera_list, 0)
 
-        print(self.cam)
-
         if not self.cam:
             self._disconnect()
             return False
         
-        print("opening session")
+        logger.info("Camera connecting... 3/5")
         
         edsdk.OpenSession(self.cam)
         
-        print("session opened")
-        
+        logger.info("Camera connecting... 4/5")
+
         time.sleep(1)
 
         edsdk.SetPropertyData(self.cam, edsdk.PropID.SaveTo, 0, edsdk.SaveTo.Host)
@@ -114,12 +123,12 @@ class Camera(ThreadedInstance):
         self.av_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Av)["propDesc"])
         self.tv_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Tv)["propDesc"])
 
-        print("properties set")
-
         self.image_out_stream = edsdk.CreateMemoryStreamFromPointer(self.image_data)
         self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
 
         self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
+
+        logger.info("Camera connected")
 
         return True
     
@@ -141,10 +150,8 @@ class Camera(ThreadedInstance):
             edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, int(tv))
             edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, int(av))
             edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, int(iso))
-            
-            print("done")
         except Exception as e:
-            print(e)
+            logger.exception("Camera.set_camera_properties error")
             pass
     
     def queue_raw_shot(self, iso, av, tv) -> Future[ShotResult]:
@@ -210,6 +217,8 @@ class Camera(ThreadedInstance):
         if not self.is_connected():
             return
         
+        logger.debug("Camera take_image start")
+        
         self.last_action = time.time()
         
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, payload.tv)
@@ -220,8 +229,12 @@ class Camera(ThreadedInstance):
 
         self.busy = True
 
+        logger.debug("Camera take_image complete")
+
     def handle_transfer(self, event, obj_handle):
         self.last_action = time.time()
+
+        logger.debug("Camera.handle_transfer start")
 
         if not event == edsdk.ObjectEvent.DirItemRequestTransfer:
             return 0
@@ -247,8 +260,10 @@ class Camera(ThreadedInstance):
             )
 
             future.set_result(result)
-        except:
-            pass
+
+            logger.debug("Camera.handle_transfer complete")
+        except Exception as e:
+            logger.exception("Camera.handle_transfer error")
 
         self.busy = False
         return 0

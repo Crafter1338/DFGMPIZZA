@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 import io
+import logging
+import traceback
 
 from PIL import Image as PILImage
 import numpy as np
@@ -9,6 +11,9 @@ import cv2 as cv
 from PySide6.QtGui import QPixmap
 
 from application.settings import settings
+
+logger = logging.getLogger(__name__)
+
 from application.file_processing import (
     crop_image_buffer,
     flip_image_buffer,
@@ -29,13 +34,15 @@ class Image:
         try:
             arr = np.frombuffer(self.data, dtype=np.uint8)
             return cv.imdecode(arr, cv.IMREAD_COLOR)
-        except:
+        except Exception as e:
+            logger.exception("Image.get_cv2_image error")
             return None
     
     def get_pil_image(self) -> Optional[PILImage.Image]:
         try:
             return PILImage.open(io.BytesIO(self.data))
-        except:
+        except Exception as e:
+            logger.exception("Image.get_pil_image error")
             return None
 
     def get_pixmap(self) -> Optional[QPixmap]:
@@ -44,7 +51,8 @@ class Image:
             if pixmap.loadFromData(self.data):
                 return pixmap
             return None
-        except:
+        except Exception as e:
+            logger.exception("Image.get_pixmap error")
             return None
         
     def pil_to_data(self, img: PILImage.Image):
@@ -52,16 +60,16 @@ class Image:
             buffer = io.BytesIO()
             img.save(buffer, format="JPEG")
             self.data = buffer.getvalue()
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.pil_to_data error")
 
     def cv2_to_data(self, img: np.ndarray):
         try:
             success, encoded = cv.imencode(".jpg", img)
             if success:
                 self.data = encoded.tobytes()
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.cv2_to_data error")
 
     def crop(self, value: float):
         try:
@@ -74,8 +82,8 @@ class Image:
                 return
 
             self.cv2_to_data(cropped)
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.crop error")
 
     def flip(self):
         try:
@@ -88,8 +96,8 @@ class Image:
                 return
 
             self.cv2_to_data(flipped)
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.flip error")
 
     def save_as_file(self, destination: Path):
         try:
@@ -101,8 +109,8 @@ class Image:
             saved = save_bytes(self.data, destination)
             if saved is not None:
                 self.dst = saved
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.save_as_file error")
 
     def save_preview(self, destination: Path):
         try:
@@ -124,5 +132,5 @@ class Image:
 
             if saved is not None:
                 self.preview_dst = saved
-        except:
-            pass
+        except Exception as e:
+            logger.exception("Image.save_preview error")

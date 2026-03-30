@@ -1,7 +1,10 @@
+import logging
 from threading import Thread, Event
 import time
 
 from application.settings import settings
+
+logger = logging.getLogger(__name__)
 
 class ThreadedInstance(Thread):
     def __init__(self):
@@ -54,7 +57,8 @@ class ThreadedInstance(Thread):
         try:
             self.disconnect()
             self._connected_event.clear()
-        except:
+        except Exception as e:
+            logger.exception("ThreadedInstance._disconnect error")
             return
 
     def connect(self) -> bool: # Muss von Unterklasse definiert werden
@@ -72,11 +76,11 @@ class ThreadedInstance(Thread):
         return
 
     def run(self):
-        print("STARTING:",self)
+        logger.info("STARTING: %s", self)
         try:
             self.on_start()
         except Exception as e:
-            print(e)
+            logger.exception("ThreadedInstance.on_start error")
             
         while not self.is_stopped():
             try:
@@ -91,6 +95,6 @@ class ThreadedInstance(Thread):
                 self.tick()
 
             except Exception as e:
-                print(e)
+                logger.exception("ThreadedInstance.run error")
                 self._disconnect()
                 

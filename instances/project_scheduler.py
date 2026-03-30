@@ -16,8 +16,12 @@ from instances.turn_table import TurnTable
 
 from instances.threaded_instance import ThreadedInstance
 
+import logging
+import traceback
 from collections import deque
 from concurrent.futures import Future
+
+logger = logging.getLogger(__name__)
 
 import application.file_processing as fp
 
@@ -97,20 +101,25 @@ class ScanPosition:
             self.final_image.cv2_to_data(result)
 
             self.final_image_processed.set()
-        except:
-            pass
+        except Exception as e:
+            logger.exception("ScanPosition.process_images error")
 
     def save_final_image(self, project_dir: Path):
         if self.final_image is None:
             return False
 
-        final_dst = project_dir / f"{self.y_name}_{self.x_name}.jpg"
+        row = int(self.y_name)
+        col = int(self.x_name)
+
+        filename = f"DFGM_R{row:02d}_C{col:02d}.jpg"
+        final_dst = project_dir / filename
+
         saved = self.final_image.save_as_file(final_dst)
         if saved is None:
             return False
 
         if settings.process.create_previews:
-            preview_dst = project_dir / "preview" / f"{self.y_name}_{self.x_name}.jpg"
+            preview_dst = project_dir / "preview" / filename
             self.final_image.save_preview(preview_dst)
 
         return True
@@ -250,16 +259,20 @@ class ProjectScheduler(ThreadedInstance):
             )
 
             return self.current_project
-        except:
-            return
+        except Exception as e:
+            logger.exception("ProjectScheduler.create_project error")
+            return None
 
     def start_project(self):
         if self.current_project is None:
+            logger.warning("start_project called with no current project")
             return
 
         if not self.camera.is_connected() or not self.serial_device.is_connected():
+            logger.warning("start_project aborted: camera or serial device not connected")
             return
 
+        logger.info("Starting project %s", self.current_project.name)
         self.current_project.current_index = 0
         self.current_project.n_finished_shots = 0
         self.current_project.turn_confirmed = False
@@ -273,12 +286,15 @@ class ProjectScheduler(ThreadedInstance):
         self.project_running_event.set()
     
     def resume_project(self):
+        logger.info("Resuming project")
         self.project_pause_event.set()
     
     def pause_project(self):
+        logger.info("Pausing project")
         self.project_pause_event.clear()
     
     def stop_project(self):
+        logger.info("Stopping project")
         self.project_running_event.clear()
         self.project_pause_event.set()
 
@@ -312,10 +328,11 @@ class ProjectScheduler(ThreadedInstance):
             self.project_running_event.clear()
             self.project_pause_event.set()
 
+            logger.info("Project %s finished", project.name)
             return True
 
         except Exception as e:
-            print(f"finish_project error: {e}")
+            logger.exception("finish_project error")
             return False
 
 
@@ -324,29 +341,35 @@ class ProjectScheduler(ThreadedInstance):
             return
     
     def tick(self):
-        if not self.camera.is_connected() or not self.serial_device.is_connected():
-            return
-        
-        if not self.project_running_event.is_set():
-            # clear cache
-            return
-        
-        if self.current_project is None:
-            return
-        
-        if self.current_project.current_index == self.current_project.turn_index and not self.current_project.turn_confirmed:
-            return
-        
-        if self.current_project.finished:
-            return
-
-        self.project_pause_event.wait()
-
-        if self.current_project.current_index >= len(self.current_project.scan_positions):
-            self.finish_project()
-            return
+        try:
+            if not self.camera.is_connected() or not self.serial_device.is_connected():
+                return
             
-        prev_scan_position: ScanPosition = None
+            if not self.project_running_event.is_set():
+                # clear cache
+                return
+            
+            if self.current_project is None:
+                return
+            
+            if self.current_project.current_index == self.current_project.turn_index and not self.current_project.turn_confirmed:
+                return
+            
+            if self.current_project.finished:
+                return
+
+            self.project_pause_event.wait()
+
+            if self.current_project.current_index >= len(self.current_project.scan_positions):
+                self.finish_project()
+                return
+                
+            prev_scan_position: ScanPosition = None
+        except Exception as e:
+            logger.exception("ProjectScheduler.tick error")
+
+            # Early return on unrecoverable tick failure
+            return
 
         if self.current_project.current_index != 0:
             prev_scan_position = self.current_project.scan_positions[self.current_project.current_index - 1]
@@ -354,45 +377,56 @@ class ProjectScheduler(ThreadedInstance):
         scan_position = self.current_project.scan_positions[self.current_project.current_index]
 
         def camera_shoot_image():
-            image_payload = scan_position.image_payloads[scan_position.current_shot_indx]
+            try:
+                if scan_position.current_shot_indx >= len(scan_position.image_payloads):
+                    logger.warning(
+                        "Shot index out of range prevented: %s/%s at project index %s",
+                        scan_position.current_shot_indx,
+                        len(scan_position.image_payloads),
+                        self.current_project.current_index,
+                    )
+                    self.current_project.current_index += 1
+                    return
 
-            result = self.camera.queue_shot(image_payload).result(settings.camera.timeout)
+                image_payload = scan_position.image_payloads[scan_position.current_shot_indx]
 
-            if not result:
-                return
+                result = self.camera.queue_shot(image_payload).result(settings.camera.timeout)
 
-            scan_position.current_shot_indx += 1
-            self.current_project.n_finished_shots += 1
+                if not result:
+                    return
 
-            if scan_position.current_shot_indx == len(scan_position.image_payloads):
-                self.current_project.current_index += 1
+                scan_position.images.append(result.image)
+                scan_position.current_shot_indx += 1
+                self.current_project.n_finished_shots += 1
 
-            scan_position.images.append(result.image)
+                if scan_position.current_shot_indx >= len(scan_position.image_payloads):
+                    self.current_project.current_index += 1
+            except Exception as e:
+                logger.exception("ProjectScheduler.camera_shoot_image error")
 
         def mechanics_move_to_position():
-            print("X:", scan_position.x_pos, "Y:", scan_position.y_pos)
-            
-            if prev_scan_position and prev_scan_position.y_pos != scan_position.y_pos:
-                self.camera_crane.move_to(scan_position.y_pos)
+            try:
+                logger.debug("Moving to X:%s Y:%s", scan_position.x_pos, scan_position.y_pos)
                 
-            if not prev_scan_position:
-                self.camera_crane.move_to(scan_position.y_pos)
+                if prev_scan_position and prev_scan_position.y_pos != scan_position.y_pos:
+                    self.camera_crane.move_to(scan_position.y_pos)
+                    
+                if not prev_scan_position:
+                    self.camera_crane.move_to(scan_position.y_pos)
 
-            if prev_scan_position and prev_scan_position.x_pos != scan_position.x_pos:
-                self.turn_table.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
-                self.turn_table.rotated.wait()
-                            
-            self.camera_crane.moved.wait()
+                if prev_scan_position and prev_scan_position.x_pos != scan_position.x_pos:
+                    self.turn_table.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
+                    self.turn_table.rotated.wait()
+                                
+                self.camera_crane.moved.wait()
 
-            if prev_scan_position == None or prev_scan_position.y_pos != scan_position.y_pos:
-                time.sleep(settings.mechanics.vertical_swing_compensation_delay)
+                if prev_scan_position == None or prev_scan_position.y_pos != scan_position.y_pos:
+                    time.sleep(settings.mechanics.vertical_swing_compensation_delay)
+            except Exception as e:
+                logger.exception("ProjectScheduler.mechanics_move_to_position error")
 
-        print("ready to rumble")
-
-        mechanics_move_to_position() # TODO: pos of y stimmt überhaupt nicht,
+        mechanics_move_to_position(),
         # List index out of index
-        
-        print("moved")
 
         time.sleep(settings.mechanics.settle_time)
 

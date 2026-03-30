@@ -1,7 +1,10 @@
+import logging
 import time
 from typing import *
 import serial
 from threading import Event, RLock
+
+logger = logging.getLogger(__name__)
 
 from application.settings import settings
 from instances.threaded_instance import ThreadedInstance
@@ -11,6 +14,7 @@ from concurrent.futures import Future
 
 class SerialDevice(ThreadedInstance):
     def __init__(self):
+        logger.info("SerialDevice initialization 1/2")
         self.ser: Optional[serial.Serial] = None
 
         self.instruction_queue: Deque[Tuple[List[str], Future]] = deque()
@@ -19,27 +23,42 @@ class SerialDevice(ThreadedInstance):
         self.serial_lock = RLock()
 
         super().__init__()
+        logger.info("SerialDevice initialization 2/2")
 
 
     def connect(self):
-        with self.serial_lock:
-            if self.ser:
-                self._disconnect()
+        try:
+            logger.info("SerialDevice connecting... 1/2")
 
-            self.ser = serial.Serial(
-                port=settings.serial.port,
-                baudrate=settings.serial.baudrate,
-                bytesize=serial.EIGHTBITS,
-                parity=serial.PARITY_NONE,
-                stopbits=serial.STOPBITS_ONE,
-                timeout=settings.serial.timeout
-            )
+            with self.serial_lock:
+                if self.ser:
+                    self._disconnect()
 
-            if self.ser and self.ser.is_open:
-                self.queue_instructions(_generate_connection_instructions()["SET"])
-                return True
-            
-        return False
+                try:
+                    self.ser = serial.Serial(
+                        port=settings.serial.port,
+                        baudrate=settings.serial.baudrate,
+                        bytesize=serial.EIGHTBITS,
+                        parity=serial.PARITY_NONE,
+                        stopbits=serial.STOPBITS_ONE,
+                        timeout=settings.serial.timeout
+                    )
+                except Exception as e:
+                    logger.exception("SerialDevice connection error")
+                    self.ser = None
+                    return False
+
+                if self.ser and self.ser.is_open:
+                    self.queue_instructions(_generate_connection_instructions()["SET"])
+                
+                    logger.info("SerialDevice connected")
+                    return True
+                
+            logger.warning("SerialDevice connection failed")
+            return False
+        except Exception as e:
+            logger.exception("SerialDevice.connect error")
+            return False
 
     def disconnect(self):
         with self.serial_lock:
@@ -47,7 +66,7 @@ class SerialDevice(ThreadedInstance):
                 try:
                     self.ser.close()
                 except Exception as e:
-                    pass
+                    logger.exception("SerialDevice.disconnect close error")
 
             self.ser = None
             return True
@@ -76,6 +95,7 @@ class SerialDevice(ThreadedInstance):
                 future.set_result(last_response)
 
         except Exception as e:
+            logger.exception("SerialDevice.tick instruction execution error")
             with self.queue_lock:
                 self.instruction_queue.appendleft((instructions, future))
 

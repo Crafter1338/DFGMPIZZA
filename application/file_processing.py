@@ -1,10 +1,14 @@
 from typing import Optional, Sequence
 from pathlib import Path
 import shutil
+import logging
+import traceback
 
 import cv2
 import numpy as np
 from PySide6.QtGui import QPixmap, QImage
+
+logger = logging.getLogger(__name__)
 
 
 def save_image_buffer(img: np.ndarray, dst: str | Path) -> Path | None:
@@ -19,7 +23,8 @@ def save_image_buffer(img: np.ndarray, dst: str | Path) -> Path | None:
             return None
 
         return destination
-    except:
+    except Exception as e:
+        logger.exception("save_image_buffer error")
         return None
 
 
@@ -33,7 +38,8 @@ def save_bytes(data: bytes, dst: str | Path) -> Path | None:
         destination.write_bytes(data)
 
         return destination
-    except:
+    except Exception as e:
+        logger.exception("save_bytes error")
         return None
 
 
@@ -50,7 +56,8 @@ def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
             return None
 
         return img
-    except:
+    except Exception as e:
+        logger.exception("load_image_buffer error")
         return None
 
 
@@ -66,7 +73,8 @@ def delete_file(path: str | Path) -> bool:
 
         target.unlink()
         return True
-    except:
+    except Exception as e:
+        logger.exception("delete_file error")
         return False
 
 
@@ -87,7 +95,8 @@ def move_file(src: str | Path, dst: str | Path, overwrite: bool = True) -> Path 
 
         shutil.move(str(source), str(destination))
         return destination
-    except:
+    except Exception as e:
+        logger.exception("move_file error")
         return None
 
 
@@ -97,7 +106,8 @@ def flip_image_buffer(img: np.ndarray) -> Optional[np.ndarray]:
             return None
 
         return cv2.rotate(img, cv2.ROTATE_180)
-    except:
+    except Exception as e:
+        logger.exception("flip_image_buffer error")
         return None
 
 
@@ -123,7 +133,8 @@ def crop_image_buffer(img: np.ndarray, val: float) -> Optional[np.ndarray]:
             return None
 
         return img[top:bottom, left:right].copy()
-    except:
+    except Exception as e:
+        logger.exception("crop_image_buffer error")
         return None
 
 
@@ -190,7 +201,8 @@ def save_preview_buffer(
             return destination
 
         return None
-    except:
+    except Exception as e:
+        logger.exception("save_preview_buffer error")
         return None
 
 
@@ -221,7 +233,8 @@ def hdr_merge_mertens_buffer(
         res_mertens_8bit = np.clip(res_mertens * 255, 0, 255).astype(np.uint8)
 
         return res_mertens_8bit
-    except:
+    except Exception as e:
+        logger.exception("hdr_merge_mertens_buffer error")
         return None
 
 
@@ -258,7 +271,8 @@ def hdr_merge_robertson_buffer(
         ldr_8bit = np.clip(ldr * 255, 0, 255).astype(np.uint8)
 
         return ldr_8bit
-    except:
+    except Exception as e:
+        logger.exception("hdr_merge_robertson_buffer error")
         return None
 
 
@@ -310,7 +324,8 @@ def cv_image_to_qpixmap(img: np.ndarray) -> QPixmap:
             return QPixmap.fromImage(qimg)
 
         return QPixmap()
-    except:
+    except Exception as e:
+        logger.exception("cv_image_to_qpixmap error")
         return QPixmap()
 
 
@@ -319,5 +334,6 @@ def jpeg_buffer_to_qpixmap(buffer: bytes) -> QPixmap:
         pixmap = QPixmap()
         pixmap.loadFromData(buffer)
         return pixmap
-    except:
+    except Exception as e:
+        logger.exception("jpeg_buffer_to_qpixmap error")
         return QPixmap()

@@ -1,3 +1,5 @@
+import logging
+from logging.handlers import RotatingFileHandler
 import threading
 import subprocess
 import sys
@@ -5,6 +7,30 @@ import time
 from pathlib import Path
 
 from typing import * 
+
+app_dir = Path(__file__).resolve().parent
+log_dir = app_dir / "application"
+log_dir.mkdir(parents=True, exist_ok=True)
+log_file = log_dir / "app.log"
+
+file_handler = RotatingFileHandler(
+    log_file,
+    maxBytes=5 * 1024 * 1024,
+    backupCount=2,
+    encoding="utf-8",
+)
+file_handler.setFormatter(
+    logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+)
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[
+        logging.StreamHandler(),
+        file_handler,
+    ],
+)
+logger = logging.getLogger(__name__)
 
 from PySide6.QtWidgets import (
     QApplication,
@@ -24,6 +50,7 @@ from ui.aspect_ratio_label import AspectRatioLabel
 from ui.ui_mainwindow import Ui_MainWindow
 from ui.ui_destinationalreadyexists import Ui_Dialog as Ui_D_Dialog
 from ui.ui_rotatepart import Ui_Dialog as Ui_R_Dialog
+from ui.ui_invalidarticle import Ui_Dialog as Ui_I_Dialog
 
 from instances.serial_device import SerialDevice
 from instances.camera_crane import CameraCrane
@@ -47,6 +74,12 @@ class RotatePartDialog(QDialog):
             self.ui.label_movie.setMovie(self.movie)
             self.movie.start()
 
+class InvalidArticleNumberDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.ui = Ui_I_Dialog()
+        self.ui.setupUi(self)
 
 class DestinationAlreadyExistsDialog(QDialog):
     def __init__(self, article_number: str = None):
@@ -443,7 +476,7 @@ class MainWindow(QMainWindow):
         settings.save()
 
         #self.camera.set_camera_properties(float(settings.camera.iso), float(settings.camera.av), float(settings.camera.base_tv))
-        # doesnt work
+        # TODO: doesnt work
 
     def _on_hdr_ev_changed(self, value):
         settings.camera.hdr_ev = float(value)
@@ -503,16 +536,23 @@ class MainWindow(QMainWindow):
         ):
             try:
                 instance.stop()
-            except Exception:
-                pass
+            except Exception as e:
+                logger.exception("Error stopping instance on closeEvent")
 
         super().closeEvent(event)
         
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
+    try:
+        app = QApplication(sys.argv)
 
-    window = MainWindow()
-    window.show()
+        window = MainWindow()
+        window.show()
 
-    sys.exit(app.exec())
+        exit_code = app.exec()
+        logger.info("Application exited with code %s", exit_code)
+        sys.exit(exit_code)
+
+    except Exception as e:
+        logger.exception("Unhandled exception in app.py main")
+        sys.exit(1)
