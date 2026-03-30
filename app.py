@@ -68,7 +68,7 @@ class RotatePartDialog(QDialog):
         self.ui = Ui_R_Dialog()
         self.ui.setupUi(self)
 
-        self.movie = QMovie("assets/rotate_part.gif")
+        self.movie = QMovie("assets/rotate_part.gif") # TODO: rotate_part gif in assets erstellen 
 
         if self.movie.isValid():
             self.ui.label_movie.setMovie(self.movie)
@@ -206,18 +206,6 @@ class MainWindow(QMainWindow):
 
     ## Update
     def _update_hardware_visuals(self):
-        ready = self.camera.is_connected() and self.serial_device.is_connected()
-
-        self.ui.start_button.setEnabled(ready)
-        self.ui.pause_button.setEnabled(ready)
-        self.ui.stop_button.setEnabled(ready)
-
-        if not self.camera.is_connected():
-            self.ui.hdr_preview_button.setEnabled(False)
-            self.ui.liveview_checkbox.setEnabled(False)
-        else:
-            self.ui.liveview_checkbox.setEnabled(True)
-
         self.ui.lcd_crane_pos.display(round(getattr(self.camera_crane, "position", 0.0), 2) * 100)
         self.ui.lcd_table_pos.display(round(getattr(self.turn_table, "rotation", 0.0), 1) % 360)
     
@@ -232,26 +220,34 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage("[1/2] | Serial Getrennt | Kamera Verbunden")
 
     def _block_settings_while_running(self):
-        elements: list[QLabel] = [self.ui.name_input, self.ui.base_tv_input, self.ui.crop_slider, self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider, self.ui.hdr_count_input, self.ui.hdr_ev_input, self.ui.hdr_mertens_button, self.ui.hdr_robertson_button, self.ui.single_picture_button, self.ui.start_button, self.ui.hdr_preview_button]
-        
-        def set_state(state: bool):
-            for e in elements:
-                if not state and e.isEnabled():
-                    e.setEnabled(state)
-                elif state and not e.isEnabled():
-                    if e in [self.ui.contrast_slider, self.ui.exposure_slider, self.ui.saturation_slider]:
-                        e.setEnabled(self.ui.hdr_mertens_button.isChecked())
-                    elif e in [self.ui.hdr_count_input, self.ui.hdr_ev_input]:
-                        e.setEnabled((not self.ui.single_picture_button.isChecked()))
-                    elif e == self.ui.hdr_preview_button:
-                        e.setEnabled((not self.ui.liveview_checkbox.isChecked()))
-                    else:
-                        e.setEnabled(state)
-        
-        if self.project_scheduler.current_project and self.project_scheduler.is_project_running():
-            set_state(False)
-        else:
-            set_state(True)
+        is_project_running = self.project_scheduler.is_project_running()
+        is_cam_connected = self.camera.is_connected()
+        is_serial_connected = self.serial_device.is_connected()
+
+        is_system_ready = is_cam_connected and is_serial_connected and self.camera_crane.nulled.is_set() and self.turn_table.nulled.is_set()
+
+        self.ui.name_input.setEnabled(is_system_ready and not is_project_running)
+
+        self.ui.single_picture_button.setEnabled(not is_project_running)
+        self.ui.hdr_mertens_button.setEnabled(not is_project_running)
+        self.ui.hdr_robertson_button.setEnabled(not is_project_running)
+
+        self.ui.crop_slider.setEnabled(not is_project_running)
+
+        self.ui.base_tv_input.setEnabled(not is_project_running)
+        self.ui.hdr_count_input.setEnabled(not is_project_running)
+        self.ui.hdr_ev_input.setEnabled(not is_project_running)
+
+        self.ui.contrast_slider.setEnabled(not is_project_running)
+        self.ui.exposure_slider.setEnabled(not is_project_running)
+        self.ui.saturation_slider.setEnabled(not is_project_running)
+
+        self.ui.start_button.setEnabled(is_system_ready and not is_project_running)
+        self.ui.pause_button.setEnabled(is_project_running)
+        self.ui.stop_button.setEnabled(is_project_running)
+
+        self.ui.liveview_checkbox.setEnabled(is_cam_connected)
+        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked())
 
     def _handle_rotate_dialog(self):
         project = self.project_scheduler.current_project
@@ -399,16 +395,18 @@ class MainWindow(QMainWindow):
         name = self.ui.name_input.text().strip()
 
         if not name:
-            self.statusBar().showMessage("Bitte einen Namen eingeben")
-            return
-
+            return self.show_invalid_dialog()
+        
+        if len(name) != 5:
+            return self.show_invalid_dialog()
+        
         dst = Path(settings.process.destination_dir)
 
         project_dst = dst / name
         if project_dst.exists():
             result = self.show_destination_already_exists_dialog()
             if not result:
-                return
+                return self.show_invalid_dialog()
 
         project = self.project_scheduler.create_project(name, dst)
         if project is None:
@@ -441,6 +439,12 @@ class MainWindow(QMainWindow):
     # ---------------------------------------------------------
     # Dialoge
     # ---------------------------------------------------------
+
+    def show_invalid_dialog(self) -> bool:
+        dlg = InvalidArticleNumberDialog()
+        dlg.show()
+
+        return dlg.exec()
 
     def show_rotate_dialog(self) -> bool:
         dlg = RotatePartDialog()

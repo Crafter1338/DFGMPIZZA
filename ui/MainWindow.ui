@@ -304,11 +304,11 @@
             <property name="minimum">
              <number>3</number>
             </property>
-            <property name="singleStep">
-                <number>2</number>
-            </property>
             <property name="maximum">
              <number>9</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
             </property>
            </widget>
           </item>
@@ -846,54 +846,6 @@
     <hint type="sourcelabel">
      <x>91</x>
      <y>524</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>375</x>
-     <y>525</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>single_picture_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hdr_preview_button</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>850</x>
-     <y>158</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>375</x>
-     <y>525</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_mertens_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hdr_preview_button</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>876</x>
-     <y>197</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>375</x>
-     <y>525</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_robertson_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hdr_preview_button</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>937</x>
-     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>375</x>

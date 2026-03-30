@@ -2,7 +2,7 @@
     "app": {
         "thread_refreshrate": 20,
         "reconnect_delay": 0.5,
-        "image_crop": 0.05
+        "image_crop": 0.17
     },
     "ui": {
         "refreshrate": 60,

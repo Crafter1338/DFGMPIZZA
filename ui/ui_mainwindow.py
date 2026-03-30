@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindow.ui'
+## Form generated from reading UI file 'MainWindow.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -170,8 +170,8 @@ class Ui_MainWindow(object):
         self.hdr_count_input = QSpinBox(self.scrollAreaWidgetContents)
         self.hdr_count_input.setObjectName(u"hdr_count_input")
         self.hdr_count_input.setMinimum(3)
-        self.hdr_count_input.setSingleStep(2)
         self.hdr_count_input.setMaximum(9)
+        self.hdr_count_input.setSingleStep(2)
 
         self.verticalLayout_7.addWidget(self.hdr_count_input)
 
@@ -458,9 +458,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.liveview_checkbox.toggled.connect(self.hdr_preview_button.setDisabled)
-        self.single_picture_button.toggled.connect(self.hdr_preview_button.setDisabled)
-        self.hdr_mertens_button.toggled.connect(self.hdr_preview_button.setEnabled)
-        self.hdr_robertson_button.toggled.connect(self.hdr_preview_button.setEnabled)
         self.single_picture_button.toggled.connect(self.hdr_count_input.setDisabled)
         self.single_picture_button.toggled.connect(self.hdr_ev_input.setDisabled)
         self.single_picture_button.toggled.connect(self.contrast_slider.setDisabled)
