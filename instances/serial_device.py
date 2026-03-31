@@ -12,6 +12,12 @@ from instances.threaded_instance import ThreadedInstance
 from collections import deque
 from concurrent.futures import Future
 
+import serial.tools.list_ports
+
+def port_exists(port_name: str) -> bool:
+    ports = [port.device for port in serial.tools.list_ports.comports()]
+    return port_name in ports
+
 class SerialDevice(ThreadedInstance):
     def __init__(self):
         logger.info("SerialDevice initialization 1/2")
@@ -33,6 +39,14 @@ class SerialDevice(ThreadedInstance):
             with self.serial_lock:
                 if self.ser:
                     self._disconnect()
+
+                try:
+                    if not port_exists(settings.serial.port):
+                        logger.error(f"SerialDevice connection error: Port {settings.serial.port} does not exist")
+                        return False
+                except Exception as e:
+                    logger.exception("SerialDevice port existence check error")
+                    return False
 
                 try:
                     self.ser = serial.Serial(
