@@ -247,7 +247,7 @@ class MainWindow(QMainWindow):
         self.ui.stop_button.setEnabled(is_project_running)
 
         self.ui.liveview_checkbox.setEnabled(is_cam_connected)
-        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked())
+        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked() and not self.camera.is_busy())
 
     def _handle_rotate_dialog(self):
         project = self.project_scheduler.current_project
@@ -301,6 +301,8 @@ class MainWindow(QMainWindow):
         elif self.preview_bytes:
             self.preview = Image(self.preview_bytes)
             self.preview.crop(settings.app.image_crop)
+        else:
+            self.preview_bytes = Path("assets/NoSignal.jpg").read_bytes()
         
         if not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes:
             self.ui.image_label.setPixmap(QPixmap())
@@ -396,6 +398,8 @@ class MainWindow(QMainWindow):
 
         if not name:
             return self.show_invalid_dialog()
+        
+        # TODO check if numveric and length == 5
         
         if len(name) != 5:
             return self.show_invalid_dialog()

@@ -29445,3 +29445,2088 @@ Traceback (most recent call last):
     raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
 serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
 2026-03-30 23:43:29,844 [INFO] __main__: Application exited with code 0
+2026-03-31 10:16:29,842 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-03-31 10:16:29,842 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-03-31 10:16:29,842 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-03-31 10:16:29,842 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-03-31 10:16:29,842 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-03-31 10:16:29,842 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-03-31 10:16:29,842 [INFO] instances.camera: Camera initialization 1/2
+2026-03-31 10:16:29,842 [INFO] instances.camera: Camera initialization 2/2
+2026-03-31 10:16:29,842 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 18580)>
+2026-03-31 10:16:29,842 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 16932)>
+2026-03-31 10:16:29,842 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 19424)>
+2026-03-31 10:16:29,842 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 4300)>
+2026-03-31 10:16:29,892 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 15824)>
+2026-03-31 10:16:29,987 [INFO] instances.camera: Camera EDSDK initialized
+2026-03-31 10:16:29,987 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:30,006 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:30,056 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:30,057 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:30,560 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:30,562 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:30,561 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:30,564 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:31,106 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:31,106 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:31,106 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:31,106 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:31,671 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:31,671 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:31,671 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:31,671 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:32,175 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:32,175 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:32,176 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:32,176 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:32,716 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:32,716 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:32,717 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:32,717 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:33,305 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:33,305 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:33,306 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:33,306 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:33,902 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:33,902 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:33,902 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:33,902 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:34,413 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:34,415 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:34,415 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:34,416 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:34,919 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:34,919 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:34,919 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:34,920 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:35,426 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:35,426 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:35,426 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:35,426 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:35,933 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:35,933 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:35,933 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:35,934 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:36,438 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:36,438 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:36,439 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:36,439 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:36,940 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:36,941 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:36,941 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:36,941 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:37,451 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:37,451 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:37,452 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:37,452 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:37,964 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:37,964 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:37,964 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:37,964 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:38,469 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:38,469 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:38,470 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:38,470 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:38,976 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:38,976 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:38,977 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:38,977 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:39,490 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:39,491 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:39,491 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:39,491 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:40,002 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:40,002 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:40,002 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:40,002 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:40,605 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:40,605 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:40,605 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:40,605 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:41,107 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:41,107 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:41,107 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:41,108 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:41,618 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:41,618 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:41,618 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:41,618 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:42,132 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:42,132 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:42,132 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:42,132 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:42,639 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:42,639 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:42,639 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:42,641 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:43,246 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:43,246 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:43,247 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:43,247 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:43,751 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:43,751 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:43,751 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:43,751 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:44,255 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:16:44,255 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:16:44,256 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:16:44,256 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:16:44,681 [INFO] __main__: Application exited with code 0
+2026-03-31 10:18:45,944 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-03-31 10:18:45,944 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-03-31 10:18:45,945 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-03-31 10:18:45,945 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-03-31 10:18:45,945 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-03-31 10:18:45,945 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-03-31 10:18:45,945 [INFO] instances.camera: Camera initialization 1/2
+2026-03-31 10:18:45,945 [INFO] instances.camera: Camera initialization 2/2
+2026-03-31 10:18:45,946 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 4944)>
+2026-03-31 10:18:45,946 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 5696)>
+2026-03-31 10:18:45,946 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 17440)>
+2026-03-31 10:18:45,946 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 17904)>
+2026-03-31 10:18:45,947 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 16360)>
+2026-03-31 10:18:45,950 [INFO] instances.camera: Camera EDSDK initialized
+2026-03-31 10:18:46,030 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:46,031 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:46,046 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:46,046 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:46,566 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:46,566 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:46,566 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:46,566 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:47,123 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:47,124 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:47,124 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:47,125 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:47,645 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:47,645 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:47,645 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:47,646 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:48,183 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:48,183 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:48,184 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:48,184 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:48,745 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:48,745 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:48,745 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:48,745 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:49,250 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:49,250 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:49,250 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:49,250 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:49,762 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:49,762 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:49,762 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:49,762 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:50,266 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:50,266 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:50,266 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:50,268 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:50,773 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:50,773 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:50,773 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:50,774 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:51,283 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:51,284 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:51,284 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:51,284 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:51,788 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:51,788 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:51,788 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:51,788 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:52,297 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:52,297 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:52,298 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:52,297 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:52,804 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:52,804 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:52,805 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:52,805 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:53,324 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:53,324 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:53,324 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:53,325 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:53,876 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:53,876 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:53,876 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:53,876 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:54,439 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:54,439 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:54,439 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:54,440 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:55,042 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:55,042 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:55,042 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:55,042 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:55,548 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:55,548 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:55,549 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:55,549 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:56,052 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:56,052 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:56,053 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:56,053 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:56,567 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:56,568 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:56,568 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:56,568 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:57,076 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:57,076 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:57,077 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:57,077 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:57,681 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:57,681 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:57,682 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:57,682 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:58,187 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:58,187 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:58,189 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:58,189 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:58,691 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:58,691 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:58,692 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:58,692 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:59,202 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:59,202 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:59,202 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:18:59,202 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:59,710 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:18:59,711 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:18:59,710 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:18:59,711 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:00,219 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:00,219 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:00,219 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:00,219 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:00,728 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:00,728 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:00,729 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:00,730 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:01,242 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:01,242 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:01,242 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:01,242 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:01,748 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:01,749 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:01,749 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:01,750 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:02,252 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:02,252 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:02,253 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:02,252 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:02,759 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:02,759 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:02,760 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:02,760 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:03,271 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:19:03,271 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:19:03,272 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:19:03,272 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:19:03,699 [INFO] __main__: Application exited with code 0
+2026-03-31 10:30:45,822 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-03-31 10:30:45,822 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-03-31 10:30:45,822 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-03-31 10:30:45,822 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-03-31 10:30:45,822 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-03-31 10:30:45,822 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-03-31 10:30:45,822 [INFO] instances.camera: Camera initialization 1/2
+2026-03-31 10:30:45,822 [INFO] instances.camera: Camera initialization 2/2
+2026-03-31 10:30:45,822 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 12668)>
+2026-03-31 10:30:45,822 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 14660)>
+2026-03-31 10:30:45,822 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 18588)>
+2026-03-31 10:30:45,822 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 19412)>
+2026-03-31 10:30:45,822 [INFO] instances.camera: Camera EDSDK initialized
+2026-03-31 10:30:45,822 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 10724)>
+2026-03-31 10:30:45,913 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:45,913 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:45,931 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:45,931 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:46,438 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:46,438 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:46,438 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:46,438 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:46,998 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:46,998 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:46,998 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:46,998 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:47,605 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:47,605 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:47,606 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:47,606 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:48,112 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:48,112 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:48,112 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:48,113 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:48,625 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:48,626 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:48,626 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:48,626 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:49,228 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:49,228 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:49,228 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:49,229 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:49,733 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:49,733 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:49,733 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:49,734 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:50,245 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:50,245 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:50,245 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:50,245 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:50,756 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:50,756 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:50,757 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:50,757 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:51,261 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:51,261 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:51,262 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:51,262 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:51,767 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:51,768 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:51,768 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:51,768 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:52,275 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:52,275 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:52,276 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:52,276 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:52,781 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:52,781 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:52,781 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:52,784 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:53,290 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:53,290 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:53,291 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:53,291 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:53,794 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:53,794 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:53,795 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:53,795 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:54,307 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:54,308 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:54,307 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:54,310 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:54,817 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:54,817 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:54,818 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:54,818 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:55,324 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:30:55,324 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:30:55,324 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:30:55,326 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:30:55,545 [INFO] __main__: Application exited with code 0
+2026-03-31 10:31:35,036 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-03-31 10:31:35,038 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-03-31 10:31:35,038 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-03-31 10:31:35,038 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-03-31 10:31:35,038 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-03-31 10:31:35,039 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-03-31 10:31:35,039 [INFO] instances.camera: Camera initialization 1/2
+2026-03-31 10:31:35,039 [INFO] instances.camera: Camera initialization 2/2
+2026-03-31 10:31:35,039 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 3136)>
+2026-03-31 10:31:35,040 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 15536)>
+2026-03-31 10:31:35,040 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 12200)>
+2026-03-31 10:31:35,040 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 15312)>
+2026-03-31 10:31:35,043 [INFO] instances.camera: Camera EDSDK initialized
+2026-03-31 10:31:35,043 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 19016)>
+2026-03-31 10:31:35,125 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:35,142 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:35,143 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:35,143 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:35,661 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:35,661 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:35,661 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:35,661 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:36,211 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:36,211 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:36,211 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:36,212 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:36,741 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:36,741 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:36,741 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:36,742 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:37,279 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:37,279 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:37,279 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:37,279 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:37,835 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:37,835 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:37,835 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:37,836 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:38,343 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:38,343 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:38,343 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:38,345 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:38,854 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:38,855 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:38,855 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:38,855 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:39,357 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:39,357 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:39,357 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:39,358 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:39,866 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:39,866 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:39,866 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:39,866 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:40,383 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:40,383 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:40,389 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:40,389 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:40,891 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:40,891 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:40,891 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:40,893 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:41,395 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:41,395 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:41,397 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:41,397 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:41,900 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:41,901 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:41,900 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:41,901 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:42,414 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:42,414 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:42,416 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:42,416 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:42,921 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:42,921 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:42,921 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:42,922 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:43,427 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:43,427 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:43,428 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:43,428 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:43,930 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:43,930 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:43,980 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:43,980 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:44,437 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:44,438 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:44,538 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:44,538 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:44,948 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:44,948 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:45,049 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:45,049 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:45,460 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:45,460 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:45,556 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:45,556 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:45,962 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:45,962 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:46,063 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:46,063 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:46,470 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:46,470 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:46,572 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:46,573 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:46,990 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:46,990 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:47,091 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:47,092 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:47,499 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:47,499 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:47,603 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:47,603 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:48,045 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:48,045 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:48,199 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:48,200 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:48,609 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:48,610 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:48,711 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:48,711 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:49,120 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:49,120 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:49,215 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:49,215 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:49,627 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:31:49,628 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:31:49,729 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:31:49,729 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:31:50,063 [INFO] __main__: Application exited with code 0
+2026-03-31 10:32:26,996 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-03-31 10:32:26,996 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-03-31 10:32:26,996 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-03-31 10:32:26,996 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-03-31 10:32:26,996 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-03-31 10:32:26,997 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-03-31 10:32:26,997 [INFO] instances.camera: Camera initialization 1/2
+2026-03-31 10:32:26,997 [INFO] instances.camera: Camera initialization 2/2
+2026-03-31 10:32:26,997 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 2192)>
+2026-03-31 10:32:26,998 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 10432)>
+2026-03-31 10:32:26,998 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 18488)>
+2026-03-31 10:32:26,998 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 9804)>
+2026-03-31 10:32:27,002 [INFO] instances.camera: Camera EDSDK initialized
+2026-03-31 10:32:27,002 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 18460)>
+2026-03-31 10:32:27,087 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:27,087 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:27,103 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:27,105 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:27,611 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:27,612 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:27,612 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:27,612 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:28,116 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:28,116 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:28,117 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:28,117 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:28,619 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:28,619 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:28,621 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:28,621 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:29,124 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:29,124 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:29,126 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:29,126 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:29,630 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:29,630 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:29,630 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:29,631 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:30,135 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:30,135 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:30,135 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:30,135 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:30,640 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:30,640 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:30,640 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:30,640 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:31,143 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:31,143 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:31,145 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:31,145 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:31,646 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:31,646 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:31,649 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:31,649 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:32,151 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:32,151 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:32,152 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:32,152 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:32,656 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:32,656 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:32,656 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:32,656 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:33,159 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:33,159 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:33,161 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:33,161 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:33,663 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:33,663 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:33,665 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:33,665 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:34,167 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:34,167 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:34,169 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:34,169 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:34,670 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:34,670 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:34,673 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:34,673 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:35,174 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:35,174 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:35,176 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:35,176 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:35,677 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:35,677 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:35,678 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:35,678 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:36,180 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:36,180 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:36,182 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:36,182 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:36,684 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:36,684 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:36,686 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:36,686 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:37,188 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:37,188 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:37,192 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:37,192 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:37,693 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:37,693 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:37,695 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:37,695 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:38,198 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:38,198 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:38,200 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:38,200 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:38,701 [INFO] instances.camera: Camera connecting... 1/5
+2026-03-31 10:32:38,701 [INFO] instances.camera: Camera connecting... 2/5
+2026-03-31 10:32:38,704 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-03-31 10:32:38,704 [ERROR] instances.serial_device: SerialDevice connection error
+Traceback (most recent call last):
+  File "c:\Users\stick\Documents\GitHub\DFGMPIZZA\instances\serial_device.py", line 38, in connect
+    self.ser = serial.Serial(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\stick\AppData\Local\Programs\Python\Python312\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port 'COM5': FileNotFoundError(2, 'Das System kann die angegebene Datei nicht finden.', None, 2)
+2026-03-31 10:32:38,768 [INFO] __main__: Application exited with code 0
