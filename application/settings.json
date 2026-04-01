@@ -2,7 +2,7 @@
     "app": {
         "thread_refreshrate": 20,
         "reconnect_delay": 0.5,
-        "image_crop": 0.17
+        "image_crop": 0.13
     },
     "ui": {
         "refreshrate": 60,
@@ -14,14 +14,14 @@
         "liveview_refresh_rate": 4,
         "iso": 100,
         "av": 8,
-        "base_tv": 0.1,
+        "base_tv": 0.05,
         "hdr_shot_count": 3,
-        "hdr_ev": 1.3333339999999998,
+        "hdr_ev": 1.9999990000000003,
         "contrast_weight": 0.99,
         "exposure_weight": 1,
         "saturation_weight": 1,
         "tonemap_gamma": 2.2,
-        "use_mertens": false,
+        "use_mertens": true,
         "use_robertson": false
     },
     "process": {

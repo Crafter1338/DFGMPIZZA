@@ -10,8 +10,10 @@ from PySide6.QtGui import QPixmap, QImage
 
 logger = logging.getLogger(__name__)
 
-
 def save_image_buffer(img: np.ndarray, dst: str | Path) -> Path | None:
+    """
+    Speichert das Bild (cv2 img, ndarray) in dst
+    """
     try:
         if img is None or not isinstance(img, np.ndarray) or img.size == 0:
             return None
@@ -29,6 +31,9 @@ def save_image_buffer(img: np.ndarray, dst: str | Path) -> Path | None:
 
 
 def save_bytes(data: bytes, dst: str | Path) -> Path | None:
+    """
+    Speichert das Bild (bytes) in dst
+    """
     try:
         if not isinstance(data, (bytes, bytearray)) or len(data) == 0:
             return None
@@ -44,6 +49,9 @@ def save_bytes(data: bytes, dst: str | Path) -> Path | None:
 
 
 def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
+    """
+    Lädt src zu cv2 Bild
+    """
     try:
         source = Path(src)
 
@@ -62,6 +70,9 @@ def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
 
 
 def delete_file(path: str | Path) -> bool:
+    """
+    Löscht Datei bei path
+    """
     try:
         target = Path(path)
 
@@ -79,6 +90,9 @@ def delete_file(path: str | Path) -> bool:
 
 
 def move_file(src: str | Path, dst: str | Path, overwrite: bool = True) -> Path | None:
+    """
+    Bewegt Datei von src nach dst
+    """
     try:
         source = Path(src)
         destination = Path(dst)
@@ -101,6 +115,9 @@ def move_file(src: str | Path, dst: str | Path, overwrite: bool = True) -> Path 
 
 
 def flip_image_buffer(img: np.ndarray) -> Optional[np.ndarray]:
+    """
+    Dreht das Bild (cv2 img, ndarray) um 180°
+    """
     try:
         if img is None or not isinstance(img, np.ndarray) or img.size == 0:
             return None
@@ -111,7 +128,42 @@ def flip_image_buffer(img: np.ndarray) -> Optional[np.ndarray]:
         return None
 
 
+def downsample_to_hd(img: np.ndarray) -> Optional[np.ndarray]:
+    """
+    Skaliert ein Bild auf maximal 1280x720 (HD), behält Seitenverhältnis bei.
+    """
+    try:
+        if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+            return None
+
+        target_w, target_h = 1280, 720
+        h, w = img.shape[:2]
+
+        scale = min(target_w / w, target_h / h)
+
+        if scale >= 1:
+            return img.copy()
+
+        new_w = max(1, int(w * scale))
+        new_h = max(1, int(h * scale))
+
+        resized = cv2.resize(
+            img,
+            (new_w, new_h),
+            interpolation=cv2.INTER_AREA  # ideal für Downsampling (laut ChatGPT)
+        )
+
+        return resized
+
+    except Exception:
+        logger.exception("downsample_to_hd error")
+        return None
+
+
 def crop_image_buffer(img: np.ndarray, val: float) -> Optional[np.ndarray]:
+    """
+    Cropt das Bild (cv2 img, ndarray) mit crop
+    """
     try:
         if img is None or not isinstance(img, np.ndarray) or img.size == 0:
             return None
@@ -147,8 +199,11 @@ def save_preview_buffer(
     start_quality: int = 90,
     step: int = 5,
 ) -> Path | None:
+    """
+    Speichert das Bild (cv2 img, ndarray) als Preview nach Vorgaben in dst
+    """
     try:
-        if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+        if img is None or img.size == 0:
             return None
 
         destination = Path(dst)
@@ -277,6 +332,9 @@ def hdr_merge_robertson_buffer(
 
 
 def cv_image_to_qpixmap(img: np.ndarray) -> QPixmap:
+    """
+    Konvertiert ein cv2 img zu einer pyside6 QPixmap
+    """
     try:
         if img is None or not isinstance(img, np.ndarray) or img.size == 0:
             return QPixmap()
@@ -330,6 +388,9 @@ def cv_image_to_qpixmap(img: np.ndarray) -> QPixmap:
 
 
 def jpeg_buffer_to_qpixmap(buffer: bytes) -> QPixmap:
+    """
+    Konvertiert bytes zu einer pyside6 QPixmap
+    """
     try:
         pixmap = QPixmap()
         pixmap.loadFromData(buffer)

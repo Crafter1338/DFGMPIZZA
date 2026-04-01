@@ -1,67 +1,967 @@
-2026-03-31 14:42:55,707 [INFO] instances.serial_device: SerialDevice initialization 1/2
-2026-03-31 14:42:55,707 [INFO] instances.serial_device: SerialDevice initialization 2/2
-2026-03-31 14:42:55,707 [INFO] instances.serial_device: TurnTable initialization 1/2
-2026-03-31 14:42:55,707 [INFO] instances.serial_device: TurnTable initialization 2/2
-2026-03-31 14:42:55,707 [INFO] instances.camera_crane: CameraCrane initialization 1/2
-2026-03-31 14:42:55,707 [INFO] instances.camera_crane: CameraCrane initialization 2/2
-2026-03-31 14:42:55,707 [INFO] instances.camera: Camera initialization 1/2
-2026-03-31 14:42:55,707 [INFO] instances.camera: Camera initialization 2/2
-2026-03-31 14:42:55,707 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 20464)>
-2026-03-31 14:42:55,707 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 10392)>
-2026-03-31 14:42:55,707 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 22148)>
-2026-03-31 14:42:55,707 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 22156)>
-2026-03-31 14:42:55,707 [INFO] instances.camera: Camera EDSDK initialized
-2026-03-31 14:42:55,707 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 8332)>
-2026-03-31 14:42:55,795 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:55,811 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:55,816 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:55,818 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:56,319 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:56,319 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:56,321 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:56,325 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:56,824 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:56,825 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:56,829 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:56,832 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:57,328 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:57,328 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:57,335 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:57,339 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:57,831 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:57,831 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:57,845 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:57,848 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:58,334 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:58,334 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:58,350 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:58,353 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:58,840 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:58,840 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:58,855 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:58,861 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:59,348 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:59,348 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:59,363 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:59,366 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:42:59,857 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:42:59,857 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:42:59,869 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:42:59,873 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:43:00,364 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:43:00,364 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:43:00,376 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:43:00,379 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:43:00,871 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:43:00,871 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:43:00,882 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:43:00,886 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:43:01,378 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:43:01,378 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:43:01,389 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:43:01,392 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:43:01,887 [INFO] instances.camera: Camera connecting... 1/5
-2026-03-31 14:43:01,887 [INFO] instances.camera: Camera connecting... 2/5
-2026-03-31 14:43:01,896 [INFO] instances.serial_device: SerialDevice connecting... 1/2
-2026-03-31 14:43:01,899 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
-2026-03-31 14:43:02,090 [INFO] __main__: Application exited with code 0
+2026-04-01 16:44:34,200 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 16:44:34,200 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 16:44:34,201 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 16:44:34,201 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 16:44:34,201 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 16:44:34,201 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 16:44:34,201 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 16:44:34,223 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 16:44:34,223 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 7668)>
+2026-04-01 16:44:34,223 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 9296)>
+2026-04-01 16:44:34,223 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 8112)>
+2026-04-01 16:44:34,223 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 14232)>
+2026-04-01 16:44:34,223 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 17640)>
+2026-04-01 16:44:34,237 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 16:44:34,357 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:34,364 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:34,410 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:34,413 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:34,915 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:34,921 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:34,950 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:34,951 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:35,459 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:35,459 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:35,503 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:35,503 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:36,005 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:36,005 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:36,021 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:36,028 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:36,556 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:36,557 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:36,586 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:36,592 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:37,072 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:37,072 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:37,152 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:37,154 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:37,626 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:37,626 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:37,703 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:37,704 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:38,158 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:38,158 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:38,237 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:38,238 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:38,688 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:38,688 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:38,755 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:38,755 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:39,254 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:39,255 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:39,309 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:39,309 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:39,771 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:39,773 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:39,823 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:39,829 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:40,300 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:40,300 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:40,357 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:40,364 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:40,824 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:40,824 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:40,890 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:40,896 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:41,373 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:41,374 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:41,440 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:41,446 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:41,886 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:41,887 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:41,968 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:41,975 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:42,394 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:42,394 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:42,482 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:42,488 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:42,903 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:42,903 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:42,994 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:43,001 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:43,413 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:43,414 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:43,526 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:43,526 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:43,949 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:43,949 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:44,075 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:44,075 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:44,499 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:44:44,499 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:44:44,575 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:44:44,579 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:44:44,927 [INFO] __main__: Application exited with code 0
+2026-04-01 16:48:52,345 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 16:48:52,347 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 16:48:52,347 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 16:48:52,347 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 16:48:52,347 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 16:48:52,347 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 16:48:52,349 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 16:48:52,389 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 16:48:52,389 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 22144)>
+2026-04-01 16:48:52,391 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 18668)>
+2026-04-01 16:48:52,392 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 4132)>
+2026-04-01 16:48:52,392 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 4484)>
+2026-04-01 16:48:52,401 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 16:48:52,401 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 17576)>
+2026-04-01 16:48:52,401 [ERROR] __main__: Unhandled exception in app.py main
+Traceback (most recent call last):
+  File "c:\Nico\pizza\app.py", line 480, in <module>
+    window = MainWindow()
+  File "c:\Nico\pizza\app.py", line 152, in __init__
+    self._connect_ui()
+  File "c:\Nico\pizza\app.py", line 221, in _connect_ui
+    self.ui.settings_button.clicked.connect(self._open_settings_folder)
+AttributeError: 'MainWindow' object has no attribute '_open_settings_folder'
+2026-04-01 16:49:03,113 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 16:49:03,114 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 16:49:03,114 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 16:49:03,114 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 16:49:03,114 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 16:49:03,115 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 16:49:03,115 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 16:49:03,138 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 16:49:03,139 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 20024)>
+2026-04-01 16:49:03,140 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 21376)>
+2026-04-01 16:49:03,141 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 10460)>
+2026-04-01 16:49:03,142 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 9512)>
+2026-04-01 16:49:03,142 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 16:49:03,142 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 15884)>
+2026-04-01 16:49:03,151 [ERROR] __main__: Unhandled exception in app.py main
+Traceback (most recent call last):
+  File "c:\Nico\pizza\app.py", line 480, in <module>
+    window = MainWindow()
+  File "c:\Nico\pizza\app.py", line 155, in __init__
+    self.ui_timer.timeout.connect(self._update_ui)
+AttributeError: 'MainWindow' object has no attribute '_update_ui'
+2026-04-01 16:49:17,618 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 16:49:17,618 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 16:49:17,618 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 16:49:17,618 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 16:49:17,618 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 16:49:17,618 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 16:49:17,618 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 16:49:17,653 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 16:49:17,654 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 13960)>
+2026-04-01 16:49:17,655 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 22464)>
+2026-04-01 16:49:17,655 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 20876)>
+2026-04-01 16:49:17,656 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 20908)>
+2026-04-01 16:49:17,656 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 19328)>
+2026-04-01 16:49:17,656 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 16:49:17,749 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:17,797 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:17,801 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:17,805 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:18,336 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:18,336 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:18,337 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:18,342 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:18,845 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:18,845 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:18,851 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:18,856 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:19,354 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:19,355 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:19,366 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:19,372 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:19,863 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:19,864 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:19,878 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:19,885 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:20,371 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:20,371 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:20,391 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:20,398 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:20,880 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:20,881 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:20,905 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:20,910 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:21,388 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:21,388 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:21,418 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:21,424 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:21,895 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:21,895 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:21,932 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:21,938 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:22,403 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:22,404 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:22,446 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:22,452 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:22,912 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:22,913 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:22,958 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:22,968 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:23,428 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:23,429 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:23,479 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:23,485 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:23,938 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:23,939 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:23,993 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:23,998 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:24,447 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:24,448 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:24,507 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:24,513 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:24,955 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:24,956 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:25,021 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:25,031 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:25,468 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:25,469 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:25,539 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:25,549 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:25,976 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:25,977 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:26,057 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:26,065 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:26,486 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:26,487 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:26,581 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:26,590 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:26,993 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:26,994 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:27,096 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:27,101 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:27,501 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:49:27,503 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:49:27,609 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:49:27,615 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:49:27,899 [INFO] __main__: Application exited with code 0
+2026-04-01 16:59:23,201 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 16:59:23,201 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 16:59:23,201 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 16:59:23,217 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 16:59:23,217 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 16:59:23,218 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 16:59:23,218 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 16:59:23,235 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 16:59:23,235 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 11732)>
+2026-04-01 16:59:23,250 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 15140)>
+2026-04-01 16:59:23,250 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 18912)>
+2026-04-01 16:59:23,251 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 16696)>
+2026-04-01 16:59:23,260 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 16:59:23,260 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 3212)>
+2026-04-01 16:59:23,350 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:23,389 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:23,433 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:23,437 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:23,914 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:23,920 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:23,965 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:23,966 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:24,425 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:24,432 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:24,474 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:24,475 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:24,939 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:24,946 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:24,983 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:24,984 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:25,453 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:25,459 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:25,490 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:25,491 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:25,969 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:25,976 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:25,998 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:25,999 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:26,483 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:26,489 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:26,505 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:26,506 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:26,997 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:27,003 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:27,014 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:27,015 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:27,510 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:27,517 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:27,520 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:27,520 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:28,023 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:28,028 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:28,029 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:28,030 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:28,536 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:28,536 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:28,537 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:28,542 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:29,043 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:29,043 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:29,048 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:29,055 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:29,550 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:29,551 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:29,561 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:29,567 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:30,058 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 16:59:30,059 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 16:59:30,077 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 16:59:30,083 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 16:59:30,096 [INFO] __main__: Application exited with code 0
+2026-04-01 17:00:51,901 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 17:00:51,901 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 17:00:51,901 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 17:00:51,901 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 17:00:51,901 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 17:00:51,903 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 17:00:51,903 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 17:00:51,923 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 17:00:51,925 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 15080)>
+2026-04-01 17:00:51,925 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 8380)>
+2026-04-01 17:00:51,927 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 6256)>
+2026-04-01 17:00:51,928 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 5956)>
+2026-04-01 17:00:51,929 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 17:00:51,929 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 13656)>
+2026-04-01 17:00:52,011 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:52,011 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:52,049 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:52,052 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:52,561 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:52,561 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:52,562 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:52,578 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:53,089 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:53,097 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:53,197 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:53,198 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:53,605 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:53,613 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:53,715 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:53,715 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:54,120 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:54,127 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:54,224 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:54,224 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:54,633 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:54,641 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:54,731 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:54,732 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:55,150 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:55,157 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:55,242 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:55,243 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:55,666 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:55,674 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:55,756 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:55,757 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:56,183 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:56,192 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:56,263 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:56,264 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:56,700 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:56,706 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:56,773 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:56,774 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:57,211 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:57,217 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:57,289 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:57,290 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:57,727 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:57,734 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:57,800 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:57,801 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:58,248 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:58,257 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:58,309 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:58,310 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:58,767 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:58,774 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:58,818 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:58,819 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:59,285 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:59,303 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:59,336 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:59,337 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:00:59,811 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:00:59,819 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:00:59,850 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:00:59,852 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:00,326 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:00,335 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:00,361 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:00,361 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:00,842 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:00,850 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:00,871 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:00,872 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:01,360 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:01,369 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:01,381 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:01,382 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:01,885 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:01,891 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:01,892 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:01,895 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:02,402 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:02,403 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:02,404 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:02,416 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:02,913 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:02,915 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:02,927 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:02,958 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:03,422 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:03,423 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:03,465 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:03,473 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:03,931 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:03,932 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:03,983 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:03,993 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:04,438 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:04,440 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:04,500 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:04,509 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:04,947 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:04,948 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:05,029 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:05,037 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:05,456 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:05,458 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:05,546 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:05,556 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:05,966 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:05,967 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:06,063 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:06,073 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:06,474 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:06,475 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:06,580 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:06,593 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:06,982 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:06,983 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:07,121 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:07,130 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:07,489 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:07,490 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:07,639 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:07,649 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:07,998 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:07,999 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:08,158 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:08,167 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:08,505 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:08,506 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:08,687 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:08,696 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:09,013 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:09,013 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:09,202 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:09,211 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:09,521 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:09,522 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:09,718 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:09,726 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:10,029 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:10,030 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:10,235 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:10,248 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:10,538 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:10,540 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:10,766 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:10,775 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:11,047 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:11,049 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:11,283 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:11,292 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:11,556 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:11,558 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:11,799 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:11,809 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:12,070 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:12,072 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:12,316 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:12,325 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:12,583 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:12,584 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:12,833 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:12,842 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:13,102 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:13,104 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:13,357 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:13,397 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:13,620 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:13,621 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:13,906 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:13,924 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:14,130 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:14,131 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:14,433 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:14,442 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:14,638 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:14,639 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:14,949 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:14,957 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:15,148 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:15,149 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:15,465 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:15,473 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:15,655 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:15,656 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:15,985 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:15,994 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:16,162 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:16,163 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:16,509 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:16,520 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:16,671 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:16,672 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:17,028 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:17,038 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:17,181 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:17,183 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:17,546 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:17,557 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:17,694 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:17,695 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:18,070 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:18,078 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:18,205 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:18,207 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:18,593 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:18,602 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:18,716 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:18,717 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:19,109 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:19,119 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:19,227 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:19,228 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:19,626 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:19,636 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:19,744 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:19,746 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:20,144 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:20,153 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:20,263 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:20,264 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:20,674 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:20,683 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:20,775 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:01:20,781 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:01:20,782 [INFO] instances.camera: Camera connecting... 3/5
+2026-04-01 17:01:21,369 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:21,370 [INFO] instances.camera: Camera connecting... 4/5
+2026-04-01 17:01:21,382 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:21,890 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:21,899 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:22,411 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:22,500 [INFO] instances.camera: Camera connected
+2026-04-01 17:01:22,509 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:23,017 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:23,029 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:23,558 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:23,569 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:24,115 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:24,124 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:24,644 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:24,654 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:25,161 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:25,170 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:25,680 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:25,689 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:26,217 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:26,227 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:26,756 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:26,766 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:27,273 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:27,283 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:27,802 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:27,812 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:28,318 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:28,327 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:28,836 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:28,847 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:29,356 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:29,365 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:29,881 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:29,890 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:30,417 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:30,426 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:30,933 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:30,943 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:31,467 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:31,476 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:32,002 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:32,010 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:32,521 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:32,533 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:33,062 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:33,071 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:33,578 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:33,590 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:34,107 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:34,116 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:34,634 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:34,643 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:35,158 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:35,173 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:35,708 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:35,731 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:36,253 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:36,265 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:36,772 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:36,802 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:37,309 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:37,318 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:37,826 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:37,835 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:38,352 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:38,362 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:38,889 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:38,899 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:39,418 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:39,428 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:39,944 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:39,953 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:40,459 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:40,468 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:40,980 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:40,990 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:41,497 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:41,507 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:42,033 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:42,043 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:42,563 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:42,575 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:43,084 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:43,093 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:43,601 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:43,610 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:44,118 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:44,127 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:44,351 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:01:44,727 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:45,227 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:01:45,240 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:45,746 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:45,755 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:46,261 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:46,273 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:46,542 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:01:46,780 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:46,789 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:47,133 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:01:47,185 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:01:47,338 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:47,765 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:01:47,778 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:48,287 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:48,297 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:48,793 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:01:48,803 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:48,842 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:49,465 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:49,486 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:01:49,521 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:01:49,793 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:01:49,794 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:50,302 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:50,311 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:50,818 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:50,827 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:50,888 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:01:51,334 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:51,345 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:51,586 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:01:51,890 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:51,905 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:52,165 [ERROR] __main__: Fehler bei HDR Preview
+Stack (most recent call last):
+  File "C:\Users\n.stickel\AppData\Local\Programs\Python\Python310\lib\threading.py", line 966, in _bootstrap
+    self._bootstrap_inner()
+  File "C:\Users\n.stickel\AppData\Local\Programs\Python\Python310\lib\threading.py", line 1009, in _bootstrap_inner
+    self.run()
+  File "C:\Users\n.stickel\AppData\Local\Programs\Python\Python310\lib\threading.py", line 946, in run
+    self._target(*self._args, **self._kwargs)
+  File "c:\Nico\pizza\app.py", line 455, in worker
+    logger.error("Fehler bei HDR Preview", stack_info=True)
+2026-04-01 17:01:52,418 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:52,426 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:52,953 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:52,962 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:53,469 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:53,479 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:54,028 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:54,037 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:54,545 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:54,555 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:55,077 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:55,086 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:55,593 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:55,603 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:56,129 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:56,140 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:56,659 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:56,669 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:57,186 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:57,196 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:57,703 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:57,714 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:58,230 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:58,240 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:58,758 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:58,768 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:59,275 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:59,287 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:01:59,801 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:01:59,812 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:00,342 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:00,351 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:00,866 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:00,876 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:01,396 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:01,407 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:01,927 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:01,936 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:02,446 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:02,471 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:02,991 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:03,000 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:03,507 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:03,517 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:04,022 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:04,032 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:04,540 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:04,550 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:05,075 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:05,085 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:05,641 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:05,653 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:06,176 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:06,180 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:06,713 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:06,713 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:07,260 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:07,269 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:07,803 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:07,811 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:08,358 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:08,396 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:08,903 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:08,914 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:09,425 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:09,435 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:09,987 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:10,001 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:10,526 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:10,536 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:11,043 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:11,046 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:11,560 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:11,572 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:12,107 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:12,113 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:12,623 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:12,629 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:13,182 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:13,182 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:13,725 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:13,733 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:14,252 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:14,257 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:14,791 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:14,800 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:15,303 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:15,303 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:15,823 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:15,823 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:16,387 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:16,398 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:16,961 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:16,961 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:17,481 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:17,489 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:18,015 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:18,024 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:18,524 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:18,550 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:19,072 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:19,079 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:19,600 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:19,635 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:20,149 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:20,190 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:20,691 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:20,715 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:21,216 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:21,229 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:21,802 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:21,819 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:22,322 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:22,348 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:22,905 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:22,929 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:23,474 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:23,484 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:24,034 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:24,043 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:24,559 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:24,562 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:25,099 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:25,110 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:25,614 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:25,638 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:26,141 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:26,141 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:26,659 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:26,659 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:27,176 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:27,176 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:27,683 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:27,683 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:28,231 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:28,239 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:28,758 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:28,766 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:29,274 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:29,285 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:29,806 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:29,811 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:30,327 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:30,338 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:30,856 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:30,863 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:31,401 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:31,408 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:31,913 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:31,913 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:32,421 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:32,460 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:32,963 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:32,963 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:33,527 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:33,527 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:34,040 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:34,049 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:34,611 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:34,616 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:35,130 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:35,130 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:35,646 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:35,655 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:36,159 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:36,165 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:36,682 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:36,695 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:37,209 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:37,209 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:37,709 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:37,720 [ERROR] instances.serial_device: SerialDevice connection error: Port COM5 does not exist
+2026-04-01 17:02:38,270 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:02:38,318 [INFO] instances.serial_device: SerialDevice connected
+2026-04-01 17:02:38,326 [INFO] instances.serial_device: TurnTable null 1/2
+2026-04-01 17:02:38,326 [INFO] instances.serial_device: TurnTable null 2/2
+2026-04-01 17:02:38,336 [INFO] instances.camera_crane: CameraCrane null 1/2
+2026-04-01 17:02:38,338 [INFO] instances.camera_crane: CameraCrane move_end
+2026-04-01 17:03:28,352 [INFO] instances.camera_crane: CameraCrane null 2/2
+2026-04-01 17:03:45,755 [INFO] __main__: Application exited with code 0
+2026-04-01 17:03:52,965 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 17:03:52,965 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 17:03:52,965 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 17:03:52,965 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 17:03:52,965 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 17:03:52,965 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 17:03:52,965 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 17:03:52,990 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 17:03:52,990 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 5464)>
+2026-04-01 17:03:52,991 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 7856)>
+2026-04-01 17:03:52,991 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 16460)>
+2026-04-01 17:03:52,991 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 10556)>
+2026-04-01 17:03:52,997 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 17:03:52,997 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 22212)>
+2026-04-01 17:03:53,100 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:03:53,146 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:03:53,155 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:03:53,155 [INFO] instances.camera: Camera connecting... 3/5
+2026-04-01 17:03:53,743 [INFO] instances.camera: Camera connecting... 4/5
+2026-04-01 17:03:53,782 [INFO] instances.serial_device: SerialDevice connected
+2026-04-01 17:03:53,795 [INFO] instances.serial_device: TurnTable null 1/2
+2026-04-01 17:03:53,796 [INFO] instances.camera_crane: CameraCrane null 1/2
+2026-04-01 17:03:53,796 [INFO] instances.serial_device: TurnTable null 2/2
+2026-04-01 17:03:53,797 [INFO] instances.camera_crane: CameraCrane move_end
+2026-04-01 17:03:54,828 [INFO] instances.camera: Camera connected
+2026-04-01 17:03:57,352 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:03:57,989 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:03:59,332 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:03:59,958 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:04:00,015 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:04:00,546 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:04:01,571 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:04:02,282 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:04:02,329 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:04:02,610 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:04:03,651 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:04:04,368 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:04:43,796 [INFO] instances.camera_crane: CameraCrane null 2/2
+2026-04-01 17:04:55,081 [INFO] instances.project_scheduler: Starting project 00000
+2026-04-01 17:04:55,083 [DEBUG] instances.project_scheduler: Moving to X:0.0 Y:1.0
+2026-04-01 17:04:55,084 [INFO] instances.camera_crane: CameraCrane move_to 1/3: pos=1.0
+2026-04-01 17:04:55,084 [INFO] instances.camera_crane: CameraCrane move_to position calculated 2/3: target=90
+2026-04-01 17:04:55,085 [INFO] instances.camera_crane: CameraCrane move_to position set 3/3: target=90
+2026-04-01 17:05:24,978 [INFO] instances.camera_crane: CameraCrane move_end
+2026-04-01 17:05:31,308 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:32,140 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:33,494 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:34,057 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:05:34,157 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:34,727 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:35,824 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:36,486 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:05:36,608 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:36,841 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:37,955 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:38,668 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:05:38,785 [DEBUG] instances.project_scheduler: Moving to X:120.0 Y:1.0
+2026-04-01 17:05:45,135 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:45,951 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:47,268 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:47,841 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:05:47,958 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:48,494 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:49,607 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:50,287 [DEBUG] instances.camera: Camera.handle_transfer complete
+2026-04-01 17:05:50,388 [DEBUG] instances.camera: Camera take_image start
+2026-04-01 17:05:50,651 [DEBUG] instances.camera: Camera take_image complete
+2026-04-01 17:05:51,692 [DEBUG] instances.camera: Camera.handle_transfer start
+2026-04-01 17:05:51,761 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:05:51,770 [INFO] __main__: Application exited with code 0
+2026-04-01 17:05:56,348 [INFO] instances.serial_device: SerialDevice initialization 1/2
+2026-04-01 17:05:56,348 [INFO] instances.serial_device: SerialDevice initialization 2/2
+2026-04-01 17:05:56,348 [INFO] instances.serial_device: TurnTable initialization 1/2
+2026-04-01 17:05:56,348 [INFO] instances.serial_device: TurnTable initialization 2/2
+2026-04-01 17:05:56,348 [INFO] instances.camera_crane: CameraCrane initialization 1/2
+2026-04-01 17:05:56,348 [INFO] instances.camera_crane: CameraCrane initialization 2/2
+2026-04-01 17:05:56,348 [INFO] instances.camera: Camera initialization 1/2
+2026-04-01 17:05:56,375 [INFO] instances.camera: Camera initialization 2/2
+2026-04-01 17:05:56,375 [INFO] instances.threaded_instance: STARTING: <SerialDevice(Thread-1, started daemon 3208)>
+2026-04-01 17:05:56,375 [INFO] instances.threaded_instance: STARTING: <TurnTable(Thread-2, started daemon 17444)>
+2026-04-01 17:05:56,375 [INFO] instances.threaded_instance: STARTING: <CameraCrane(Thread-3, started daemon 3048)>
+2026-04-01 17:05:56,375 [INFO] instances.threaded_instance: STARTING: <Camera(Thread-4, started daemon 14392)>
+2026-04-01 17:05:56,375 [INFO] instances.threaded_instance: STARTING: <ProjectScheduler(Thread-5, started daemon 2764)>
+2026-04-01 17:05:56,389 [INFO] instances.camera: Camera EDSDK initialized
+2026-04-01 17:05:56,481 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:05:56,573 [INFO] instances.serial_device: SerialDevice connected
+2026-04-01 17:05:56,576 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:05:56,583 [INFO] instances.serial_device: TurnTable null 1/2
+2026-04-01 17:05:56,584 [INFO] instances.camera: Camera connecting... 2/5
+2026-04-01 17:05:56,584 [INFO] instances.camera_crane: CameraCrane null 1/2
+2026-04-01 17:05:56,585 [INFO] instances.serial_device: TurnTable null 2/2
+2026-04-01 17:05:56,585 [INFO] instances.camera: Camera connecting... 3/5
+2026-04-01 17:05:56,586 [INFO] instances.camera_crane: CameraCrane move_end
+2026-04-01 17:05:57,043 [INFO] instances.camera: Camera connecting... 4/5
+2026-04-01 17:05:58,134 [INFO] instances.camera: Camera connected
+2026-04-01 17:06:47,043 [INFO] instances.camera_crane: CameraCrane null 2/2
+2026-04-01 17:07:40,218 [INFO] instances.project_scheduler: Starting project 00000
+2026-04-01 17:07:40,265 [DEBUG] instances.project_scheduler: Moving to X:0.0 Y:1.0
+2026-04-01 17:07:40,265 [INFO] instances.camera_crane: CameraCrane move_to 1/3: pos=1.0
+2026-04-01 17:07:40,266 [INFO] instances.camera_crane: CameraCrane move_to position calculated 2/3: target=90
+2026-04-01 17:07:40,267 [INFO] instances.camera_crane: CameraCrane move_to position set 3/3: target=90
+2026-04-01 17:08:07,252 [INFO] instances.serial_device: SerialDevice connecting... 1/2
+2026-04-01 17:08:07,253 [INFO] instances.camera: Camera connecting... 1/5
+2026-04-01 17:08:07,254 [INFO] __main__: Application exited with code 0
+2026-04-01 17:08:07,255 [INFO] instances.camera: Camera disconnected

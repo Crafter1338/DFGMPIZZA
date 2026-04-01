@@ -3,6 +3,7 @@ from typing import List, Tuple
 def nearest_value_index(values: list[float], target: float) -> int:
     """
     Gibt den Index des numerisch nächsten Wertes zurück.
+    Rückgabe: Index
     """
     return min(range(len(values)), key=lambda i: abs(values[i] - target))
 
@@ -13,28 +14,25 @@ def clamp(value: int, min_value: int, max_value: int) -> int:
 
 def ev_to_tv_steps(ev: float, third_ev_per_step: float = 1/3) -> int:
     """
-    Wandelt EV in Schritte innerhalb der tv_names-Liste um.
-    Standard: 1 Schritt = 1/3 EV.
+    Wandelt EV in Schritte innerhalb der tv_names Liste um.
     """
     return max(1, int(round(ev / third_ev_per_step)))
 
 
-# -------------------------------------------------------------------
-# GENERIC ROUNDING
-# -------------------------------------------------------------------
-
 def round_to_name_index(value: float, names: List[float]) -> int:
     """
-    Rundet einen Inputwert auf den nächsten vorhandenen Namen
+    Rundet einen Input auf den nächsten vorhandenen Namen
     und gibt dessen Index zurück.
+    Rückgabe: Index
     """
     return nearest_value_index(names, value)
 
 
 def round_to_raw_value(value: float, names: List[float], raw_values: List[int]) -> int:
     """
-    Rundet einen Inputwert auf den nächsten Namen und gibt
-    den zugehörigen RAW-Wert zurück.
+    Rundet einen Input auf den nächsten Namen und gibt
+    den zugehörigen SDK Wert zurück.
+    Rückgabe: SDK Wert
     """
     idx = round_to_name_index(value, names)
     return raw_values[idx]
@@ -46,21 +44,18 @@ def round_to_name_and_raw(
     raw_values: List[int],
 ) -> Tuple[float, int]:
     """
-    Rundet auf den nächsten Namen und gibt sowohl den Namen
-    als auch den RAW-Wert zurück.
+    Rundet einen Input auf den nächsten Namen und gibt sowohl den Namen
+    als auch den SDK Wert zurück.
+    Rückgabe: (Name, SDK Wert)
     """
     idx = round_to_name_index(value, names)
     return names[idx], raw_values[idx]
 
 
-# -------------------------------------------------------------------
-# HDR GENERATION
-# -------------------------------------------------------------------
-
 def round_base_tv_to_name(base_tv: float, tv_names: list[float]) -> Tuple[int, float]:
     """
-    Rundet base_tv auf den nächsten vorhandenen tv_names-Wert.
-    Rückgabe: (index, gerundeter_wert)
+    Rundet base_tv auf den nächsten vorhandenen Namenwert.
+    Rückgabe: (Index, Name)
     """
     idx = nearest_value_index(tv_names, base_tv)
     return idx, tv_names[idx]
@@ -105,6 +100,9 @@ def generate_hdr_tv_names(
     tv_names: list[float],
     third_ev_per_step: float = 1/3,
 ) -> List[float]:
+    """
+    Generiert die SDK TV Namen. (Wird aktuell nicht gebraucht)
+    """
 
     indices = generate_hdr_tv_name_indices(
         base_tv=base_tv,
@@ -126,7 +124,7 @@ def generate_hdr_tv_values(
     third_ev_per_step: float = 1/3,
 ) -> List[int]:
     """
-    Generiert direkt die RAW Tv Werte für EDSDK.
+    Generiert die SDK TV Werte.
     """
 
     indices = generate_hdr_tv_name_indices(
@@ -145,6 +143,8 @@ def index_to_raw(indices: List[int], raw_values: List[int]) -> List[int]:
 
 
 """
+Verwendungsbeispiel (Notiz an mich selbst):
+
 iso_raw = round_to_raw_value(
     iso_input,
     self.iso_names,
