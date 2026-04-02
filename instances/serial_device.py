@@ -37,7 +37,7 @@ class SerialDevice(ThreadedInstance):
             logger.info("SerialDevice connecting... 1/2")
 
             with self.serial_lock:
-                if self.ser:
+                if self.ser is not None:
                     self._disconnect()
 
                 try:
@@ -89,6 +89,9 @@ class SerialDevice(ThreadedInstance):
     
     def tick(self):        
         item = None
+        
+        if self.ser is None:
+            return
 
         with self.queue_lock:
             if self.instruction_queue:
@@ -127,7 +130,7 @@ class SerialDevice(ThreadedInstance):
             
             # Hex-String in Bytes
             with self.serial_lock:
-                if not self.ser or not self.ser.is_open:
+                if self.ser is None or not self.ser.is_open:
                     self._disconnect()
                     return None
     

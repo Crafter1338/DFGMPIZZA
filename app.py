@@ -32,6 +32,8 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger(__name__)
+
+from functools import wraps
 ###############################
 from PySide6.QtWidgets import (
     QApplication,
@@ -42,7 +44,7 @@ from PySide6.QtWidgets import (
     QPushButton,
 )
 from PySide6.QtCore import QTimer, QUrl, Qt
-from PySide6.QtGui import QDesktopServices, QMovie, QPixmap
+from PySide6.QtGui import QColor, QDesktopServices, QMovie, QPixmap
 
 from ui.aspect_ratio_label import AspectRatioLabel
 from ui.ui_mainwindow import Ui_MainWindow
@@ -51,6 +53,7 @@ from ui.ui_destinationalreadyexists import Ui_Dialog as Ui_D_Dialog
 from ui.ui_rotatepart import Ui_Dialog as Ui_R_Dialog
 from ui.ui_invalidarticle import Ui_Dialog as Ui_I_Dialog
 from ui.ui_projectfinished import Ui_Dialog as Ui_P_Dialog
+from ui.spinner import WaitingSpinner
 ###############################
 from application.settings import settings
 
@@ -66,18 +69,63 @@ from instances.project_scheduler import Project, ProjectScheduler
 from application.datastructures import Image
 
 ## Helpers ####################
-def _parse_float(self, text: str):
+def _parse_float(text: str):
     try:
         return float(text.strip().replace(",", "."))
     except ValueError:
         return None
 
-def _clamp01(self, value: float):
+def _clamp01(value: float):
     return min(max(value, 0), 1)
 
-def _set_and_save(self, obj, attr: str, value):
+def _set_and_save(obj, attr: str, value):
     setattr(obj, attr, value)
     settings.save()
+
+def cameraready(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        if self.camera is None:
+            #logger.warning("Camera missing")
+            return None
+
+        if not self.camera.is_connected():
+            #logger.debug("Camera not connected")
+            return None
+
+        return func(self, *args, **kwargs)
+    return wrapper
+
+def mechanicsready(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        if not all([self.serial_device, self.camera_crane, self.turn_table]):
+            #logger.warning("Mechanics missing")
+            return None
+
+        if not self.serial_device.is_connected():
+            #logger.debug("Serial not connected")
+            return None
+
+        if not self.camera_crane.nulled.is_set():
+            #logger.debug("Crane not nulled")
+            return None
+
+        if not self.turn_table.nulled.is_set():
+            #logger.debug("Turntable not nulled")
+            return None
+
+        return func(self, *args, **kwargs)
+    return wrapper
+
+def systemready(func):
+    @wraps(func)
+    @cameraready
+    @mechanicsready
+    def wrapper(self, *args, **kwargs):
+        return func(self, *args, **kwargs)
+    return wrapper
+    
 
 ## Dialoge / Pop-Ups ##########
 class RotatePartDialog(QDialog):
@@ -148,7 +196,16 @@ class MainWindow(QMainWindow):
         
         self.project: Optional[Project] = None
         
+        self.preview_spinner: Optional[WaitingSpinner] = None
+        self.is_generating_hdr_preview = False
+        
+        self.is_moving_by_buttons = False
+        
+        self.last_preview_bytes: Optional[bytes] = None
+        self.last_preview_crop: Optional[float] = None
+        
         self._replace_image_label()
+        self._insert_spinner()
         self._init_ui_from_settings()
         self._connect_ui()
 
@@ -164,6 +221,10 @@ class MainWindow(QMainWindow):
         self.preview_bytes = bytes()
         
     ## UI Helpers #################
+    def _insert_spinner(self): # Drehteil damit man während HDR Preview nicht ganz alleine ist
+        self.preview_spinner = WaitingSpinner(self.ui.image_label, True, True, radius=30, color=QColor(255,255,255), line_width=4, line_length=14)
+        self.preview_spinner.stop()
+    
     def _replace_image_label(self): # Sorgt dafür, dass jedes Image im Preview auch wirklich 16:9 ist
         old_label = self.ui.image_label
         parent_layout = self.ui.horizontalLayout
@@ -221,6 +282,9 @@ class MainWindow(QMainWindow):
 
         self.ui.settings_button.clicked.connect(self.open_settings_folder)
         
+        self.ui.move_arm_to_0.clicked.connect(self._on_0_press)
+        self.ui.move_arm_to_50.clicked.connect(self._on_50_press)
+        
     def _set_preview_pixmap(self, pixmap: QPixmap):
         if pixmap and not pixmap.isNull():
             self.ui.image_label.setPixmap(pixmap)
@@ -233,6 +297,7 @@ class MainWindow(QMainWindow):
         self.ui.pause_button.setText("Pause")
         
     ## Update UI ##################
+    @systemready
     def _update_hardware_visuals(self):
         self.ui.lcd_crane_pos.display(round(getattr(self.camera_crane, "position", 0.0), 2) * 100)
         self.ui.lcd_table_pos.display(round(getattr(self.turn_table, "rotation", 0.0), 1) % 360)
@@ -253,44 +318,52 @@ class MainWindow(QMainWindow):
         is_serial_connected = self.serial_device.is_connected()
 
         is_system_ready = is_cam_connected and is_serial_connected and self.camera_crane.nulled.is_set() and self.turn_table.nulled.is_set()
+        is_mechanics_ready = is_serial_connected and self.camera_crane.nulled.is_set() and self.turn_table.nulled.is_set()
 
         self.ui.name_input.setEnabled(is_system_ready and not is_project_running)
 
-        self.ui.single_picture_button.setEnabled(not is_project_running)
-        self.ui.hdr_mertens_button.setEnabled(not is_project_running)
-        self.ui.hdr_robertson_button.setEnabled(not is_project_running)
+        self.ui.single_picture_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
+        self.ui.hdr_mertens_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
+        self.ui.hdr_robertson_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
 
-        self.ui.crop_slider.setEnabled(not is_project_running)
+        self.ui.crop_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
 
-        self.ui.base_tv_input.setEnabled(not is_project_running)
-        self.ui.hdr_count_input.setEnabled(not is_project_running)
-        self.ui.hdr_ev_input.setEnabled(not is_project_running)
+        self.ui.base_tv_input.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
+        self.ui.hdr_count_input.setEnabled(not is_project_running and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
+        self.ui.hdr_ev_input.setEnabled(not is_project_running and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
 
-        self.ui.contrast_slider.setEnabled(not is_project_running)
-        self.ui.exposure_slider.setEnabled(not is_project_running)
-        self.ui.saturation_slider.setEnabled(not is_project_running)
+        self.ui.contrast_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
+        self.ui.exposure_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
+        self.ui.saturation_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
 
-        self.ui.start_button.setEnabled(is_system_ready and not is_project_running)
-        self.ui.pause_button.setEnabled(is_project_running)
-        self.ui.stop_button.setEnabled(is_project_running)
+        self.ui.start_button.setEnabled(is_system_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
+        self.ui.pause_button.setEnabled(is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
+        self.ui.stop_button.setEnabled(is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
 
-        self.ui.liveview_checkbox.setEnabled(is_cam_connected)
-        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked() and not self.camera.busy)
+        self.ui.liveview_checkbox.setEnabled(is_cam_connected and not self.is_generating_hdr_preview)
+        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked() and not self.camera.busy and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
 
+        self.ui.move_arm_to_0.setEnabled(is_mechanics_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
+        self.ui.move_arm_to_50.setEnabled(is_mechanics_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
+
+    @systemready
     def _update_project_progress(self):
-        project = self.project_scheduler.current_project
-        if project is None:
+        if self.project is None:
             return
+        
+        if not self.project_scheduler.is_project_running():
+            self.statusBar().showMessage(self.project.error or f"Projekt {self.project.name} fehlgeschlagen")
+            self._on_stop_clicked()
 
-        total = max(1, project.n_total_shots)
-        finished = min(project.n_finished_shots, total)
+        total = max(1, self.project.n_total_shots)
+        finished = min(self.project.n_finished_shots, total)
 
         percent = int((finished / total) * 100)
 
         self.ui.progress_bar.setValue(percent)
-        self.ui.progress_bar.setFormat(f"{finished}/{project.n_total_shots}")
+        self.ui.progress_bar.setFormat(f"{finished}/{self.project.n_total_shots}")
 
-        if self.project.started_at is not None and not project.finished:
+        if self.project.started_at is not None and not self.project.finished:
             elapsed = int(time.time() - self.project.started_at)
             minutes = elapsed // 60
             seconds = elapsed % 60
@@ -303,10 +376,18 @@ class MainWindow(QMainWindow):
         if self.project.finished and not self.project.finish_confirmed:
             self.show_project_finished_dialog()
             self.project_scheduler.confirm_finish()
+            self.statusBar().showMessage(f"Projekt {self.project.name} erfolgreich abgeschlossen")
+            
+            self._reset_progress_ui()
+            self.project = None
+            
+            return
             
         if self.project.turnable and not self.project.turn_confirmed:
             self.show_rotate_dialog()
-            self.project_scheduler.confirm_turn
+            self.project_scheduler.confirm_turn()
+            
+            return
     
     def update_ui(self):
         self._block_settings_while_running()
@@ -317,37 +398,41 @@ class MainWindow(QMainWindow):
         self._handle_project_dialogs()
         
     def update_preview(self):
-        if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked():
+        if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked(): # Liveview muss nicht gesamplet werden weil sowieso klein
             self.preview = Image(data=self.camera.liveview_data)
             self.preview.crop(settings.app.image_crop)
             
             self.preview_bytes = None
                         
-        elif self.preview_bytes:
+        elif self.preview_bytes != None:
+            if (self.last_preview_bytes != None and self.last_preview_bytes == self.preview_bytes) and (self.last_preview_crop != None and self.last_preview_crop == settings.app.image_crop):
+                return # Wenn nichts am Bild geändert wurde, nicht erneut croppen und samplen
+            
             self.preview = Image(self.preview_bytes)
             self.preview.crop(settings.app.image_crop)
+            self.preview.downsample()
             
-        if not self.camera.is_connected():
+            self.last_preview_bytes = self.preview_bytes
+            self.last_preview_crop = settings.app.image_crop
+            
+        if not self.camera.is_connected(): # Wenn Kamera nicht verbunden, anzeigen
             self.preview = Image(Path("assets/NoSignal.jpg").read_bytes())
             self.preview_bytes = None
-        
-        if self.camera.is_connected() and not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes:
+
+        if self.camera.is_connected() and not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes: # Leeres Bild
             self.ui.image_label.setPixmap(QPixmap())
             return
         
-        self.preview.downsample()
+        if not self.preview:
+            return
         
         pixmap = self.preview.get_pixmap()
 
         self._set_preview_pixmap(pixmap)
-    ## Aktions-Auslöser ###########
-    def _on_start_clicked(self):
-        if not self.camera.is_connected() or not self.serial_device.is_connected():
-            return
         
-        if not self.camera_crane.nulled.is_set():
-            return
-
+    ## Aktions-Auslöser ###########
+    @systemready
+    def _on_start_clicked(self):
         name = self.ui.name_input.text().strip()
 
         if not name:
@@ -361,6 +446,8 @@ class MainWindow(QMainWindow):
         except ValueError:
             return self.show_invalid_dialog()
         
+        self.statusBar().showMessage(f"Projekt {name} gestartet")
+        
         dst = Path(settings.process.destination_dir)
 
         project_dst = dst / name
@@ -371,7 +458,7 @@ class MainWindow(QMainWindow):
 
         self.project = self.project_scheduler.create_project(name, dst)
         
-        self.project_scheduler.start_project(self.project) #TODO: implementieren
+        self.project_scheduler.start_project(self.project)
         self._reset_progress_ui()
     
     def _on_pause_clicked(self):
@@ -388,15 +475,19 @@ class MainWindow(QMainWindow):
     def _on_stop_clicked(self):
         self.project_scheduler.stop_project()
         self._reset_progress_ui()
+        self.project = None
     
+    @cameraready
     def _on_hdr_preview_clicked(self):
-        if not self.camera.is_connected():
-            return
-        
-        self.ui.hdr_preview_button.setEnabled(False)
+        self.is_generating_hdr_preview = True
+        self.preview_spinner.start()
+        self.preview_bytes = None
 
         def worker():
             try:
+                if not self.camera.is_connected():
+                    return
+                
                 payloads = self.project_scheduler._create_image_payloads()
                 images: list[Image] = []
 
@@ -456,7 +547,8 @@ class MainWindow(QMainWindow):
                 logger.error("Fehler bei HDR Preview", stack_info=True)
 
             finally:
-                self.ui.hdr_preview_button.setEnabled(True)
+                self.preview_spinner.stop()
+                self.is_generating_hdr_preview = False
 
         threading.Thread(target=worker, daemon=True).start()
         
@@ -486,21 +578,34 @@ class MainWindow(QMainWindow):
         return dlg.exec()
     
     ## Setting Update #############
-    def _on_base_tv_changed(self, text: str):
-        value = _parse_float(text)
-        if not value or value <= 0:
+    def _on_base_tv_changed(self):
+        if self.ui.base_tv_input.text() is None: 
+            return 
+    
+        value = _parse_float(self.ui.base_tv_input.text())
+        if value is None or value <= 0:
             return
+        
+        if self.camera is not None and self.camera.is_connected():
+            self.camera.enqueue_property_change(settings.camera.iso, settings.camera.av, value) 
+        
         _set_and_save(settings.camera, "base_tv", value)
 
 
-    def _on_hdr_ev_changed(self, value):
-        _set_and_save(settings.camera, "hdr_ev", float(value))
+    def _on_hdr_ev_changed(self):
+        if self.ui.hdr_ev_input.value() is None: 
+            return 
+        
+        _set_and_save(settings.camera, "hdr_ev", self.ui.hdr_ev_input.value())
 
 
-    def _on_hdr_count_changed(self, value):
-        if value % 2 == 0:
+    def _on_hdr_count_changed(self):
+        if self.ui.hdr_count_input.value() is None: 
+            return 
+        
+        if self.ui.hdr_count_input.value() % 2 == 0:
             return
-        _set_and_save(settings.camera, "hdr_shot_count", int(value))
+        _set_and_save(settings.camera, "hdr_shot_count", self.ui.hdr_count_input.value())
     
     def _on_crop_change(self):
         settings.app.image_crop = min(max(self.ui.crop_slider.value() / 100, 0), 1)
@@ -525,6 +630,32 @@ class MainWindow(QMainWindow):
         settings.camera.use_mertens   = self.ui.hdr_mertens_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.camera.use_robertson = self.ui.hdr_robertson_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.save()
+        
+    @mechanicsready
+    def _on_50_press(self):
+        def worker():
+            try:
+                self.is_moving_by_buttons = True
+                self.camera_crane.move_to(0.5)
+                
+                self.camera_crane.moved.wait()
+            finally:
+                self.is_moving_by_buttons = False
+                
+        threading.Thread(target=worker, daemon=True).start()
+    
+    @mechanicsready
+    def _on_0_press(self):
+        def worker():
+            try:
+                self.is_moving_by_buttons = True
+                self.camera_crane.move_to(0) 
+                
+                self.camera_crane.moved.wait()
+            finally:
+                self.is_moving_by_buttons = False
+                
+        threading.Thread(target=worker, daemon=True).start()
         
     ## Close Event ################
     def open_settings_folder(self):

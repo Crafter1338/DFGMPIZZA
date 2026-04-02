@@ -92,6 +92,8 @@ class CameraCrane(ThreadedInstance):
 
         self.is_moving = False
         self._is_moving_to = False
+        
+        self.moved.set()
 
     def move_to(self, pos: float):
         logger.info("CameraCrane move_to 1/3: pos=%s", pos)
@@ -125,7 +127,7 @@ class CameraCrane(ThreadedInstance):
         logger.info("CameraCrane move_to position set 3/3: target=%s", target_position)
 
     def tick(self):
-        if not self.serial_device or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
+        if self.serial_device is None or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
             return
         
         if not self.nulled.is_set() and not self.is_nulling: # Wenn noch nicht kalibriert

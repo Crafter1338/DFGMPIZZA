@@ -58,6 +58,8 @@ class Camera(ThreadedInstance):
         self.av_values: list[int]  = []
 
         self.last_liveview = 0.0
+        
+        self.pending_settings: Optional[ShotPayload] = None
     
         super().__init__()
         logger.info("Camera initialization 2/2")
@@ -78,9 +80,17 @@ class Camera(ThreadedInstance):
         self.last_action = time.time()
         self.busy = False
 
-        if self.cam:
-            edsdk.CloseSession(self.cam)
-        self.cam = None
+        if self.cam is not None:
+            try:
+                edsdk.CloseSession(self.cam)
+            except:
+                edsdk.TerminateSDK()
+                
+                time.sleep(0.5)
+            
+                edsdk.InitializeSDK()
+            finally:
+                self.cam = None
 
         return True
 
@@ -89,7 +99,7 @@ class Camera(ThreadedInstance):
 
         self.last_action = time.time()
 
-        if self.cam:
+        if self.cam is not None:
             self._disconnect()
             return False
 
@@ -103,7 +113,7 @@ class Camera(ThreadedInstance):
         
         self.cam = edsdk.GetChildAtIndex(camera_list, 0)
 
-        if not self.cam:
+        if self.cam is None:
             self._disconnect()
             return False
         
@@ -115,6 +125,11 @@ class Camera(ThreadedInstance):
 
         time.sleep(1)
 
+        try:
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.AIServoAF_ServoAF if settings.camera.af_enabled else edsdk.AFMode.ManualFocus)
+        except Exception as e:
+            logger.exception("Cam Setup Exception AFMode")
+            
         edsdk.SetPropertyData(self.cam, edsdk.PropID.SaveTo, 0, edsdk.SaveTo.Host)
         edsdk.SetPropertyData(self.cam, edsdk.PropID.Evf_OutputDevice, 0, edsdk.EvfOutputDevice.PC)
         edsdk.SetCapacity(
@@ -136,26 +151,15 @@ class Camera(ThreadedInstance):
 
         return True
     
-    def set_camera_properties(self, iso, av, tv):
-        if not self.cam:
-            return
-        
-        if not self.is_connected():
-            return
-    
-        if self.busy:
-            return
-
+    def enqueue_property_change(self, iso, av, tv):
         try:
-            iso = conversions.round_to_raw_value(iso, self.iso_names, self.iso_values)
-            av = conversions.round_to_raw_value(av, self.av_names, self.av_values)
-            tv = conversions.round_to_raw_value(tv, self.tv_names, self.tv_values)
+            r_iso = conversions.round_to_raw_value(iso, self.iso_names, self.iso_values)
+            r_av = conversions.round_to_raw_value(av, self.av_names, self.av_values)
+            r_tv = conversions.round_to_raw_value(tv, self.tv_names, self.tv_values)
             
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, int(tv))
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, int(av))
-            edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, int(iso))
+            self.pending_settings = ShotPayload(iso=iso, av=av, tv=tv, raw_iso=r_iso, raw_av=r_av, raw_tv=r_tv)
         except Exception as e:
-            logger.exception("Camera.set_camera_properties error")
+            logger.exception("Camera.enqueue_property_change error")
             pass
 
     def queue_shot(self, payload: ShotPayload) -> Future[ShotResult]:
@@ -184,7 +188,7 @@ class Camera(ThreadedInstance):
         return future
     
     def take_image(self, payload: ShotPayload):
-        if not self.cam:
+        if self.cam is None:
             return
         
         if not self.is_connected():
@@ -206,8 +210,22 @@ class Camera(ThreadedInstance):
 
             self.busy = True
         except Exception as e:
-            # TODO: If error is autofocus then find out fix
-            return
+            if "EDS_ERR_TAKE_PICTURE_AF_NG" in str(e):
+                logger.warning("AF ERROR")
+                
+                try:
+                    edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.ManualFocus)
+
+                    time.sleep(0.1)
+
+                    edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
+                    
+                    time.sleep(0.1)
+                    
+                    edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.AIServoAF_ServoAF if settings.camera.af_enabled else edsdk.AFMode.ManualFocus)
+                except Exception as e:
+                    logger.exception("AF FALLBACK FAIL | FATAL")
+                    return
 
         logger.debug("Camera take_image complete")
 
@@ -268,7 +286,40 @@ class Camera(ThreadedInstance):
         
         if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate:
             self.last_liveview = time.time()
-            edsdk.DownloadEvfImage(self.cam, self.liveview_ref)
+            
+            try:                
+                if self.pending_settings is not None:
+                    edsdk.SendCommand(
+                        self.cam,
+                        edsdk.CameraCommand.PressShutterButton,
+                        edsdk.ShutterButton.OFF
+                    )
+                    
+                    time.sleep(0.05)
+                
+                    edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, int(self.pending_settings.raw_tv))
+                    edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, int(self.pending_settings.raw_av))
+                    edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, int(self.pending_settings.raw_iso))
+                    
+                    self.pending_settings = None
+                    
+                    time.sleep(0.05)
+            except Exception as e:
+                logger.exception("Cam Update Properties Err")
+                pass
+            
+            try:
+                if self.cam is None:
+                    return
+                
+                if self.liveview_ref is None:
+                    return
+
+                edsdk.DownloadEvfImage(self.cam, self.liveview_ref)
+            except Exception as e:
+                self._disconnect()
+                logger.exception("Camera EVF Error")
+                pass
         
 
         item = None

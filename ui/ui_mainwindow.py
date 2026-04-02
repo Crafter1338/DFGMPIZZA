@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.2
+## Created by: Qt User Interface Compiler version 6.11.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(957, 621)
+        MainWindow.resize(975, 595)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -333,10 +333,26 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(-1, -1, 0, -1)
+        self.move_arm_to_0 = QPushButton(self.centralwidget)
+        self.move_arm_to_0.setObjectName(u"move_arm_to_0")
+
+        self.verticalLayout_4.addWidget(self.move_arm_to_0)
+
+        self.move_arm_to_50 = QPushButton(self.centralwidget)
+        self.move_arm_to_50.setObjectName(u"move_arm_to_50")
+
+        self.verticalLayout_4.addWidget(self.move_arm_to_50)
+
         self.settings_button = QToolButton(self.centralwidget)
         self.settings_button.setObjectName(u"settings_button")
 
-        self.horizontalLayout_2.addWidget(self.settings_button, 0, Qt.AlignmentFlag.AlignBottom)
+        self.verticalLayout_4.addWidget(self.settings_button, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
+
+
+        self.horizontalLayout_2.addLayout(self.verticalLayout_4)
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -360,7 +376,7 @@ class Ui_MainWindow(object):
         sizePolicy7.setVerticalStretch(0)
         sizePolicy7.setHeightForWidth(self.lcd_crane_pos.sizePolicy().hasHeightForWidth())
         self.lcd_crane_pos.setSizePolicy(sizePolicy7)
-        self.lcd_crane_pos.setMinimumSize(QSize(80, 0))
+        self.lcd_crane_pos.setMinimumSize(QSize(80, 40))
         self.lcd_crane_pos.setMaximumSize(QSize(16777215, 40))
         self.lcd_crane_pos.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.lcd_crane_pos.setFrameShape(QFrame.Shape.StyledPanel)
@@ -397,7 +413,7 @@ class Ui_MainWindow(object):
         self.lcd_table_pos.setObjectName(u"lcd_table_pos")
         sizePolicy7.setHeightForWidth(self.lcd_table_pos.sizePolicy().hasHeightForWidth())
         self.lcd_table_pos.setSizePolicy(sizePolicy7)
-        self.lcd_table_pos.setMinimumSize(QSize(80, 0))
+        self.lcd_table_pos.setMinimumSize(QSize(80, 40))
         self.lcd_table_pos.setMaximumSize(QSize(16777215, 40))
         self.lcd_table_pos.setFrameShape(QFrame.Shape.StyledPanel)
         self.lcd_table_pos.setFrameShadow(QFrame.Shadow.Plain)
@@ -426,7 +442,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 957, 33))
+        self.menubar.setGeometry(QRect(0, 0, 975, 33))
         MainWindow.setMenuBar(self.menubar)
 #if QT_CONFIG(shortcut)
         self.label_6.setBuddy(self.name_input)
@@ -453,8 +469,7 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.pause_button, self.stop_button)
         QWidget.setTabOrder(self.stop_button, self.contrast_slider)
         QWidget.setTabOrder(self.contrast_slider, self.exposure_slider)
-        QWidget.setTabOrder(self.exposure_slider, self.settings_button)
-        QWidget.setTabOrder(self.settings_button, self.saturation_slider)
+        QWidget.setTabOrder(self.exposure_slider, self.saturation_slider)
 
         self.retranslateUi(MainWindow)
         self.liveview_checkbox.toggled.connect(self.hdr_preview_button.setDisabled)
@@ -502,6 +517,8 @@ class Ui_MainWindow(object):
         self.hdr_preview_button.setText(QCoreApplication.translate("MainWindow", u"HDR Preview", None))
         self.status_label.setText(QCoreApplication.translate("MainWindow", u"Status", None))
         self.time_label.setText(QCoreApplication.translate("MainWindow", u"10:00 min", None))
+        self.move_arm_to_0.setText(QCoreApplication.translate("MainWindow", u"Arm:  0%", None))
+        self.move_arm_to_50.setText(QCoreApplication.translate("MainWindow", u"Arm: 50%", None))
         self.settings_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Kamera Arm", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Drehtisch", None))

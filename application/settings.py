@@ -19,6 +19,8 @@ class UISettings:
 
 @dataclass
 class CameraSettings:
+    af_enabled: bool = False # Restart Erforderlich
+    
     reconnect_delay: float = 0.5
     timeout: float = 15
     liveview_refresh_rate: float = 4

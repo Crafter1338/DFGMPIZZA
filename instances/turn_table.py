@@ -90,7 +90,7 @@ class TurnTable(ThreadedInstance):
         self.is_rotating = True
 
     def tick(self):
-        if not self.serial_device or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
+        if self.serial_device is None or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
             return
         
         if not self.nulled.is_set() and not self.is_nulling: # Wenn noch nicht kalibriert

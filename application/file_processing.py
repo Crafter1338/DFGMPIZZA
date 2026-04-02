@@ -50,7 +50,7 @@ def save_bytes(data: bytes, dst: str | Path) -> Path | None:
 
 def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
     """
-    Lädt src zu cv2 Bild
+    Läd src zu cv2 Bild
     """
     try:
         source = Path(src)
@@ -68,6 +68,25 @@ def load_image_buffer(src: str | Path) -> Optional[np.ndarray]:
         logger.exception("load_image_buffer error")
         return None
 
+
+def delete_dir(path: str | Path) -> bool:
+    """
+    Löscht Ordner bei path
+    """
+    try:
+        target = Path(path)
+
+        if not target.exists():
+            return True
+
+        if target.is_file():
+            return False
+
+        shutil.rmtree(target)
+        return True
+    except Exception as e:
+        logger.exception("delete_dir error")
+        return False
 
 def delete_file(path: str | Path) -> bool:
     """
