@@ -3,21 +3,20 @@ import logging
 import time
 from typing import *
 import edsdk
-import numpy as np
 import pythoncom
-from threading import Event, RLock
+from threading import RLock
 
 logger = logging.getLogger(__name__)
 
-from application.settings import settings
-from instances.threaded_instance import ThreadedInstance
+from utility.settings import settings
+from utility.threaded_instance import ThreadedInstance
 
 from collections import deque
 from concurrent.futures import Future
 
-from application import datastructures
+from utility import datastructures
 
-import application.conversions as conversions
+import utility.conversions as conversions
 
 @dataclass
 class ShotPayload:
@@ -78,7 +77,7 @@ class Camera(ThreadedInstance):
         logger.info("Camera disconnected")
 
         self.last_action = time.time()
-        self.busy = False
+        self.busy = True
 
         if self.cam is not None:
             try:
@@ -88,7 +87,7 @@ class Camera(ThreadedInstance):
                 
                 time.sleep(0.5)
             
-                edsdk.InitializeSDK()
+                edsdk.InitializeSDK() # Yannik: Init nach Disconnect?
             finally:
                 self.cam = None
 
@@ -146,6 +145,8 @@ class Camera(ThreadedInstance):
         self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
 
         self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
+        
+        self.busy = False
 
         logger.info("Camera connected")
 
@@ -242,6 +243,9 @@ class Camera(ThreadedInstance):
         
         try:
             info = edsdk.GetDirectoryItemInfo(obj_handle)
+            
+            if not self.shot_queue:
+                return 0
 
             shot_payload, future = self.shot_queue.popleft()
 
@@ -284,7 +288,7 @@ class Camera(ThreadedInstance):
         if not self.is_connected():
             return
         
-        if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate:
+        if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate: # Yannik: Liveview ist immer aktiv?
             self.last_liveview = time.time()
             
             try:                
@@ -326,7 +330,7 @@ class Camera(ThreadedInstance):
             
         if self.shot_queue:
             with self.queue_lock:
-                item = self.shot_queue.popleft()
+                item = self.shot_queue.popleft() # Yannik: Was genau macht das hier? 
                 self.shot_queue.appendleft(item)
 
         if not item:

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>975</width>
-    <height>595</height>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,20 +18,87 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="image_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="MinimumExpanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Aktueller Liveview:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="image_label_left">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Zuletzt verarbeitetes Bild:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="image_label_right">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <spacer name="IMAGE_SPACER">
@@ -52,15 +119,21 @@
       <item>
        <widget class="QScrollArea" name="scrollArea">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>200</width>
+          <width>0</width>
           <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>220</width>
+          <height>16777215</height>
          </size>
         </property>
         <property name="frameShape">
@@ -90,7 +163,7 @@
            <x>0</x>
            <y>0</y>
            <width>218</width>
-           <height>585</height>
+           <height>526</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -161,7 +234,7 @@
           <item alignment="Qt::AlignmentFlag::AlignRight">
            <widget class="QRadioButton" name="single_picture_button">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -183,8 +256,8 @@
             </attribute>
            </widget>
           </item>
-          <item alignment="Qt::AlignmentFlag::AlignRight">
-           <widget class="QRadioButton" name="hdr_mertens_button">
+          <item>
+           <widget class="QRadioButton" name="hdr_drago_button">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -201,7 +274,10 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>HDR Mertens</string>
+             <string>HDR Aufhellend</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroup</string>
@@ -226,15 +302,108 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>HDR Robertson</string>
-            </property>
-            <property name="autoRepeat">
-             <bool>false</bool>
+             <string>HDR Abdunkelnd</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroup</string>
             </attribute>
            </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>15</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Gamma (Dunkle Teile: ~ Hoch)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="sizeConstraint">
+             <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="gamma_low">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Niedrig</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="gamma_mid">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Mittel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="gamma_high">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Hoch</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QLabel" name="label_11">
@@ -277,15 +446,30 @@
             <property name="text">
              <string>Basis Belichtungszeit</string>
             </property>
-            <property name="buddy">
-             <cstring>base_tv_input</cstring>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="base_tv_input">
-            <property name="text">
-             <string>0</string>
+           <widget class="QSlider" name="base_tv_slider">
+            <property name="maximum">
+             <number>150</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+            <property name="invertedControls">
+             <bool>false</bool>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TickPosition::TicksBelow</enum>
+            </property>
+            <property name="tickInterval">
+             <number>5</number>
             </property>
            </widget>
           </item>
@@ -353,72 +537,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Mertens: Kontrast</string>
-            </property>
-            <property name="buddy">
-             <cstring>contrast_slider</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="contrast_slider">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="autoFillBackground">
-             <bool>true</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Mertens: Belichtung</string>
-            </property>
-            <property name="buddy">
-             <cstring>exposure_slider</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="exposure_slider">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Mertens: Sättigung</string>
-            </property>
-            <property name="buddy">
-             <cstring>saturation_slider</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="saturation_slider">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_3">
@@ -522,19 +640,6 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="liveview_checkbox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Liveview</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="hdr_preview_button">
             <property name="sizePolicy">
@@ -558,7 +663,17 @@
           <item row="1" column="1">
            <widget class="QLabel" name="time_label">
             <property name="text">
-             <string>10:00 min</string>
+             <string>10:00 Minuten</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>~ Verbleibend:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -588,8 +703,24 @@
         </item>
        </layout>
       </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_8"/>
+      <item alignment="Qt::AlignmentFlag::AlignBottom">
+       <widget class="QToolButton" name="settings_button">
+        <property name="toolTip">
+         <string>Einstellungen</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::MailMessageNew"/>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
+        </property>
+        <property name="arrowType">
+         <enum>Qt::ArrowType::NoArrow</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer">
@@ -615,21 +746,28 @@
         <item>
          <widget class="QPushButton" name="move_arm_to_0">
           <property name="text">
-           <string>Arm:  0%</string>
+           <string>Vertikal: 0°</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="move_arm_to_50">
           <property name="text">
-           <string>Arm: 50%</string>
+           <string>Vertikal: 45°</string>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignBottom">
-         <widget class="QToolButton" name="settings_button">
+        <item>
+         <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>...</string>
+           <string>Vertikal: 85°</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Sweep</string>
           </property>
          </widget>
         </item>
@@ -658,7 +796,7 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Kamera Arm</string>
+             <string>Vertikal</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -753,7 +891,7 @@
           <item>
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>Drehtisch</string>
+             <string>Horizontal</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -840,48 +978,26 @@
   <tabstop>scrollArea</tabstop>
   <tabstop>name_input</tabstop>
   <tabstop>single_picture_button</tabstop>
-  <tabstop>hdr_mertens_button</tabstop>
   <tabstop>hdr_robertson_button</tabstop>
   <tabstop>crop_slider</tabstop>
-  <tabstop>base_tv_input</tabstop>
   <tabstop>hdr_count_input</tabstop>
   <tabstop>hdr_ev_input</tabstop>
-  <tabstop>liveview_checkbox</tabstop>
   <tabstop>hdr_preview_button</tabstop>
   <tabstop>start_button</tabstop>
   <tabstop>pause_button</tabstop>
   <tabstop>stop_button</tabstop>
-  <tabstop>contrast_slider</tabstop>
-  <tabstop>exposure_slider</tabstop>
-  <tabstop>saturation_slider</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>liveview_checkbox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hdr_preview_button</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>91</x>
-     <y>524</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>375</x>
-     <y>525</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>single_picture_button</sender>
+   <sender>hdr_robertson_button</sender>
    <signal>toggled(bool)</signal>
    <receiver>hdr_count_input</receiver>
-   <slot>setDisabled(bool)</slot>
+   <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>937</x>
-     <y>172</y>
+     <x>955</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
@@ -896,8 +1012,8 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>937</x>
-     <y>172</y>
+     <x>955</x>
+     <y>100</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
@@ -906,62 +1022,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>single_picture_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>contrast_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>937</x>
-     <y>172</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>524</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>single_picture_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>exposure_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>933</x>
-     <y>155</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>568</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>single_picture_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>saturation_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>935</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>612</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_mertens_button</sender>
+   <sender>hdr_drago_button</sender>
    <signal>toggled(bool)</signal>
    <receiver>hdr_count_input</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>935</x>
-     <y>187</y>
+     <x>955</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
@@ -970,30 +1038,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>hdr_mertens_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hdr_ev_input</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>908</x>
-     <y>192</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>459</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_robertson_button</sender>
+   <sender>single_picture_button</sender>
    <signal>toggled(bool)</signal>
    <receiver>hdr_count_input</receiver>
-   <slot>setEnabled(bool)</slot>
+   <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>917</x>
-     <y>220</y>
+     <x>955</x>
+     <y>100</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
@@ -1008,8 +1060,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>928</x>
-     <y>223</y>
+     <x>955</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
@@ -1018,98 +1070,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>hdr_mertens_button</sender>
+   <sender>hdr_drago_button</sender>
    <signal>toggled(bool)</signal>
-   <receiver>contrast_slider</receiver>
+   <receiver>hdr_ev_input</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>937</x>
-     <y>202</y>
+     <x>955</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel">
      <x>937</x>
-     <y>524</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_mertens_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>exposure_slider</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>832</x>
-     <y>194</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>568</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_mertens_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>saturation_slider</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>847</x>
-     <y>193</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>612</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_robertson_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>contrast_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>797</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>524</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_robertson_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>exposure_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>891</x>
-     <y>221</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>568</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>hdr_robertson_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>saturation_slider</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>895</x>
-     <y>228</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>937</x>
-     <y>612</y>
+     <y>459</y>
     </hint>
    </hints>
   </connection>

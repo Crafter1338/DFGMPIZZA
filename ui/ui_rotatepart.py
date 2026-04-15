@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'RotatePart.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.2
+## Created by: Qt User Interface Compiler version 6.11.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -22,7 +22,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(272, 199)
+        Dialog.resize(761, 509)
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_1 = QLabel(Dialog)
@@ -64,7 +64,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Teil Drehen", None))
         self.label_1.setText(QCoreApplication.translate("Dialog", u"Das Teil muss jetzt um 180\u00b0 gedreht werden.", None))
-        self.label_movie.setText(QCoreApplication.translate("Dialog", u"GIF hier", None))
-        self.label_2.setText(QCoreApplication.translate("Dialog", u"Wurde das Teil gedreht?", None))
+        self.label_movie.setText(QCoreApplication.translate("Dialog", u"", None))
+        self.label_2.setText(QCoreApplication.translate("Dialog", u"Wurde das Teil gedreht? Wurde der Laser deaktiviert?", None))
     # retranslateUi
 

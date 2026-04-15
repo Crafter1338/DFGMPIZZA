@@ -60,3 +60,16 @@ ai-artifacts/*
 *.jpg
 *.jpg
 *.jpg
+
+# virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# PyInstaller
+build/
+dist/

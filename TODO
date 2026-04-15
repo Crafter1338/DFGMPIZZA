@@ -1,1 +1,32 @@
-- Rotate Part GIF erstellen und in Assets legen
+- Hardware bereit geht nicht
+- Evtl nicht alle Bilder am Ende speichern -> RAM Untersuchen
+
+# QObject::killTimer: Timers cannot be stopped from another thread
+# Kamera discinnect bei Belichtzeit Änderung?
+-> Prop Änderung während liveview?
+
+- Range: 0 - 2 (einstellbar settings)
+- Timeout? Device busy wenn AF Auto und Bel Zeit sehr hoch
+
+- statt Bilderanzahl im ui, pos anzahl
+
+- HDR Alg -> muss funktionieren
+- Autofkus glitch
+
+- Vertikale Steps fixen
+
+# PyInstaller
+
+https://pyinstaller.org/en/stable/usage.html
+
+```bash
+pyinstaller --onedir --noconsole app.py
+```
+
+```bash
+pyinstaller --onedir --add-data "assets;assets" app.py
+```
+
+source;destination
+
+pyinstaller --onedir --noconsole --add-data "assets;assets" app.py

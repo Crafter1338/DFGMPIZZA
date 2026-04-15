@@ -6,27 +6,24 @@ import time
 from typing import *
 from threading import Event
 
-from application import conversions
-from application.datastructures import Image
-from application.settings import settings
+from utility import conversions
+from utility.datastructures import Image
+from utility.settings import settings
 
 from instances.serial_device import SerialDevice
-from instances.camera import Camera, ShotPayload, ShotResult
+from instances.camera import Camera, ShotPayload
 from instances.camera_crane import CameraCrane
 from instances.turn_table import TurnTable
 
-from instances.threaded_instance import ThreadedInstance
+from utility.threaded_instance import ThreadedInstance
 
 import logging
-import traceback
-from collections import deque
-from concurrent.futures import Future
 
 logger = logging.getLogger(__name__)
 
-import application.file_processing as fp
+import utility.file_processing as fp
 
-def cameraready(func):
+def cameraready(func):  # Yannik: Wiederholt sich zu app.py
     @wraps(func)
     def wrapper(self, *args, **kwargs):
         if self.camera is None:
@@ -107,7 +104,7 @@ class ScanPosition:
 
     final_image_processed: Event = field(default_factory=Event)
 
-    def process_images(self):
+    def process_images(self): # Prozessierung der HDR Bilder (und crop + flip), pasiert in thread während tick()
         try:
             cv_images: list = []
 
@@ -122,10 +119,10 @@ class ScanPosition:
 
             result = None
 
-            if len(cv_images) == 1:
+            if len(cv_images) == 1: # Einzelbild
                 result = cv_images[0].copy()
 
-            elif settings.camera.use_mertens:
+            elif settings.camera.use_mertens: # HDR Mertems
                 result = fp.hdr_merge_mertens_buffer(
                     images=cv_images,
                     contrast=settings.camera.contrast_weight,
@@ -133,7 +130,7 @@ class ScanPosition:
                     saturation=settings.camera.saturation_weight,
                 )
 
-            elif settings.camera.use_robertson:
+            elif settings.camera.use_robertson: # HDR Robertson
                 exposure_times = [payload.tv for payload in self.image_payloads]
 
                 result = fp.hdr_merge_robertson_buffer(
@@ -148,13 +145,13 @@ class ScanPosition:
             if result is None:
                 return False
 
-            if settings.app.image_crop > 0:
+            if settings.app.image_crop > 0: # Crop anwenden
                 cropped = fp.crop_image_buffer(result, settings.app.image_crop)
                 if cropped is None:
                     return False
                 result = cropped
 
-            if self.flipped:
+            if self.flipped: # Flip anwenden für Bilder "von unten"
                 flipped = fp.flip_image_buffer(result)
                 if flipped is None:
                     return False
@@ -167,21 +164,21 @@ class ScanPosition:
         except Exception as e:
             logger.exception("ScanPosition.process_images error")
 
-    def save_final_image(self, project_dir: Path):
+    def save_final_image(self, project_dir: Path): # Speichert das Bild im Projekt dir
         if self.final_image is None:
             return False
 
         row = int(self.y_name)
         col = int(self.x_name)
 
-        filename = f"DFGM_R{row:02d}_C{col:02d}.jpg"
+        filename = f"DFGM_R{row:02d}_C{col:02d}.jpg" # Namenformat
         final_dst = project_dir / filename
 
         self.final_image.save_as_file(final_dst)
 
         if settings.process.create_previews:
             preview_dst = project_dir / "preview" / filename
-            self.final_image.save_preview(preview_dst) # did not work
+            self.final_image.save_preview(preview_dst) # Preview mit gleichem Namen in /preview speichern (Größe in settings.json gecapped)
 
         return True
             
@@ -189,25 +186,25 @@ class ScanPosition:
 @dataclass
 class Project:    
     name: str
-    dir_destination: Path
+    dir_destination: Path # Zielordner
 
     n_finished_shots: int
     n_total_shots: int
 
     scan_positions: list[ScanPosition] = field(default_factory=list)
 
-    turnable: bool = False
-    turn_confirmed: bool = False
+    turnable: bool = False # Kann das Teil gedreht werden
+    turn_confirmed: bool = False # Wurde das Teil gedreht
 
-    finished: bool = False
-    finish_confirmed: bool = False
+    finished: bool = False # Ist das Projekt fertig
+    finish_confirmed: bool = False # Hat der User das Projekt als fertig wahrgenommen
     
     started_at: float = 0
 
     current_index: int = 0
     turn_index: int = 0
     
-    error: str = 0
+    error: str = ""
 
 class ProjectScheduler(ThreadedInstance):
     def __init__(self, camera: Camera, serial_device: SerialDevice, camera_crane: CameraCrane, turn_table: TurnTable):
@@ -225,17 +222,17 @@ class ProjectScheduler(ThreadedInstance):
 
         super().__init__()
 
-    def is_project_running(self):
+    def is_project_running(self): # Läuft das aktuelle Projekt, Pause JA, Stop NEIN
         return self.project_running_event.is_set()
 
     def is_project_stopped(self):
         return not self.project_running_event.is_set()
     
-    def is_project_paused(self):
+    def is_project_paused(self): # Ist das aktuelle Projekt pausiert
         return not self.project_pause_event.is_set()
 
 
-    def _create_image_payloads(self) -> list[ShotPayload]:
+    def _create_image_payloads(self) -> list[ShotPayload]: # Erstellt aus den Einstellungen in settings.json ShotPayloads für die Kamera
         if settings.camera.use_mertens or settings.camera.use_robertson:
             tvs = conversions.generate_hdr_tv_names(
                 base_tv=settings.camera.base_tv,
@@ -261,20 +258,20 @@ class ProjectScheduler(ThreadedInstance):
             )
         ]
 
-    def create_project(self, name: str, dst: Path) -> Project:
+    def create_project(self, name: str, dst: Path) -> Project: # Helper um Projekte einfach aus Settings.json zu erstellen
         try:
-            dst = Path(dst) / Path(str(name))
+            dst = Path(dst) / Path(str(name)) # Zielordner erstellen
             dst.mkdir(parents=True, exist_ok=True)
 
             if settings.process.create_previews:
-                (dst / "preview").mkdir(parents=True, exist_ok=True)
+                (dst / "preview").mkdir(parents=True, exist_ok=True) # Previewordner erstellen
 
             h_steps = max(2, int(settings.process.h_steps))
             v_steps = max(2, int(settings.process.v_steps))
 
             scan_positions = []
 
-            for v_indx in range(v_steps):
+            for v_indx in range(v_steps): # Scanpositions "von oben" erstellen
                 y_pos = 1 - (v_indx / (v_steps-1))
 
                 for h_indx in range(h_steps):
@@ -295,7 +292,7 @@ class ProjectScheduler(ThreadedInstance):
 
             turn_index = len(scan_positions)
 
-            for v_indx in range(v_steps):
+            for v_indx in range(v_steps): # Scanpositions "von unten" erstellen
                 y_pos = (v_indx / (v_steps-1))
 
                 for h_indx in range(h_steps):
@@ -314,7 +311,7 @@ class ProjectScheduler(ThreadedInstance):
                         flipped = True,
                     ))
 
-            project = Project(
+            project = Project( # Projekt zusammenführen
                 name = name,
                 dir_destination = dst,
 
@@ -331,7 +328,7 @@ class ProjectScheduler(ThreadedInstance):
             return None
 
     @systemready
-    def start_project(self, project):
+    def start_project(self, project): # Projekt starten
         if project is None:
             return
         
@@ -352,7 +349,7 @@ class ProjectScheduler(ThreadedInstance):
         self.current_project.turn_confirmed = False
         self.current_project.finished = False
 
-        for pos in self.current_project.scan_positions:
+        for pos in self.current_project.scan_positions: # Relikt aus alter Funktionsweise, stellt sicher, dass keine Bilder in den Scanpos sind
             pos.images.clear()
             pos.current_shot_indx = 0
 
@@ -371,9 +368,6 @@ class ProjectScheduler(ThreadedInstance):
         logger.info("Stopping project")
         self.project_running_event.clear()
         self.project_pause_event.set()
-        
-        if self.current_project is None:
-            return
 
         if self.current_project is not None:
             self.current_project.current_index = 0
@@ -382,9 +376,9 @@ class ProjectScheduler(ThreadedInstance):
         self.camera_crane.move_end()
         self.turn_table.end_rotation()
         
-        # TODO: Clear Camera queue?
+        self.camera.shot_queue.clear()
         
-        fp.delete_dir(self.current_project.dir_destination)
+        fp.delete_dir(self.current_project.dir_destination) # Löscht den Projekt Ordner wieder, da keine Bilder gemacht werden / Fehler
         
         self.current_project = None
 
@@ -408,7 +402,7 @@ class ProjectScheduler(ThreadedInstance):
 
         project = self.current_project
 
-        try:
+        try: # Erst beim Abschluss des Projektes werden die Bilder (eins nach dem anderen) in den Zielordner geschrieben
             for scan_position in project.scan_positions:
                 # Falls noch kein Finalbild existiert, aber genug Einzelbilder da sind:
                 if scan_position.final_image is None:
@@ -429,12 +423,31 @@ class ProjectScheduler(ThreadedInstance):
             logger.exception("finish_project error")
             return False
     
-    @systemready
     @projectexists
     def tick(self):
         if self.camera is None or self.serial_device is None or self.turn_table is None or self.camera_crane is None:
+            if self.current_project:
+                self.stop_project()
             logger.warning("Project_Scheduler missing devices")
             return
+        
+        if not self.serial_device.is_connected() or not self.camera.is_connected():
+            if self.current_project:
+                logger.warning("Not connected to camera or serial device")
+                self.stop_project()
+                return
+            
+        if not self.turn_table.nulled.is_set() or not self.camera_crane.nulled.is_set():
+            if self.current_project:
+                logger.warning("Mechanics not nulled")
+                self.stop_project()
+                return
+        
+        if not self.serial_device.is_set_up:
+            if self.current_project:
+                logger.warning("Serial device not set-up")
+                self.stop_project()
+                return
         
         try:
             self.project_pause_event.wait()
@@ -449,15 +462,16 @@ class ProjectScheduler(ThreadedInstance):
             return
 
         if self.current_project is not None and self.current_project.current_index != 0:
-            prev_scan_position = self.current_project.scan_positions[self.current_project.current_index - 1]
+            prev_scan_position = self.current_project.scan_positions[self.current_project.current_index - 1] # Letzte Scan Position
 
-        scan_position = self.current_project.scan_positions[self.current_project.current_index]
+        scan_position = self.current_project.scan_positions[self.current_project.current_index] # Aktuelle Scan Position
         
         if scan_position is None:
             logger.exception("Scan_Position index out of list")
             self.stop_project()
-
-        def camera_shoot_image():
+            return
+        
+        def camera_shoot_image(): # Bildaufnahme
             try:
                 if scan_position.current_shot_indx >= len(scan_position.image_payloads):
                     logger.warning(
@@ -488,7 +502,7 @@ class ProjectScheduler(ThreadedInstance):
             except Exception as e:
                 logger.exception("ProjectScheduler.camera_shoot_image error")
 
-        def mechanics_move_to_position():
+        def mechanics_move_to_position(): # Mechanik an richtige Position bewegen
             try:
                 logger.debug("Moving to X:%s Y:%s", scan_position.x_pos, scan_position.y_pos)
                 
@@ -505,26 +519,33 @@ class ProjectScheduler(ThreadedInstance):
                     self.turn_table.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
                     self.turn_table.rotated.wait()
                                 
-                self.camera_crane.moved.wait()
+                while not self.camera_crane.moved.is_set():
+                    if self.current_project is None:
+                        return
+                    time.sleep(0.05)
 
-                if prev_scan_position is None or prev_scan_position.y_pos != scan_position.y_pos:
-                    time.sleep(settings.mechanics.vertical_swing_compensation_delay)
+                if self.current_project is not None and (prev_scan_position is None or prev_scan_position.y_pos != scan_position.y_pos): # Wenn sich y pos ändert
+                    time.sleep(settings.mechanics.vertical_swing_compensation_delay) # Warte, dass nichts schwingt
             except Exception as e:
                 logger.exception("ProjectScheduler.mechanics_move_to_position error")
 
-        if scan_position.current_shot_indx == 0:
+        if scan_position.current_shot_indx == 0: # Nur beim ersten Bild der ScanPos Mechanik verändern
             mechanics_move_to_position()
 
-            time.sleep(settings.mechanics.settle_time)
+            if self.current_project is not None:
+                time.sleep(settings.mechanics.settle_time) # Kleine Kompensation
 
-        camera_shoot_image()
+        if self.current_project is None:
+            return
+
+        camera_shoot_image() # Bild aufnehmen
         
         if self.current_project is not None and self.current_project.current_index == self.current_project.turn_index and not self.current_project.turn_confirmed:
-            self.current_project.turnable = True
+            self.current_project.turnable = True # Wenn Index = TurnIndex dann Turnable markieren
         
         if self.current_project is not None and self.current_project.current_index == self.current_project.turn_index and not self.current_project.turn_confirmed:
-            self.turn_table.rotate_by(360 / settings.process.h_steps)
+            self.turn_table.rotate_by(360 / settings.process.h_steps) # Drehe nochmal eine Drehung weiter damit der User nicht umdenken muss
             self.turn_table.rotated.wait(15)
 
-        if len(scan_position.images) == len(scan_position.image_payloads):
-            threading.Thread(target=scan_position.process_images, daemon=True).start()
+        if len(scan_position.images) == len(scan_position.image_payloads): # Wenn alle Bilder der Scanpos vorhanden sind
+            threading.Thread(target=scan_position.process_images, daemon=True).start() # Prozessierung parallel starten

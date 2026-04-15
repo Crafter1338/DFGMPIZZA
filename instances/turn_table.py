@@ -1,15 +1,13 @@
 import logging
 import threading
-import time
 from typing import *
 from threading import Event
 
 logger = logging.getLogger(__name__)
 
 from instances.serial_device import *
-from application.settings import settings
 from instances.serial_device import _generate_rotate_by_instructions, _retrieve_value_from_instruction, SerialDevice, static_instructions
-from instances.threaded_instance import ThreadedInstance
+from utility.threaded_instance import ThreadedInstance
 
 class TurnTable(ThreadedInstance):
     def __init__(self, serial_device: SerialDevice):
@@ -90,6 +88,19 @@ class TurnTable(ThreadedInstance):
         self.is_rotating = True
 
     def tick(self):
+        if not self.serial_device.is_set_up:
+            self.position: float = 0
+            self.target_position: float = 0
+            self.int_target_position: int = 0
+
+            self.is_moving = False
+            self.is_nulling = False
+
+            self._is_moving_to = False
+
+            self.nulled.clear()
+            self.moved.set()
+            
         if self.serial_device is None or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
             return
         

@@ -7,8 +7,8 @@ from threading import Event
 logger = logging.getLogger(__name__)
 
 from instances.serial_device import _generate_move_to_instructions, _retrieve_value_from_instruction, SerialDevice, static_instructions
-from application.settings import settings
-from instances.threaded_instance import ThreadedInstance
+from utility.settings import settings
+from utility.threaded_instance import ThreadedInstance
 
 class CameraCrane(ThreadedInstance):
     def __init__(self, serial_device: SerialDevice):
@@ -24,6 +24,8 @@ class CameraCrane(ThreadedInstance):
 
         self.is_moving = False
         self.is_nulling = False
+        
+        self.nulling_till = time.time()
 
         self._is_moving_to = False
 
@@ -45,6 +47,9 @@ class CameraCrane(ThreadedInstance):
         self.nulled.clear()
 
         self.serial_device.queue_instructions(static_instructions["arm"]["down"])
+        
+        self.nulling_till = time.time() + max(settings.camera_crane.homing_duration or 60, 40)
+        
         time.sleep(max(settings.camera_crane.homing_duration or 60, 40))
         self.serial_device.queue_instructions(static_instructions["arm"]["end"])
 
@@ -93,6 +98,12 @@ class CameraCrane(ThreadedInstance):
         self.is_moving = False
         self._is_moving_to = False
         
+        self.position: float = 0
+        self.target_position: float = 0
+        self.int_target_position: int = 0
+
+        self.is_moving = False
+
         self.moved.set()
 
     def move_to(self, pos: float):
@@ -103,6 +114,8 @@ class CameraCrane(ThreadedInstance):
         
         if self.is_nulling:
             return
+        
+        self.moved.clear()
         
         if self.is_moving and not self._is_moving_to:
             self.move_end()
@@ -120,14 +133,25 @@ class CameraCrane(ThreadedInstance):
         self.target_position = pos 
         self.int_target_position = target_position
 
-        self.moved.clear()
         self.is_moving = True
         self._is_moving_to = True
 
         logger.info("CameraCrane move_to position set 3/3: target=%s", target_position)
 
     def tick(self):
-        if self.serial_device is None or not self.serial_device.is_connected(): # Wenn Serielle Verbindung nicht besteht
+        if self.serial_device is None or not self.serial_device.is_connected() or not self.serial_device.is_set_up:
+            self.position: float = 0
+            self.target_position: float = 0
+            self.int_target_position: int = 0
+
+            self.is_moving = False
+            self.is_nulling = False
+
+            self._is_moving_to = False
+
+            self.nulled.clear()
+            self.moved.set()
+            
             return
         
         if not self.nulled.is_set() and not self.is_nulling: # Wenn noch nicht kalibriert

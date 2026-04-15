@@ -2,7 +2,7 @@
     "app": {
         "thread_refreshrate": 20,
         "reconnect_delay": 0.5,
-        "image_crop": 0.13
+        "image_crop": 0.0
     },
     "ui": {
         "refreshrate": 60,
@@ -17,13 +17,13 @@
         "av": 8,
         "base_tv": 0.1,
         "hdr_shot_count": 3,
-        "hdr_ev": 1.9999990000000003,
-        "contrast_weight": 0.99,
-        "exposure_weight": 1,
-        "saturation_weight": 1,
-        "tonemap_gamma": 2.2,
-        "use_mertens": false,
-        "use_robertson": false
+        "hdr_ev": 0.966667,
+        "contrast_weight": 0.0,
+        "exposure_weight": 0.99,
+        "saturation_weight": 0.0,
+        "tonemap_gamma": 1.2,
+        "use_drago": false,
+        "use_robertson": true
     },
     "process": {
         "destination_dir": "application/results",

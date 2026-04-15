@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>252</width>
-    <height>199</height>
+    <width>761</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,14 +30,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>GIF hier</string>
+      <string></string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Wurde das Teil gedreht?</string>
+      <string>Wurde das Teil gedreht? Wurde der Laser deaktiviert?</string>
      </property>
     </widget>
    </item>

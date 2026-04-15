@@ -1,13 +1,12 @@
 import logging
-import time
 from typing import *
 import serial
-from threading import Event, RLock
+from threading import RLock
 
 logger = logging.getLogger(__name__)
 
-from application.settings import settings
-from instances.threaded_instance import ThreadedInstance
+from utility.settings import settings
+from utility.threaded_instance import ThreadedInstance
 
 from collections import deque
 from concurrent.futures import Future
@@ -19,20 +18,34 @@ def port_exists(port_name: str) -> bool:
     return port_name in ports
 
 class SerialDevice(ThreadedInstance):
+    def setup(self):
+        try:
+            self.ser: Optional[serial.Serial] = None
+
+            self.instruction_queue: Deque[Tuple[List[str], Future]] = deque()
+
+            self.queue_lock = RLock()
+            self.serial_lock = RLock() # Yannik: Wofür ist der Lock? Es greift doch niemand sonst low-level auf die serial connection zu, oder?
+            
+            self.is_set_up = True
+        except:
+            self.is_set_up = False
+    
     def __init__(self):
         logger.info("SerialDevice initialization 1/2")
-        self.ser: Optional[serial.Serial] = None
 
-        self.instruction_queue: Deque[Tuple[List[str], Future]] = deque()
+        self.is_set_up = False
 
-        self.queue_lock = RLock()
-        self.serial_lock = RLock()
+        self.setup()
 
         super().__init__()
         logger.info("SerialDevice initialization 2/2")
 
 
     def connect(self):
+        if not self.is_set_up:
+            self.setup()
+            
         try:
             logger.info("SerialDevice connecting... 1/2")
 
@@ -83,6 +96,7 @@ class SerialDevice(ThreadedInstance):
                     logger.exception("SerialDevice.disconnect close error")
 
             self.ser = None
+            self.is_set_up = False
             return True
         
         return False
