@@ -1,22 +1,26 @@
 from __future__ import annotations
 
 from PySide6.QtCore import Qt, QSize, QRect
-from PySide6.QtGui import QPainter, QPixmap, QColor
+from PySide6.QtGui import QPainter, QColor, QPixmap
 from PySide6.QtWidgets import QLabel, QSizePolicy
+from PySide6.QtGui import QMovie
 
 
-class AspectRatioLabel(QLabel):
+class AspectRatioMovieLabel(QLabel):
     def __init__(self, parent=None, aspect_ratio: float = 16 / 9):
         super().__init__(parent)
 
         self._aspect_ratio = aspect_ratio
-        self._pixmap: QPixmap | None = None
+        self._movie: QMovie | None = None
         self._background_color = QColor(15, 15, 15)
 
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        self.setMinimumSize(100, 90)
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.setMinimumSize(160, 90)
 
+    # -----------------------
+    # Aspect ratio handling
+    # -----------------------
     def setAspectRatio(self, aspect_ratio: float) -> None:
         if aspect_ratio <= 0:
             return
@@ -27,43 +31,70 @@ class AspectRatioLabel(QLabel):
     def aspectRatio(self) -> float:
         return self._aspect_ratio
 
-    def setPixmap(self, pixmap: QPixmap) -> None:
-        self._pixmap = pixmap
+    # -----------------------
+    # Movie handling
+    # -----------------------
+    def setMovie(self, movie: QMovie) -> None:
+        if self._movie:
+            try:
+                self._movie.frameChanged.disconnect(self.update)
+            except Exception:
+                pass
+
+        self._movie = movie
+
+        if self._movie:
+            self._movie.frameChanged.connect(self.update)
+            self._movie.start()
+
         self.update()
 
+    def movie(self) -> QMovie | None:
+        return self._movie
+
     def clear(self) -> None:
-        self._pixmap = None
+        if self._movie:
+            self._movie.stop()
+        self._movie = None
         super().clear()
         self.update()
 
+    # -----------------------
+    # Size logic
+    # -----------------------
     def hasHeightForWidth(self) -> bool:
         return True
 
     def heightForWidth(self, width: int) -> int:
         return int(width / self._aspect_ratio)
-    
+
     def sizeHint(self) -> QSize:
-        return QSize(320, int(320 / self._aspect_ratio))
+        width = max(self.width(), 320)
+        return QSize(width, self.heightForWidth(width))
 
     def minimumSizeHint(self) -> QSize:
-        return QSize(100, 90)
+        return QSize(160, 90)
 
-    def resizeEvent(self, event) -> None:
-        super().resizeEvent(event)
-        self.update()
-
+    # -----------------------
+    # Paint
+    # -----------------------
     def paintEvent(self, event) -> None:
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
 
-        # Hintergrund
+        # Background
         painter.fillRect(self.rect(), self._background_color)
 
-        if not self._pixmap or self._pixmap.isNull():
+        if not self._movie:
+            return
+
+        frame: QPixmap = self._movie.currentPixmap()
+        if frame.isNull():
             return
 
         target = self._get_target_rect()
-        scaled = self._pixmap.scaled(
+
+        scaled = frame.scaled(
             target.size(),
             Qt.AspectRatioMode.KeepAspectRatio,
             Qt.TransformationMode.SmoothTransformation,

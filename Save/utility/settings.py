@@ -38,7 +38,7 @@ class CameraSettings:
 
     tonemap_gamma: float = 2.2
 
-    use_drago: bool = True
+    use_mertens: bool = True
     use_robertson: bool = False
 
 
@@ -72,11 +72,7 @@ class MechanicsSettings:
 @dataclass
 class CameraCraneSettings:
     min_pos: float = 0.1
-    min_angle: float = 0
-    
     max_pos: float = 0.9
-    max_angle: float = 90
-    
     homing_duration: int = 50
 
 @dataclass

@@ -267,40 +267,49 @@ class ProjectScheduler(ThreadedInstance):
                 (dst / "preview").mkdir(parents=True, exist_ok=True) # Previewordner erstellen
 
             h_steps = max(2, int(settings.process.h_steps))
-            v_steps = max(2, int(settings.process.v_steps)) 
-
-            if v_steps % 2 == 1:
-                v_steps += 1
+            v_steps = max(2, int(settings.process.v_steps))
 
             scan_positions = []
 
-            for v_indx in range(v_steps):
-                t = v_indx / (v_steps - 1)
-                y = 1 - 2 * (v_indx / (v_steps - 1))
-
-                flipped = y < 0
-                y_pos = abs(y)
+            for v_indx in range(v_steps): # Scanpositions "von oben" erstellen
+                y_pos = 1 - (v_indx / (v_steps-1))
 
                 for h_indx in range(h_steps):
-                    x_pos = (h_indx / (h_steps - 1)) * 360
+                    x_pos = (h_indx / (h_steps-1)) * 360
 
                     image_payloads = self._create_image_payloads()
 
                     scan_positions.append(ScanPosition(
-                        image_payloads=image_payloads,
-                        x_pos=x_pos,
-                        y_pos=y_pos,
+                        image_payloads = image_payloads,
+                        x_pos   = x_pos,
+                        y_pos   = y_pos,
 
-                        x_name=str(h_indx + 1),
-                        y_name=str(v_indx + 1),
+                        x_name  = str(h_indx + 1),
+                        y_name  = str(v_indx + 1),
 
-                        flipped=flipped,
+                        flipped = False,
                     ))
 
-            turn_index = next(
-                v_indx for v_indx in range(v_steps)
-                if (1 - (v_indx / (v_steps - 1)) * 2) < 0
-            ) * h_steps
+            turn_index = len(scan_positions)
+
+            for v_indx in range(v_steps): # Scanpositions "von unten" erstellen
+                y_pos = (v_indx / (v_steps-1))
+
+                for h_indx in range(h_steps):
+                    x_pos = (h_indx / (h_steps-1)) * 360
+
+                    image_payloads = self._create_image_payloads()
+
+                    scan_positions.append(ScanPosition(
+                        image_payloads = image_payloads,
+                        x_pos   = x_pos,
+                        y_pos   = y_pos,
+
+                        x_name  = str(h_indx + 1),
+                        y_name  = str(v_indx + 1 + v_steps),
+
+                        flipped = True,
+                    ))
 
             project = Project( # Projekt zusammenführen
                 name = name,

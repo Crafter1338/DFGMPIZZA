@@ -277,14 +277,44 @@ def save_preview_buffer(
     except Exception as e:
         logger.exception("save_preview_buffer error")
         return None
-    
-    
-def hdr_merge_drago_buffer(
+
+
+def hdr_merge_mertens_buffer(
+    images: Sequence[np.ndarray],
+    contrast: float = 1.0,
+    exposure: float = 1.0,
+    saturation: float = 1.0,
+) -> Optional[np.ndarray]:
+    try:
+        valid_images: list[np.ndarray] = []
+
+        for img in images:
+            if img is None or not isinstance(img, np.ndarray) or img.size == 0:
+                return None
+            valid_images.append(img)
+
+        if len(valid_images) < 2:
+            return None
+
+        merge_mertens = cv2.createMergeMertens(
+            contrast_weight=contrast,
+            exposure_weight=exposure,
+            saturation_weight=saturation,
+        )
+
+        res_mertens = merge_mertens.process(valid_images)
+        res_mertens_8bit = np.clip(res_mertens * 255, 0, 255).astype(np.uint8)
+
+        return res_mertens_8bit
+    except Exception as e:
+        logger.exception("hdr_merge_mertens_buffer error")
+        return None
+
+
+def hdr_merge_robertson_buffer(
     images: Sequence[np.ndarray],
     exposure_times: Sequence[float],
     gamma: float = 2.2,
-    saturation: float = 1.0,
-    bias: float = 0.85,
 ) -> Optional[np.ndarray]:
     try:
         valid_images: list[np.ndarray] = []
@@ -302,25 +332,22 @@ def hdr_merge_drago_buffer(
 
         exposure_times_np = np.array(exposure_times, dtype=np.float32)
 
-        merge = cv2.createMergeDebevec()
-        hdr = merge.process(valid_images, exposure_times_np)
+        calibrate = cv2.createCalibrateRobertson(max_iter=10)
+        response = calibrate.process(valid_images, exposure_times_np)
 
-        tonemap = cv2.createTonemapDrago(
-            gamma=gamma,
-            saturation=saturation,
-            bias=bias,
-        )
+        merge = cv2.createMergeRobertson()
+        hdr = merge.process(valid_images, exposure_times_np, response)
 
+        tonemap = cv2.createTonemap(gamma=gamma)
         ldr = tonemap.process(hdr)
 
-        ldr = np.clip(ldr, 0, 1)
+        ldr_8bit = np.clip(ldr * 255, 0, 255).astype(np.uint8)
 
-        return (ldr * 255).astype(np.uint8)
-
-    except Exception:
-        logger.exception("hdr_merge_drago_buffer error")
+        return ldr_8bit
+    except Exception as e:
+        logger.exception("hdr_merge_robertson_buffer error")
         return None
-    
+
 
 def cv_image_to_qpixmap(img: np.ndarray) -> QPixmap:
     """

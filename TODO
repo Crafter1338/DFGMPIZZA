@@ -1,19 +1,14 @@
-- Hardware bereit geht nicht
-- Evtl nicht alle Bilder am Ende speichern -> RAM Untersuchen
+- Neues UI:
+    - Hardware bereit geht nicht (Generell Status Messages prüfen)
+    - Weg: Auswahl Bildmodus und Gamma
+    - Verbleibende Zeit
+    - Statt Bilderanzahl im Progress, Positionsanzahl oder einfach Prozent
+    - Beide Preview Fenster
 
-# QObject::killTimer: Timers cannot be stopped from another thread
-# Kamera discinnect bei Belichtzeit Änderung?
--> Prop Änderung während liveview?
-
-- Range: 0 - 2 (einstellbar settings)
-- Timeout? Device busy wenn AF Auto und Bel Zeit sehr hoch
-
-- statt Bilderanzahl im ui, pos anzahl
+- Bilder nicht erst am Ende speichern
 
 - HDR Alg -> muss funktionieren
 - Autofkus glitch
-
-- Vertikale Steps fixen
 
 # PyInstaller
 

@@ -105,27 +105,6 @@ class CameraCrane(ThreadedInstance):
         self.is_moving = False
 
         self.moved.set()
-        
-    def convert_angle_to_percentage(angle: float) -> float:
-        min_angle = settings.camera_crane.min_angle
-        max_angle = settings.camera_crane.max_angle
-
-        if max_angle == min_angle:
-            return 0.0
-
-        # Clamp
-        angle = min(max(angle, min_angle), max_angle)
-
-        return (angle - min_angle) / (max_angle - min_angle)
-    
-    def convert_percentage_to_angle(percentage: float) -> float:
-        min_angle = settings.camera_crane.min_angle
-        max_angle = settings.camera_crane.max_angle
-
-        # clamp
-        percentage = min(max(percentage, 0.0), 1.0)
-
-        return percentage * (max_angle - min_angle) + min_angle
 
     def move_to(self, pos: float):
         logger.info("CameraCrane move_to 1/3: pos=%s", pos)

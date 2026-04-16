@@ -14,8 +14,8 @@ class AspectRatioLabel(QLabel):
         self._background_color = QColor(15, 15, 15)
 
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        self.setMinimumSize(100, 90)
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.setMinimumSize(160, 90)
 
     def setAspectRatio(self, aspect_ratio: float) -> None:
         if aspect_ratio <= 0:
@@ -41,12 +41,13 @@ class AspectRatioLabel(QLabel):
 
     def heightForWidth(self, width: int) -> int:
         return int(width / self._aspect_ratio)
-    
+
     def sizeHint(self) -> QSize:
-        return QSize(320, int(320 / self._aspect_ratio))
+        width = max(self.width(), 320)
+        return QSize(width, self.heightForWidth(width))
 
     def minimumSizeHint(self) -> QSize:
-        return QSize(100, 90)
+        return QSize(160, 90)
 
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
