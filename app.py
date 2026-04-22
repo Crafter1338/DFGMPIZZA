@@ -223,7 +223,7 @@ class MainWindow(QMainWindow):
         self.last_preview_bytes: Optional[bytes] = None
         self.last_preview_crop: Optional[float] = None
         
-        #self._replace_image_label()
+        self._replace_image_label()
         self._insert_spinner()
         self._init_ui_from_settings()
         self._connect_ui()
@@ -241,47 +241,52 @@ class MainWindow(QMainWindow):
         
     ## UI Helpers #################
     def _insert_spinner(self): # Drehteil damit man während HDR Preview nicht ganz alleine ist
-        self.preview_spinner = WaitingSpinner(self.ui.image_label_right, True, True, radius=30, color=QColor(255,255,255), line_width=4, line_length=14)
+        self.preview_spinner = WaitingSpinner(self.ui.image_label, True, True, radius=30, color=QColor(255,255,255), line_width=4, line_length=14)
         self.preview_spinner.stop()
     
     def _replace_image_label(self): # Sorgt dafür, dass jedes Image im Preview auch wirklich 16:9 ist
-        for old_label in [self.ui.image_label_left, self.ui.image_label_right]:
-            parent_layout = self.ui.horizontalLayout
+        old_label = self.ui.image_label
+        parent_layout = self.ui.horizontalLayout
 
-            new_label = AspectRatioLabel(self.centralWidget(), aspect_ratio = 16 / 9)
-            new_label.setObjectName(old_label.objectName())
+        new_label = AspectRatioLabel(self.centralWidget(), aspect_ratio = 16 / 9)
+        new_label.setObjectName("image_label")
 
-            index = parent_layout.indexOf(old_label)
-            parent_layout.removeWidget(old_label)
-            old_label.deleteLater()
+        index = parent_layout.indexOf(old_label)
+        parent_layout.removeWidget(old_label)
+        old_label.deleteLater()
 
-            parent_layout.insertWidget(index, new_label)
-            setattr(self.ui, old_label.objectName(), new_label)
+        parent_layout.insertWidget(index, new_label)
+        self.ui.image_label = new_label
 
     def _init_ui_from_settings(self): # Stellt das UI von den Settings ein
-        self.ui.base_tv_slider.setValue(int(settings.camera.base_tv* 100))
+        self.ui.base_tv_input.setText(str(settings.camera.base_tv))
         self.ui.hdr_ev_input.setValue(settings.camera.hdr_ev)
         self.ui.hdr_count_input.setValue(settings.camera.hdr_shot_count)
 
         self.ui.crop_slider.setValue(int(round(settings.app.image_crop * 100)))
 
-        self.ui.single_picture_button.setChecked((not settings.camera.use_drago and not settings.camera.use_robertson))
-        self.ui.hdr_drago_button.setChecked(settings.camera.use_drago)
-        self.ui.hdr_robertson_button.setChecked(settings.camera.use_robertson)
+        self.ui.contrast_slider.setValue(int(round(settings.camera.contrast_weight * 100)))
+        self.ui.exposure_slider.setValue(int(round(settings.camera.exposure_weight * 100)))
+        self.ui.saturation_slider.setValue(int(round(settings.camera.saturation_weight * 100)))
+
+        self.ui.liveview_checkbox.setChecked(False)
 
         self._reset_progress_ui()
 
     def _connect_ui(self): # Verbindet das UI mit den Settings
-        self.ui.base_tv_slider.sliderReleased.connect(self._on_base_tv_changed)
-        
+        self.ui.base_tv_input.textChanged.connect(self._on_base_tv_changed)
         self.ui.hdr_ev_input.valueChanged.connect(self._on_hdr_ev_changed)
         self.ui.hdr_count_input.valueChanged.connect(self._on_hdr_count_changed)
 
         self.ui.crop_slider.sliderMoved.connect(self._on_crop_change)
         self.ui.crop_slider.sliderReleased.connect(self._on_crop_changed)
 
+        self.ui.contrast_slider.sliderReleased.connect(self._on_contrast_changed)
+        self.ui.exposure_slider.sliderReleased.connect(self._on_exposure_changed)
+        self.ui.saturation_slider.sliderReleased.connect(self._on_saturation_changed)
+
         self.ui.single_picture_button.clicked.connect(self._on_radio_button_changed)
-        self.ui.hdr_drago_button.clicked.connect(self._on_radio_button_changed)
+        self.ui.hdr_mertens_button.clicked.connect(self._on_radio_button_changed)
         self.ui.hdr_robertson_button.clicked.connect(self._on_radio_button_changed)
 
         self.ui.start_button.clicked.connect(self._on_start_clicked)
@@ -293,17 +298,11 @@ class MainWindow(QMainWindow):
         self.ui.settings_button.clicked.connect(self.open_settings_folder)
         
         self.ui.move_arm_to_0.clicked.connect(self._on_0_press)
-        self.ui.move_arm_to_45.clicked.connect(self._on_45_press)
-        self.ui.move_arm_to_85.clicked.connect(self._on_85_press)
+        self.ui.move_arm_to_50.clicked.connect(self._on_50_press)
         
     def _set_preview_pixmap(self, pixmap: QPixmap):
         if pixmap and not pixmap.isNull():
-            self.ui.image_label_right.setPixmap(pixmap)
-            return 
-
-    def _set_liveview_pixmap(self, pixmap: QPixmap):
-        if pixmap and not pixmap.isNull():
-            self.ui.image_label_left.setPixmap(pixmap)
+            self.ui.image_label.setPixmap(pixmap)
 
     def _reset_progress_ui(self):
         self.ui.progress_bar.setRange(0, 100)
@@ -339,7 +338,7 @@ class MainWindow(QMainWindow):
         self.ui.name_input.setEnabled(is_system_ready and not is_project_running)
 
         self.ui.single_picture_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
-        self.ui.hdr_drago_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
+        self.ui.hdr_mertens_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
         self.ui.hdr_robertson_button.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
 
         self.ui.crop_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview)
@@ -348,14 +347,20 @@ class MainWindow(QMainWindow):
         self.ui.hdr_count_input.setEnabled(not is_project_running and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
         self.ui.hdr_ev_input.setEnabled(not is_project_running and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
 
+        self.ui.contrast_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
+        self.ui.exposure_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
+        self.ui.saturation_slider.setEnabled(not is_project_running and not self.is_generating_hdr_preview and self.ui.hdr_mertens_button.isChecked())
+
         self.ui.start_button.setEnabled(is_system_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
         self.ui.pause_button.setEnabled(is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
         self.ui.stop_button.setEnabled(is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
 
-        self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.camera.busy and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
+        self.ui.liveview_checkbox.setEnabled(is_cam_connected and not self.is_generating_hdr_preview)
+        #self.ui.hdr_preview_button.setEnabled(is_cam_connected and not is_project_running and not self.ui.liveview_checkbox.isChecked() and not self.camera.busy and not self.is_generating_hdr_preview and not self.ui.single_picture_button.isChecked())
+        self.ui.hdr_preview_button.setEnabled(True)
 
         self.ui.move_arm_to_0.setEnabled(is_mechanics_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
-        self.ui.move_arm_to_45.setEnabled(is_mechanics_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
+        self.ui.move_arm_to_50.setEnabled(is_mechanics_ready and not is_project_running and not self.is_generating_hdr_preview and not self.is_moving_by_buttons)
 
     @systemready
     def _update_project_progress(self):
@@ -423,31 +428,31 @@ class MainWindow(QMainWindow):
         
         self._handle_project_dialogs()
         
-    def update_preview(self): #TODO: Rework
-        #if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked(): # Liveview muss nicht gesamplet werden weil sowieso klein
-        #    self.preview = Image(data=self.camera.liveview_data)
-        #    self.preview.crop(settings.app.image_crop)
-        #    
-        #    self.preview_bytes = None
-        #                
-        #elif self.preview_bytes != None:
-        #    if (self.last_preview_bytes != None and self.last_preview_bytes == self.preview_bytes) and (self.last_preview_crop != None and self.last_preview_crop == settings.app.image_crop):
-        #        return # Wenn nichts am Bild geändert wurde, nicht erneut croppen und samplen
-        #    
-        #    self.preview = Image(self.preview_bytes)
-        #    self.preview.crop(settings.app.image_crop)
-        #    self.preview.downsample()
-        #    
-        #    self.last_preview_bytes = self.preview_bytes
-        #    self.last_preview_crop = settings.app.image_crop
+    def update_preview(self):
+        if self.camera.is_connected() and self.ui.liveview_checkbox.isChecked(): # Liveview muss nicht gesamplet werden weil sowieso klein
+            self.preview = Image(data=self.camera.liveview_data)
+            self.preview.crop(settings.app.image_crop)
+            
+            self.preview_bytes = None
+                        
+        elif self.preview_bytes != None:
+            if (self.last_preview_bytes != None and self.last_preview_bytes == self.preview_bytes) and (self.last_preview_crop != None and self.last_preview_crop == settings.app.image_crop):
+                return # Wenn nichts am Bild geändert wurde, nicht erneut croppen und samplen
+            
+            self.preview = Image(self.preview_bytes)
+            self.preview.crop(settings.app.image_crop)
+            self.preview.downsample()
+            
+            self.last_preview_bytes = self.preview_bytes
+            self.last_preview_crop = settings.app.image_crop
             
         if not self.camera.is_connected(): # Wenn Kamera nicht verbunden, anzeigen
             self.preview = Image(Path(settings_module.resource_path("assets/NoSignal.jpg")).read_bytes())
             self.preview_bytes = None
 
-        #if self.camera.is_connected() and not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes: # Leeres Bild
-            #self.ui.image_label.setPixmap(QPixmap())
-        #    return
+        if self.camera.is_connected() and not self.ui.liveview_checkbox.isChecked() and not self.preview_bytes: # Leeres Bild
+            self.ui.image_label.setPixmap(QPixmap())
+            return
         
         if not self.preview:
             return
@@ -538,31 +543,23 @@ class MainWindow(QMainWindow):
                 if len(cv_images) == 1:
                     result_img = cv_images[0].copy()
 
-                elif settings.camera.use_drago:
-                    exposure_times = [payload.tv for payload in payloads]
-                    
-                    result_img = fp.hdr_merge_drago_buffer(
-                        images=cv_images,
-                        exposure_times=exposure_times,
-                        gamma=settings.camera.tonemap_gamma
-                    )
 
-                elif settings.camera.use_robertson:
-                    exposure_times = [payload.tv for payload in payloads]
-                    
-                    result_img = fp.hdr_merge_robertson_buffer(
-                        images=cv_images,
-                        exposure_times=exposure_times,
-                        gamma=settings.camera.tonemap_gamma
-                    )
-                else:
-                    result_img = cv_images[0].copy()
+                exposure_times = [payload.tv for payload in payloads]
+
+                result_img = fp.hdr_merge_drago_buffer(
+                    images=cv_images,
+                    exposure_times=exposure_times,
+                    gamma=1.5,
+                )
+
 
                 if result_img is None:
                     logger.error("HDR-Verarbeitung fehlgeschlagen", stack_info=True)
 
                 preview_image = Image()
                 preview_image.cv2_to_data(result_img)
+                
+                preview_image.save_as_file(Path(f"./application/results/{round(time.time())}.jpg"))
 
                 if not preview_image.data:
                     logger.error("preview konnte nicht codiert werden", stack_info=True)
@@ -605,11 +602,10 @@ class MainWindow(QMainWindow):
     
     ## Setting Update #############
     def _on_base_tv_changed(self):
-        if self.ui.base_tv_slider.value() is None: 
+        if self.ui.base_tv_input.text() is None: 
             return 
     
-        value = _parse_float(self.ui.base_tv_slider.value()/100)
-        
+        value = _parse_float(self.ui.base_tv_input.text())
         if value is None or value <= 0:
             return
         
@@ -641,30 +637,29 @@ class MainWindow(QMainWindow):
         settings.app.image_crop = min(max(self.ui.crop_slider.value() / 100, 0), 1)
         settings.save()
 
+    def _on_contrast_changed(self):
+        settings.camera.contrast_weight = min(max(self.ui.contrast_slider.value() / 100, 0), 1)
+        settings.save()
+
+    def _on_exposure_changed(self):
+        settings.camera.exposure_weight = min(max(self.ui.exposure_slider.value() / 100, 0), 1)
+        settings.save()
+
+    def _on_saturation_changed(self):
+        settings.camera.saturation_weight = min(max(self.ui.saturation_slider.value() / 100, 0), 1)
+        settings.save()
+
     def _on_radio_button_changed(self):
-        settings.camera.use_drago   = self.ui.hdr_drago_button.isChecked() and not self.ui.single_picture_button.isChecked()
+        settings.camera.use_mertens   = self.ui.hdr_mertens_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.camera.use_robertson = self.ui.hdr_robertson_button.isChecked() and not self.ui.single_picture_button.isChecked()
         settings.save()
         
     @mechanicsready
-    def _on_85_press(self):
+    def _on_50_press(self):
         def worker():
             try:
                 self.is_moving_by_buttons = True
-                self.camera_crane.move_to(0.5) # TODO: Cameracrane auf Winkel ändern
-                
-                self.camera_crane.moved.wait()
-            finally:
-                self.is_moving_by_buttons = False
-                
-        threading.Thread(target=worker, daemon=True).start()
-        
-    @mechanicsready
-    def _on_45_press(self):
-        def worker():
-            try:
-                self.is_moving_by_buttons = True
-                self.camera_crane.move_to(0.5)  # TODO: Cameracrane auf Winkel ändern
+                self.camera_crane.move_to(0.5)
                 
                 self.camera_crane.moved.wait()
             finally:
@@ -677,7 +672,7 @@ class MainWindow(QMainWindow):
         def worker():
             try:
                 self.is_moving_by_buttons = True
-                self.camera_crane.move_to(0)   # TODO: Cameracrane auf Winkel ändern
+                self.camera_crane.move_to(0) 
                 
                 self.camera_crane.moved.wait()
             finally:

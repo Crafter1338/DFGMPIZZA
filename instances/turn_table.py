@@ -121,6 +121,6 @@ class TurnTable(ThreadedInstance):
         except Exception as e:
             logger.exception("TurnTable.tick position query error")
 
-        if self.is_rotating and abs(self.target_rotation - self.rotation) < 0.6:
+        if self.is_rotating and abs(self.target_rotation - self.rotation) < 0.15:
             self.is_rotating = False
             self.rotated.set()

@@ -17,6 +17,7 @@ class ThreadedInstance(Thread):
         self._pause_event = Event()
 
         self._pause_event.set()
+        self._stop_event.clear()
 
 
     def stop(self):
@@ -29,7 +30,6 @@ class ThreadedInstance(Thread):
 
     def resume(self):
         self._pause_event.set()
-
 
     def is_connected(self):
         return self._connected_event.is_set()
@@ -50,7 +50,7 @@ class ThreadedInstance(Thread):
                 self._connected_event.set()
         except Exception as e:
             self._connected_event.clear()
-
+            
         self._last_connect = time.time()
 
     def _disconnect(self):

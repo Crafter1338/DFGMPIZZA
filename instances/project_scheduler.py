@@ -104,7 +104,7 @@ class ScanPosition:
 
     final_image_processed: Event = field(default_factory=Event)
 
-    def process_images(self): # Prozessierung der HDR Bilder (und crop + flip), pasiert in thread während tick()
+    def process_images(self, project): # Prozessierung der HDR Bilder (und crop + flip), pasiert in thread während tick()
         try:
             cv_images: list = []
 
@@ -121,26 +121,15 @@ class ScanPosition:
 
             if len(cv_images) == 1: # Einzelbild
                 result = cv_images[0].copy()
-
-            elif settings.camera.use_mertens: # HDR Mertems
-                result = fp.hdr_merge_mertens_buffer(
-                    images=cv_images,
-                    contrast=settings.camera.contrast_weight,
-                    exposure=settings.camera.exposure_weight,
-                    saturation=settings.camera.saturation_weight,
-                )
-
-            elif settings.camera.use_robertson: # HDR Robertson
+            
+            else:
                 exposure_times = [payload.tv for payload in self.image_payloads]
 
-                result = fp.hdr_merge_robertson_buffer(
+                result = fp.hdr_merge_drago_buffer(
                     images=cv_images,
                     exposure_times=exposure_times,
-                    gamma=settings.camera.tonemap_gamma,
+                    gamma=1.5,
                 )
-
-            else:
-                result = cv_images[0].copy()
 
             if result is None:
                 return False
@@ -161,6 +150,8 @@ class ScanPosition:
             self.final_image.cv2_to_data(result)
 
             self.final_image_processed.set()
+            
+            self.save_final_image(project.dir_destination)
         except Exception as e:
             logger.exception("ScanPosition.process_images error")
 
@@ -233,7 +224,7 @@ class ProjectScheduler(ThreadedInstance):
 
 
     def _create_image_payloads(self) -> list[ShotPayload]: # Erstellt aus den Einstellungen in settings.json ShotPayloads für die Kamera
-        if settings.camera.use_mertens or settings.camera.use_robertson:
+        if settings.camera.use_mertens or settings.camera.use_robertson or True:
             tvs = conversions.generate_hdr_tv_names(
                 base_tv=settings.camera.base_tv,
                 hdr_shots=settings.camera.hdr_shot_count,
@@ -539,4 +530,4 @@ class ProjectScheduler(ThreadedInstance):
             self.turn_table.rotated.wait(15)
 
         if len(scan_position.images) == len(scan_position.image_payloads): # Wenn alle Bilder der Scanpos vorhanden sind
-            threading.Thread(target=scan_position.process_images, daemon=True).start() # Prozessierung parallel starten
+            threading.Thread(target=scan_position.process_images, daemon=True, args=[self.current_project]).start() # Prozessierung parallel starten

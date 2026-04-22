@@ -67,7 +67,7 @@ class Camera(ThreadedInstance):
         try:
             self.last_action = time.time()
             pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED) # pythoncom für background thread
-            edsdk.InitializeSDK() # EDSDK Init
+            #edsdk.InitializeSDK() # EDSDK Init
 
             logger.info("Camera EDSDK initialized")
         except Exception as e:
@@ -84,23 +84,20 @@ class Camera(ThreadedInstance):
                 edsdk.CloseSession(self.cam)
             except:
                 edsdk.TerminateSDK()
-                
-                time.sleep(0.5)
-            
-                edsdk.InitializeSDK() # Yannik: Init nach Disconnect?
             finally:
                 self.cam = None
 
         return True
 
     def connect(self): # Verbindung zur Kamera herstellen
+        edsdk.InitializeSDK() # Yannik: Init nach Disconnect?
         logger.info("Camera connecting... 1/5")
 
         self.last_action = time.time()
 
-        if self.cam is not None:
-            self._disconnect()
-            return False
+        #if self.cam is not None:
+        #    self._disconnect()
+        #    return False
 
         camera_list  = edsdk.GetCameraList()
         camera_count = edsdk.GetChildCount(camera_list)
@@ -113,7 +110,7 @@ class Camera(ThreadedInstance):
         self.cam = edsdk.GetChildAtIndex(camera_list, 0)
 
         if self.cam is None:
-            self._disconnect()
+            #self._disconnect()
             return False
         
         logger.info("Camera connecting... 3/5")
@@ -206,6 +203,8 @@ class Camera(ThreadedInstance):
             edsdk.SetPropertyData(self.cam, edsdk.PropID.Tv, 0, payload.raw_tv)
             edsdk.SetPropertyData(self.cam, edsdk.PropID.Av, 0, payload.raw_av)
             edsdk.SetPropertyData(self.cam, edsdk.PropID.ISOSpeed, 0, payload.raw_iso)
+            
+            time.sleep(0.05)
 
             edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
 
@@ -217,13 +216,14 @@ class Camera(ThreadedInstance):
                 try:
                     edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.ManualFocus)
 
-                    time.sleep(0.1)
+                    time.sleep(0.05)
 
                     edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
                     
-                    time.sleep(0.1)
+                    time.sleep(0.5)
                     
-                    edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.AIServoAF_ServoAF if settings.camera.af_enabled else edsdk.AFMode.ManualFocus)
+                    if settings.camera.af_enabled:
+                        edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.AIServoAF_ServoAF)
                 except Exception as e:
                     logger.exception("AF FALLBACK FAIL | FATAL")
                     return
@@ -242,17 +242,27 @@ class Camera(ThreadedInstance):
             return 0
         
         try:
+            time.sleep(0.25)
+            
             info = edsdk.GetDirectoryItemInfo(obj_handle)
+            
+            print(info)
             
             if not self.shot_queue:
                 return 0
 
             shot_payload, future = self.shot_queue.popleft()
 
-            time.sleep(0.5)
+            time.sleep(0.25)
 
-            edsdk.Download(obj_handle, info["size"], self.image_out_stream)
-            edsdk.DownloadComplete(obj_handle)
+            try:
+                edsdk.Download(obj_handle, info["size"], self.image_out_stream)
+                time.sleep(0.05)
+                edsdk.DownloadComplete(obj_handle)
+            except:
+                self.shot_queue.appendleft((shot_payload, future))
+                self.busy = False
+                return 0 
 
             raw_bytes = bytes(self.image_data[:info["size"]])
 
@@ -262,13 +272,13 @@ class Camera(ThreadedInstance):
             )
 
             future.set_result(result)
-
-            logger.debug("Camera.handle_transfer complete")
             
             self.image_out_stream = edsdk.CreateMemoryStreamFromPointer(self.image_data)
-            self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
+            
+            logger.debug("Camera.handle_transfer complete")#
+            #self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_data)
 
-            self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
+            #self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
         except Exception as e:
             logger.exception("Camera.handle_transfer error")
 
@@ -280,15 +290,14 @@ class Camera(ThreadedInstance):
             self._disconnect()
             return
         
-        pythoncom.PumpWaitingMessages() # Ohne das hier kommen keine Bilder an
-        
         if self.busy:
+            pythoncom.PumpWaitingMessages() # Ohne das hier kommen keine Bilder an
             return
         
         if not self.is_connected():
             return
         
-        if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate: # Yannik: Liveview ist immer aktiv?
+        # if time.time() - self.last_liveview > 1/settings.camera.liveview_refresh_rate: # Yannik: Liveview ist immer aktiv?
             self.last_liveview = time.time()
             
             try:                
@@ -330,8 +339,7 @@ class Camera(ThreadedInstance):
             
         if self.shot_queue:
             with self.queue_lock:
-                item = self.shot_queue.popleft() # Yannik: Was genau macht das hier? 
-                self.shot_queue.appendleft(item)
+                item = self.shot_queue[0] if self.shot_queue else None
 
         if not item:
             return
