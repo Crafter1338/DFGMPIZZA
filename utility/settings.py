@@ -2,6 +2,8 @@ from dataclasses import dataclass, asdict, field
 import json
 from pathlib import Path
 
+import utility.paths as paths
+
 @dataclass
 class AppSettings:
     thread_refreshrate: int = 20
@@ -22,8 +24,8 @@ class CameraSettings:
     af_enabled: bool = False # Restart Erforderlich
     
     reconnect_delay: float = 0.5
-    timeout: float = 15
-    liveview_refresh_rate: float = 4
+    timeout: float = 30
+    liveview_refresh_rate: float = 5
 
     iso: int = 100
     av: float = 8
@@ -32,21 +34,13 @@ class CameraSettings:
     hdr_shot_count: int = 3
     hdr_ev: float = 1
 
-    contrast_weight: float = 1
-    exposure_weight: float = 1
-    saturation_weight: float = 1
-
-    tonemap_gamma: float = 2.2
-
-    use_drago: bool = True
-    use_robertson: bool = False
-
+    gamma: float = 1.5
 
 ##################################################################
 
 @dataclass 
 class ProcessSettings:
-    destination_dir: str = "application/results"
+    destination_dir: str = "./results"
 
     preview_dim: int = 1024
     max_preview_kb: int = 18
@@ -66,7 +60,7 @@ class SerialSettings:
 
 @dataclass
 class MechanicsSettings:
-    settle_time: float = 0.3
+    settle_time: float = 0.4
     vertical_swing_compensation_delay: float = 6
 
 @dataclass
@@ -77,7 +71,7 @@ class CameraCraneSettings:
     max_pos: float = 0.9
     max_angle: float = 90
     
-    homing_duration: int = 50
+    homing_duration: int = 55
 
 @dataclass
 class TurnTableSettings:
@@ -85,23 +79,10 @@ class TurnTableSettings:
 
 ##################################################################
 
-import sys
-from pathlib import Path
-
-def resource_path(relative: str) -> Path:
-    if getattr(sys, "frozen", False):
-        return Path(sys._MEIPASS) / relative
-    return Path(__file__).resolve().parent.parent / relative
-
-def get_base_path():
-    return resource_path("application")
-
-file = get_base_path() / "settings.json"
-
+file = paths.settings_file
 file.parent.mkdir(parents=True, exist_ok=True)
 
 def _merge(default: dict, loaded: dict):
-    """Merge loaded dict into default dict recursively"""
     for k, v in default.items():
         if k in loaded:
             if isinstance(v, dict) and isinstance(loaded[k], dict):
