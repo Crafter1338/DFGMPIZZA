@@ -81,7 +81,13 @@ class Project:
         self.calculate_estimated_time_remaining()
     
     def stop(self):
-        self.initialize()
+        self.running = False
+        self.paused = False
+        if self.paused_at:
+            self.total_pause_duration += time.time() - self.paused_at
+            self.paused_at = 0.0
+            self.resumed_at = 0.0
+        self.calculate_estimated_time_remaining()
     
     def generate_scan_positions(self):
         h_steps = max(2, int(settings.process.h_steps))

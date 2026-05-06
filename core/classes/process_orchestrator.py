@@ -38,7 +38,7 @@ class ProcessOrchestrator(BaseWorker):
                 return False
             
             if not self.serial_orchestrator.is_connected(): return False
-            if not self.serial_orchestrator.is_set_up(): return False
+            if not self.serial_orchestrator.is_set_up: return False
             if not self.camera.is_connected(): return False
             if not self.crane.nulled.is_set(): return False
             if not self.turntable.nulled.is_set(): return False
@@ -83,10 +83,10 @@ class ProcessOrchestrator(BaseWorker):
             return
     
         current_scan_position = self.project.scan_positions[self.project.index_current]
-        
-        if not self.project.index_current == 0:
+        previous_scan_position = None
+        if self.project.index_current != 0:
             previous_scan_position = self.project.scan_positions[self.project.index_current - 1]
-            
+        
         if current_scan_position is None:
             return
         
@@ -130,10 +130,10 @@ class ProcessOrchestrator(BaseWorker):
 
             result = self.camera.enqueue_shot(image_payload).result(settings.camera.timeout)
 
-            if result is None:
+            if result is None or not getattr(result, "success", False) or result.data is None:
                 return
 
-            scan_position.images.append(result.image)
+            scan_position.images.append(Image(data=result.data))
             scan_position.current_shot_indx += 1
             
             if self.project is not None:                
@@ -157,9 +157,9 @@ class ProcessOrchestrator(BaseWorker):
                 self.crane.move_to(scan_position.y_pos)
 
             if prev_scan_position is not None and prev_scan_position.x_pos != scan_position.x_pos:
-                if self.project and self.project.index_current == self.project.index_current:
+                if prev_scan_position.y_pos != scan_position.y_pos:
                     return
-                
+
                 self.turntable.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
                 self.turntable.rotated.wait()
                             

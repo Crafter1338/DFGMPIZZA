@@ -26,6 +26,7 @@ class SerialOrchestrator(BaseWorker, ReconnectingMixin):
             self.instruction_queue: Deque[Tuple[List[str], Future]] = deque()
 
             self.queue_lock = RLock()
+            self.serial_lock = RLock()
             
             self.is_set_up = True
         except:
