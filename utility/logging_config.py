@@ -3,7 +3,7 @@ import logging.handlers
 from pathlib import Path
 import os
 
-import paths
+import utility.paths as paths
 
 
 def setup_logging(production: bool = False) -> Path:

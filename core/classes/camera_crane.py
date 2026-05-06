@@ -139,10 +139,10 @@ class CameraCrane(ReconnectingMixin, BaseWorker):
         if self.is_nulling:
             return
         
-        self.moved.clear()
-        
         if self.is_moving and not self._is_moving_to:
             self.move_end()
+
+        self.moved.clear()
 
         pos = pos * (settings.camera_crane.max_pos - settings.camera_crane.min_pos) + settings.camera_crane.min_pos
 

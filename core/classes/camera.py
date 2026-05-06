@@ -48,7 +48,7 @@ class Camera(ReconnectingMixin, BaseWorker):
         self.image_out_stream = None
         
         self.liveview_buffer = bytearray(2048 * 2048 * 3)
-        self.liveview_stream = None
+        self.liveview_out_stream = None
         self.liveview_ref = None
         self.last_liveview_time = 0.0
 
@@ -60,30 +60,58 @@ class Camera(ReconnectingMixin, BaseWorker):
 
     def connect(self) -> bool:
         """Verbindungsaufbau zur EOS RP."""
+        print("Verbindung wird hergestellt")
+        
         try:
             cam_list = edsdk.GetCameraList()
+            print(edsdk.GetChildCount(cam_list))
+            
             if edsdk.GetChildCount(cam_list) == 0:
+                logger.info("Kameraliste leer")
                 return False
             
             self.cam = edsdk.GetChildAtIndex(cam_list, 0)
             edsdk.OpenSession(self.cam)
             
+            time.sleep(1)
+            
+            logger.info("Session gestartet")
+            
             # 1. Grundkonfiguration
             edsdk.SetPropertyData(self.cam, edsdk.PropID.SaveTo, 0, edsdk.SaveTo.Host)
-            edsdk.SetCapacity(self.cam, {
-                "reset": True, 
-                "bytesPerSector": 512, 
-                "numberOfFreeClusters": 2147483647
-            })
+            edsdk.SetPropertyData(self.cam, edsdk.PropID.Evf_OutputDevice, 0, edsdk.EvfOutputDevice.PC)
+            edsdk.SetCapacity(
+                self.cam, {"reset": True, "bytesPerSector": 512, "numberOfFreeClusters": 2147483647}
+            )
+            
+            time.sleep(0.5)
 
             # 2. Property Descriptions laden (für Conversions benötigt)
             self.iso_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.ISOSpeed)["propDesc"])
             self.av_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Av)["propDesc"])
             self.tv_values = list(edsdk.GetPropertyDesc(self.cam, edsdk.PropID.Tv)["propDesc"])
 
+            self.shot_queue: Deque[Tuple[ShotPayload, Future[ShotResult]]] = deque()
+
             # 3. Handler & Streams
+            self.image_data = bytearray(6500 * 4500 * 3)
+            self.image_out_stream = None
+            
+            self.liveview_buffer = bytearray(2048 * 2048 * 3)
+            self.liveview_out_stream = None
+            self.liveview_ref = None
+            self.last_liveview_time = 0.0
+            
             edsdk.SetObjectEventHandler(self.cam, edsdk.ObjectEvent.DirItemRequestTransfer, self._handle_transfer)
+            
             self.image_out_stream = edsdk.CreateMemoryStreamFromPointer(self.image_data)
+            self.liveview_out_stream = edsdk.CreateMemoryStreamFromPointer(self.liveview_buffer)
+
+            time.sleep(0.1)
+
+            self.liveview_ref = edsdk.CreateEvfImageRef(self.liveview_out_stream)
+
+            logger.info("Transferhandler ready")
 
             # 4. State zurücksetzen
             self.busy = False
@@ -91,9 +119,15 @@ class Camera(ReconnectingMixin, BaseWorker):
                 self.shot_queue.clear()
             self.pending_settings = None
 
+            try:
+                edsdk.SetPropertyData(self.cam, edsdk.PropID.AFMode, 0, edsdk.AFMode.AIServoAF_ServoAF if settings.camera.af_enabled else edsdk.AFMode.ManualFocus)
+            except Exception as e:
+                logger.exception("Cam Setup Exception AFMode")
+
             self.is_session_open = True
             return True
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
 
     def disconnect(self):
@@ -146,6 +180,7 @@ class Camera(ReconnectingMixin, BaseWorker):
                     payload, future = self.shot_queue[0]
                 else:
                     payload = None
+                    
             if payload is not None:
                 self._execute_capture(payload)
                 
@@ -179,18 +214,24 @@ class Camera(ReconnectingMixin, BaseWorker):
         """Führt die Aufnahme aus (EOS RP Shutter Logic)"""
         self.busy = True
         self.last_action = time.time()
+        
         try:
             payload.prepare_for_camera(self)
             self._apply_settings(payload)
             
-            edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.Halfway)
-            time.sleep(0.1)
-            edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.Completely)
-            edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.OFF)
-        except Exception:
+            #edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.Halfway)
+            #time.sleep(0.1)
+            #edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.Completely)
+            #time.sleep(0.1)
+            #edsdk.SendCommand(self.cam, edsdk.CameraCommand.PressShutterButton, edsdk.ShutterButton.OFF)
+            
+            edsdk.SendCommand(self.cam, edsdk.CameraCommand.TakePicture, 0)
+            
+        except Exception as e: # Wenn autofokus fehler, dann mache es dunkler um 5%
+            print(e) # TODO: E oben
             self.busy = False
 
-    def _handle_transfer(self, event, obj_handle, context=None):
+    def _handle_transfer(self, event: edsdk.ObjectEvent, obj_handle: edsdk.EdsObject) -> int:
         """Callback: Wird vom SDK aufgerufen, wenn Bilddaten bereitliegen."""
         if event != edsdk.ObjectEvent.DirItemRequestTransfer:
             return 0

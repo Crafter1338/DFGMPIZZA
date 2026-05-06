@@ -90,13 +90,20 @@ class ProcessOrchestrator(BaseWorker):
         if current_scan_position is None:
             return
         
+        print("###########")
+        print(self.project.index_current)
+        print(current_scan_position.current_shot_indx)
+        print(len(current_scan_position.images))
+        print(current_scan_position.x_pos, current_scan_position.y_pos)
+        print("###########")
+        
         # Mechanik anfahren
         if current_scan_position.current_shot_indx == 0:
             self.mechanics_move_to_position(current_scan_position, previous_scan_position)
             
             if self.project is not None:
-                time.sleep(settings.mechanics.settle_time) # Kleine Kompensation
-                
+                time.sleep(settings.mechanics.settle_time) # Kleine Kompensation       
+        
         # Prüfen ob Projekt lebendig ist
         if self.project is None:
             return
@@ -114,7 +121,7 @@ class ProcessOrchestrator(BaseWorker):
             self.project.turnable = True # Wenn Index = TurnIndex dann Turnable markieren
             self.project.pause() # Projekt pausieren und auf User Input warten
          
-    def camera_shoot(self, scan_position: ScanPosition):
+    def camera_shoot(self, scan_position: ScanPosition): # TODO: if timeout occurs, tell user to replug cam
         try:
             if scan_position.current_shot_indx >= len(scan_position.image_payloads):
                 logger.warning(
@@ -124,6 +131,11 @@ class ProcessOrchestrator(BaseWorker):
                     self.project.index_current,
                 )
                 self.project.index_current += 1
+                return
+            
+            if self.camera.busy:
+                logger.warning("Camera Busy at during imaging")
+                time.sleep(2)
                 return
 
             image_payload = scan_position.image_payloads[scan_position.current_shot_indx]
@@ -141,7 +153,7 @@ class ProcessOrchestrator(BaseWorker):
                     self.project.index_current += 1
                     self.project.n_finished_scan_positions += 1
                     
-                    threading.Thread(target=scan_position.finish, args=[self], daemon=True).start()
+                    threading.Thread(target=scan_position.finish, args=[self.project], daemon=True).start()
 
         except Exception as e:
             logger.exception("ProjectScheduler.camera_shoot_image error")
@@ -150,23 +162,20 @@ class ProcessOrchestrator(BaseWorker):
         try:
             logger.debug("Moving to X:%s Y:%s", scan_position.x_pos, scan_position.y_pos)
             
-            if prev_scan_position is not None and prev_scan_position.y_pos != scan_position.y_pos:
+            if prev_scan_position is None or prev_scan_position.y_pos != scan_position.y_pos:
                 self.crane.move_to(scan_position.y_pos)
                 
-            if prev_scan_position is None:
-                self.crane.move_to(scan_position.y_pos)
-
-            if prev_scan_position is not None and prev_scan_position.x_pos != scan_position.x_pos:
-                if prev_scan_position.y_pos != scan_position.y_pos:
-                    return
-
-                self.turntable.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
-                self.turntable.rotated.wait()
+            if prev_scan_position is not None:
+                if int(prev_scan_position.y_name) == int(scan_position.y_name) and prev_scan_position.x_pos % 360 != scan_position.x_pos % 360:
+                    self.turntable.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
+                    self.turntable.rotated.wait()
+                elif (prev_scan_position.y_name != scan_position.y_name) and not self.project.index_current == self.project.index_turn:
+                    self.turntable.rotate_by(360 / settings.process.h_steps * (-1 if scan_position.flipped else 1))
+                    self.turntable.rotated.wait()
                             
-            while not self.crane.moved.is_set():
+            while self.crane._is_moving_to:
                 if self.project is None:
                     return
-                time.sleep(0.05)
 
             if self.project is not None and (prev_scan_position is None or prev_scan_position.y_pos != scan_position.y_pos): # Wenn sich y pos ändert
                 time.sleep(settings.mechanics.vertical_swing_compensation_delay) # Warte, dass nichts schwingt
